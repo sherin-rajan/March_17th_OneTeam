@@ -1,0 +1,11 @@
+d="56"
+print(type(d))
+f=int(d)
+print(type(f))
+a=567
+print(float(a))
+b=12
+print(bool(b))
+c=None
+print(bool(c))
+print(str(c))

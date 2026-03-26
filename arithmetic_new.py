@@ -1,0 +1,14 @@
+a=30
+b=20
+c=a+b
+d=a-b
+e=a*b
+f=a/b
+g=a//b
+h=a%b
+print(f"c=a+b={c}")
+print(f"d=a-b={d}")
+print(f"e=a*b={e}")
+print(f"f=a/b={f}")
+print(f"g=a//b={g}")
+print(f"h=a%b={h}")

@@ -1,0 +1,21 @@
+a=10
+a+=15    #a=a+15 10+15=25
+print(f"a+={a}")
+b=10
+b-=5
+print(f"b-={b}")
+c=10
+c*=2
+print(f"c*={c}")
+d=12
+d/=6
+print(f"d/={d}")
+f=14
+f%=2
+print(f"f%={f}")
+g=10
+g//=2
+print(f"g//={g}")
+h=10
+h**=2
+print(f"h**={h}")

@@ -1,0 +1,41 @@
+distance_in_km=10.5
+number_of_people=12
+place_name='Pathanamthitta'
+print(place_name[3])
+print(distance_in_km)
+print(number_of_people)
+print(place_name)
+my_List=[10.5,12,'pathanamthitta']
+print(my_List)
+print(my_List[2])
+my_List[1]=10
+print(my_List)
+print(my_List[-1])
+my_List[-1]=['kochi','kottayam',10]
+print(my_List)
+print(my_List[-1])
+print(my_List[-1][0])
+my_List[-1][0]='kollam'
+print(my_List)
+tuple=(10.5,12,'pathanamthitta',"python")
+print(tuple)
+print(type(my_List))
+print(type(tuple))
+set={'pta','tvm',12,'ernklm',12,'tvm'}
+print(set)
+set={'pta','tvm',12,'ernklm',12,'tvm',13,56,'kochi'}
+print(set)
+dict={'name':'Akhil','age':20,'place':'tvm','hobbies':['coding','hiking','reading']}
+print(dict)
+print(dict['name'])
+print(dict["hobbies"])
+print(dict["hobbies"][-1])
+dict['hobbies'][-1]='singing'
+print(dict)
+dict['education']='btech'
+print(dict)
+even=True
+if even:
+ print('even')
+else:
+ print('odd')
