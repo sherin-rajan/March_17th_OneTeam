@@ -6,7 +6,7 @@ e=a*b
 f=a/b
 g=a//b
 h=a%b
-print(f"c=a+b={c}")
+print("c=a+b=",c)
 print(f"d=a-b={d}")
 print(f"e=a*b={e}")
 print(f"f=a/b={f}")
