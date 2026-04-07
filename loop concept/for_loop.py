@@ -1,4 +1,3 @@
-"""
 # print each letter until iteration ends
 for i in "EBIN":
     print(i)
@@ -39,7 +38,7 @@ for n in numbers:
 print(f'Sum of values in {numbers} = ',result)
 
 # product of values in the list
-number=5
+number=[1,2,3,4,5]
 result=1
 for n in number:
     result=n*result
@@ -58,6 +57,7 @@ for n in range(1,number+1):
     result=n*result
 print(f'Factorial of {number} : ',result)
 
+#reverse counting
 for n in range(10,0,-1):
     print(n,end=" ")
 
@@ -80,7 +80,33 @@ n=1
 for n in range(1,11):
     result=number*n
     print(result,end=' ')
-"""
+
+
+n = 5
+for i in range(1, n+1):
+    for j in range(i):
+        print("*", end="")
+    print() 
 
     
+size=int(input("How many number do you want to enter : "))
+total=0
+for i in range(size):
+    num=int(input('Enter the value : '))
+    total+=num
+print("Sum=",total)
+
+size=int(input("How many number do you want to enter : "))
+total=0
+for i in range(1,size+1):
+    num=int(input(f'{i}. Enter the value : '))
+    total+=num
+print("Sum=",total)
+
+size=int(input("How many number do you want to enter : "))
+product=1
+for i in range(1,size+1):
+    num=int(input(f"{i}. Enter the value : "))
+    product*=num
+print('Product = ',product)
  

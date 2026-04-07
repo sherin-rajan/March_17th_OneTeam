@@ -1,11 +1,10 @@
 #loop until condtion false
-"""
 count=1
 while count<=10:
     print(count,end=" ")
     count+=1 
-"""
-"""
+
+
 count=1
 while count<=10:
     if count==5:
@@ -13,8 +12,8 @@ while count<=10:
         continue
     print(count,end=" ")
     count+=1
-"""
-"""
+
+
 count=1
 while count<=10:
     if count==5:
@@ -47,5 +46,5 @@ while count<=20:
     count=count+1
     if count%2!=0:
         print(count,end=" ")  
-"""    
+ 
 
