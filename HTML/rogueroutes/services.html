@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+/* Hero */
+.hero{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 18px;                 /* controls middle gap */
+    padding: 20px;
+    background-color: rgb(237, 232, 232);
+}
+
+.hero img{
+    width: 320px;
+    height: 70vh;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* center text over entire section */
+.hero-text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color:#1d3557;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    z-index: 2;
+    width: 755px;
+    height: 100px;
+}
+
+.hero-text h2{
+    font-size: 52px;
+    letter-spacing: 2px;
+}
+
+.hero-text p{
+    font-size: 20px;
+}
+
+/* Services */
+.services-section {
+    padding: 80px 10%;
+    text-align: center;
+}
+
+.services-section h2 {
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+}
+
+.services-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.service-card {
+    width: 320px;
+    padding: 30px;
+    margin: 20px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+}
+
+.service-card h3 {
+    margin-bottom: 15px;
+    color: #1d3557;
+}
+
+/* Festival */
+.festival-section {
+    padding: 80px 10%;
+    background: #f8f9fc;
+    text-align: center;
+}
+
+.festival-list {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.festival-card {
+    background: white;
+    padding: 25px;
+    width: 300px;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+/* Student Offer */
+.student-offers {
+    padding: 80px 10%;
+    text-align: center;
+}
+.student-offers h2{
+    padding-bottom: 20px;
+}
+.offer-box {
+    background: white;
+    color: #1d3557;
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 600px;
+    margin: auto;
+}
+
+.offer-box span {
+    display: block;
+    margin-top: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Merchandise */
+.merchandise {
+    padding: 80px 10%;
+    background: #f8f9fc;
+    text-align: center;
+}
+
+.merch-grid {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.merch-card {
+    background: white;
+    padding: 20px;
+    width: 250px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.merch-card img {
+    width: 100%;
+    border-radius: 15px;
+    height: 180px;
+    object-fit: cover;
+}
+
+.merch-card h3 {
+    margin-top: 15px;
+}
+.merchandise {
+    padding: 90px 10%;
+    background: #f8f9fc;
+    text-align: center;
+}
+
+.merchandise h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.merch-subtitle {
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.merch-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.merch-card {
+    width: 320px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: 0.3s;
+    text-align: left;
+}
+
+.merch-card:hover {
+    transform: translateY(-10px);
+}
+
+.merch-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.merch-content {
+    padding: 25px;
+}
+
+.merch-content h3 {
+    margin-bottom: 12px;
+    color: #1d3557;
+}
+
+.merch-content p {
+    color: #555;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+}
+
+.tag {
+    display: inline-block;
+    background: #e6f4f1;
+    color: #007b5e;
+    padding: 8px 14px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+/* Footer */
+footer {
+    background: #1d3557;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+</style>
+<body>
+    <header>
+        <nav>
+            <div class="logo">RogueRoutes</div>
+
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="ourstory.html">Our Story</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="gallery.html">Travel Memories</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+    <!-- Hero -->
+   <section class="hero">
+
+    <div class="hero-text">
+        <h2>Travel Beyond the Ordinary</h2>
+        <p>Curated experiences, hidden gems, local festivals and customized adventures.</p>
+    </div>
+
+    <img src="images/travel (1).jpg" alt="">
+    <img src="images/trek1.jpg" alt="">
+    <img src="images/travel (4).jpg" alt="">
+    <img src="images/travel (9).jpg" alt="">
+
+</section>
+
+    <!-- Services -->
+    <section class="services-section">
+        <h2>Our Services</h2>
+
+        <div class="services-grid">
+
+            <div class="service-card">
+                <h3>Customized Tour Packages</h3>
+                <p>Trips tailored for couples, families, friends, solos, and groups based on your budget and interests.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>Travel + Stay + Food Included</h3>
+                <p>Complete packages with transport, accommodation, meals and seamless planning.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>Local Festival Travel Calendar</h3>
+                <p>Travel during authentic local festivals and cultural celebrations in hidden destinations.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>Student Budget Specials</h3>
+                <p>Affordable group trips and backpacking experiences designed for students.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>Local Guides & Jeep Drivers</h3>
+                <p>Trusted local guides, off-road drivers and village experts to enhance your journey.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>Travel Merchandise</h3>
+                <p>Custom travel journals, hoodies, mugs, stickers and souvenirs for travelers.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Festival Calendar -->
+    <section class="festival-section">
+        <h2>Festival Travel Calendar</h2>
+
+        <div class="festival-list">
+            <div class="festival-card">
+                <h3>March – Holi in Hidden Villages</h3>
+                <p>Celebrate local traditions away from crowded cities.</p>
+            </div>
+
+            <div class="festival-card">
+                <h3>July – Nepal Monsoon Festivals</h3>
+                <p>Experience unique mountain celebrations and culture.</p>
+            </div>
+
+            <div class="festival-card">
+                <h3>October – Himachal Village Harvest Festival</h3>
+                <p>Traditional food, music and authentic local life.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Offers -->
+    <section class="student-offers">
+        <h2>Student Special Offers</h2>
+        <div class="offer-box">
+            <h3 style="padding-bottom: 20px;">Budget Backpacking Trips</h3>
+            <p>Special discounted trips with shared stays and student-friendly pricing.</p>
+            <span>Starting from ₹4,999</span>
+        </div>
+    </section>
+
+    <!-- Merchandise -->
+    <section class="merchandise">
+        <h2>Travel Merchandise Showcase</h2>
+    <div class="merch-grid">
+
+        <div class="merch-card">
+            <img src="images/cap.png" alt="Customized Travel Cap">
+            <div class="merch-content">
+                <h3>Customized Travel Cap</h3>
+                <p>
+                    Stylish caps with destination names, trip dates or your own design.
+                    Perfect for adventure lovers.
+                </p>
+                <span class="tag">Personalized Available</span>
+            </div>
+        </div>
+
+        <div class="merch-card">
+            <img src="images/keychain.png" alt="Destination Keychain">
+            <div class="merch-content">
+                <h3>Destination Keychains</h3>
+                <p>
+                    Cute handcrafted keychains inspired by mountains, villages
+                    and local culture.
+                </p>
+                <span class="tag">Handmade Collection</span>
+            </div>
+        </div>
+
+        <div class="merch-card">
+            <img src="images/bag.png" alt="Adventure Backpack">
+            <div class="merch-content">
+                <h3>Adventure Backpack</h3>
+                <p>
+                    Compact travel backpacks designed for hidden trails and
+                    weekend adventures.
+                </p>
+                <span class="tag">Travel Essential</span>
+            </div>
+        </div>
+
+        <div class="merch-card">
+            <img src="images/book.png" alt="Travel Journal">
+            <div class="merch-content">
+                <h3>Travel Journal</h3>
+                <p>
+                    Record memories, sketch landscapes and document your travel
+                    stories in style.
+                </p>
+                <span class="tag">Custom Name Printing</span>
+            </div>
+        </div>
+
+        <div class="merch-card">
+            <img src="images/cup.png" alt="Travel Mug">
+            <div class="merch-content">
+                <h3>Adventure Travel Mug</h3>
+                <p>
+                    Keep your drinks warm while carrying memories of your favorite
+                    destinations.
+                </p>
+                <span class="tag">Gift Friendly</span>
+            </div>
+        </div>
+
+        <div class="merch-card">
+            <img src="images/sticker.png" alt="Travel Stickers">
+            <div class="merch-content">
+                <h3>Travel Sticker Pack</h3>
+                <p>
+                    Fun destination-themed stickers for laptops, bottles,
+                    journals and more.
+                </p>
+                <span class="tag">Limited Edition</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- Footer -->
+    <footer>
+        <p>© 2026 RogueRoutes | Explore Beyond Ordinary</p>
+    </footer>
+</body>
+</html>

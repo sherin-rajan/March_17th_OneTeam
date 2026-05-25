@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+    .hero {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 20px;
+        background-image: url(images/parafull.jpg);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        min-height: 45vh;
+    }
+
+    .hero-content {
+        padding: 30px;
+        padding-bottom: 0;
+        width: 45%;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 30px;
+    }
+
+    .hero-content h1 {
+        font-size: 110px;
+        line-height: 1;
+        margin-bottom: 40px;
+        font-weight: bold;
+    }
+
+    .hero-content p {
+        font-size: 20px;
+        line-height: 1.5;
+        margin-bottom: 50px;
+    }
+
+    .text {
+        padding-top: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .promise {
+        background: white;
+        padding: 20px;
+        border-radius: 7px;
+        margin-right: 20px;
+        width: 30%;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        transition: 0.3s;
+        line-height: 1.6;
+    }
+
+    .promise:hover{
+        transform: translateY(-10px);
+    }
+
+    .testimonials {
+        padding: 80px 10%;
+        text-align: center;
+    }
+
+    .testimonials h2 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+
+    .subtitle {
+        color: #666;
+        margin-bottom: 40px;
+    }
+
+    .testimonial-container {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .testimonial-card {
+        background: white;
+        padding: 30px;
+        width: 320px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        transition: 0.3s;
+    }
+
+    .testimonial-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .testimonial-img {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 15px;
+        border: 4px solid #f0f0f0;
+    }
+
+    .testimonial-card h3 {
+        margin: 10px 0 5px;
+    }
+
+    .testimonial-card span {
+        color: #777;
+        font-size: 0.9rem;
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    .testimonial-card p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #444;
+    }
+
+    .stars {
+        color: gold;
+        margin-top: 15px;
+        font-size: 1.2rem;
+    }
+</style>
+
+<body>
+    <nav>
+        <div class="logo">RogueRoutes</div>
+
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="ourstory.html" class="active">Our Story</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Travel Memories</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Our Story</h2>
+            <p class="hero-para">Born from a passion for travel and discovering places beyond the ordinary,
+                we started this journey to help travelers experience the hidden beauty of India.
+                From peaceful mountain villages to untouched waterfalls and local cultural experiences,
+                our goal is to create meaningful journeys filled with adventure, comfort,
+                and unforgettable memories.</p>
+        </div>
+    </section>
+    <section class="text">
+        <div class="promise">
+            <h2>Why We Exist</h2>
+            <p>We believe travel should be more than visiting crowded tourist spots.
+                It should help people disconnect from routine, discover new cultures,
+                and create memories that last forever.</p>
+        </div>
+        <div class="promise">
+            <h2>Our Promise</h2>
+            <p>We focus on creating journeys that feel personal, peaceful,
+                adventurous, and unforgettable — not just another packaged tour.</p>
+        </div>
+        <div class="promise" style="padding: 28px;">
+            <h2>More Than Just A Trip</h2>
+            <p>We don’t just plan destinations.</p>
+            <p>We help create stories, experiences, and moments you’ll remember for a lifetime.</p>
+        </div>
+    </section>
+    <section class="testimonials">
+        <h2>What Our Travelers Say</h2>
+        <p class="subtitle">Real experiences from people who explored hidden gems with us.</p>
+
+        <div class="testimonial-container">
+
+            <div class="testimonial-card">
+                <img src="images/couple.jpg" alt="Traveler Photo" class="testimonial-img">
+                <h3>Ananya & Rahul</h3>
+                <span>Couples Trip – Himachal Hidden Villages</span>
+                <p>
+                    “One of the most peaceful trips we’ve ever had. The local guide,
+                    cozy stay, and village festival experience felt magical.”
+                </p>
+                <div class="stars">★★★★★</div>
+            </div>
+
+            <div class="testimonial-card">
+                <img src="images/solo.jpg" alt="Traveler Photo" class="testimonial-img">
+                <h3>Arjun Menon</h3>
+                <span>Solo Backpacking – Nepal</span>
+                <p>
+                    “Perfectly customized for my budget. Met amazing people and
+                    explored places I never would have found on my own.”
+                </p>
+                <div class="stars">★★★★★</div>
+            </div>
+
+            <div class="testimonial-card">
+                <img src="images/friends.jpg" alt="Traveler Photo" class="testimonial-img">
+                <h3>Friends Group – Kerala to Spiti</h3>
+                <span>Adventure Trip</span>
+                <p>
+                    “Everything was taken care of—transport, food, stay, guides.
+                    Super smooth and unforgettable.”
+                </p>
+                <div class="stars">★★★★★</div>
+            </div>
+
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 RogueRoutes | Explore Beyond Ordinary</p>
+    </footer>
+</body>
+
+</html>

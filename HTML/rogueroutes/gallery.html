@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Memories | Hidden Trails</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+
+/* Gallery Section */
+.travel-gallery {
+    padding: 90px 10%;
+    background: white;
+    text-align: center;
+}
+
+.travel-gallery h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.gallery-subtitle {
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.gallery-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    height: 320px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.gallery-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.4s;
+}
+
+.gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 25px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
+    color: white;
+    text-align: left;
+}
+
+.gallery-overlay h3 {
+    margin-bottom: 5px;
+}
+
+.gallery-overlay p {
+    font-size: 0.9rem;
+}
+
+.gallery-card:hover img {
+    transform: scale(1.08);
+}
+
+/* Trip Stories */
+.trip-stories {
+    padding: 90px 10%;
+    background: #f8f9fc;
+    text-align: center;
+}
+
+.trip-stories h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.story-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.story-card {
+    width: 340px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.story-card:hover {
+    transform: translateY(-8px);
+}
+
+.story-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.story-content {
+    padding: 25px;
+    text-align: left;
+}
+
+.story-content h3 {
+    margin-bottom: 12px;
+    color: #1d3557;
+}
+
+.story-content p {
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Traveler Highlights */
+.traveler-highlights {
+    padding: 90px 10%;
+    text-align: center;
+    background: white;
+}
+
+.traveler-highlights h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.highlight-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.highlight-card {
+    width: 320px;
+    background: #f8f9fc;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    transition: 0.3s;
+}
+
+.highlight-card:hover {
+    transform: translateY(-8px);
+}
+
+.highlight-card img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 4px solid #e5e5e5;
+}
+
+.highlight-card h3 {
+    margin-bottom: 12px;
+    color: #1d3557;
+}
+
+.highlight-card p {
+    color: #555;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+</style>
+<body>
+
+    <!-- Common Navbar -->
+    <header>
+        <nav class="navbar">
+            <h1 class="logo">Hidden Trails</h1>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="ourstory.html">Our Story</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="gallery.html" class="active">Travel Memories</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Gallery Section -->
+    <section class="travel-gallery">
+        <h2>Captured Adventures</h2>
+        <p class="gallery-subtitle">
+            Real moments from unforgettable journeys across hidden destinations.
+        </p>
+
+        <div class="gallery-grid">
+
+            <div class="gallery-card">
+                <img src="images/himachal.jpg" alt="Himachal Village Trip">
+                <div class="gallery-overlay">
+                    <h3>Hidden Villages, Himachal</h3>
+                    <p>Couples Escape</p>
+                </div>
+            </div>
+
+            <div class="gallery-card">
+                <img src="images/nepalfest.jpg" alt="Nepal Festival Trip">
+                <div class="gallery-overlay">
+                    <h3>Nepal Festival Tour</h3>
+                    <p>Cultural Experience</p>
+                </div>
+            </div>
+
+            <div class="gallery-card">
+                <img src="images/student.jpg" alt="Student Backpacking">
+                <div class="gallery-overlay">
+                    <h3>Backpacking Adventure</h3>
+                    <p>Student Special</p>
+                </div>
+            </div>
+
+            <div class="gallery-card">
+                <img src="images/frnds.jpg" alt="Friends Group Trip">
+                <div class="gallery-overlay">
+                    <h3>Mountain Road Trip</h3>
+                    <p>Friends Trip</p>
+                </div>
+            </div>
+
+            <div class="gallery-card">
+                <img src="images/singl.jpg" alt="Solo Traveler">
+                <div class="gallery-overlay">
+                    <h3>Solo Escape</h3>
+                    <p>Adventure Journey</p>
+                </div>
+            </div>
+
+            <div class="gallery-card">
+                <img src="images/india (1).jpg" alt="Festival Travel">
+                <div class="gallery-overlay">
+                    <h3>Harvest Festival Experience</h3>
+                    <p>Local Celebration</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 RogueRoutes | Explore Beyond Ordinary</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+/* Contact Section */
+.contact-section {
+    padding: 90px 10%;
+    background: white;
+}
+
+.contact-container {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.contact-form,
+.contact-info {
+    flex: 1;
+    min-width: 350px;
+    background: #f8f9fc;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+.contact-form h2,
+.contact-info h2 {
+    margin-bottom: 25px;
+    color: #1d3557;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    font-size: 1rem;
+}
+
+.contact-form button {
+    padding: 15px;
+    border: none;
+    background: #0077b6;
+    color: white;
+    font-size: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.contact-form button:hover {
+    background: #005f8d;
+}
+
+.info-box {
+    margin-bottom: 25px;
+}
+
+.info-box h3 {
+    margin-bottom: 8px;
+    color: #0077b6;
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: 90px 10%;
+    background: #f8f9fc;
+    text-align: center;
+}
+
+.faq-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.faq-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+.faq-card {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    text-align: left;
+    transition: 0.3s;
+}
+
+.faq-card:hover {
+    transform: translateY(-8px);
+}
+
+.faq-card h3 {
+    color: #1d3557;
+    margin-bottom: 15px;
+}
+
+.faq-card p {
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Support Section */
+.support-section {
+    padding: 80px 10%;
+    text-align: center;
+    background: #1d3557;
+    color: white;
+}
+
+.support-section h2 {
+    font-size: 2.3rem;
+    margin-bottom: 15px;
+}
+
+.support-section p {
+    margin-bottom: 25px;
+}
+
+.support-section a {
+    display: inline-block;
+    padding: 14px 28px;
+    background: white;
+    color: #1d3557;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.support-section a:hover {
+    transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+    background: #10263f;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+</style>
+<body>
+    <nav>
+            <div class="logo">RogueRoutes</div>
+
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="ourstory.html">Our Story</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="gallery.html" >Travel Memories</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </nav>
+
+    </header>
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="contact-container">
+
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <h2>Send Us a Message</h2>
+
+                <form>
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <input type="text" placeholder="Destination Interested In">
+                    <textarea rows="5" placeholder="Tell us about your dream trip..."></textarea>
+                    <button type="submit">Submit Inquiry</button>
+                </form>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <h2>Contact Information</h2>
+
+                <div class="info-box">
+                    <h3>Office</h3>
+                    <p>Rogue Routes, Kochi, Kerala, India</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Phone</h3>
+                    <p>+91 98765 43210</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Email</h3>
+                    <p>hello@rogueroutes.com</p>
+                </div>
+
+                <div class="info-box">
+                    <h3>Support Hours</h3>
+                    <p>Mon – Sat | 9:00 AM – 7:00 PM</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-container">
+
+            <div class="faq-card">
+                <h3>Do your packages include food and accommodation?</h3>
+                <p>
+                    Yes, most of our packages include travel, stay and meals.
+                    Package details vary based on destination and customization.
+                </p>
+            </div>
+
+            <div class="faq-card">
+                <h3>Can I customize my travel package?</h3>
+                <p>
+                    Absolutely! We create personalized itineraries based on your
+                    budget, travel style and preferences.
+                </p>
+            </div>
+
+            <div class="faq-card">
+                <h3>Do you offer student budget trips?</h3>
+                <p>
+                    Yes, we have student-friendly group packages with affordable pricing.
+                </p>
+            </div>
+
+            <div class="faq-card">
+                <h3>Can you arrange local guides and transport?</h3>
+                <p>
+                    Yes, local guides, jeep drivers and destination support can be arranged.
+                </p>
+            </div>
+
+            <div class="faq-card">
+                <h3>Do you organize festival special trips?</h3>
+                <p>
+                    Yes, we curate trips around unique local festivals and cultural events.
+                </p>
+            </div>
+
+            <div class="faq-card">
+                <h3>What if I need help during the trip?</h3>
+                <p>
+                    Our travel support team is available to assist during your journey.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Emergency Support -->
+    <section class="support-section">
+        <h2>Need Immediate Travel Assistance?</h2>
+        <p>
+            Our support team is here to help you with urgent travel-related concerns.
+        </p>
+        <a href="#">Call Emergency Support</a>
+    </section>
+        <!-- Footer -->
+    <footer>
+        <p>© 2026 RogueRoutes | Explore Beyond Ordinary</p>
+    </footer>
+</body>
+</html>
