@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form onsubmit="calculator()">
+        <div>
+            <label>Enter first number</label>
+            <input type="number" id="num1">
+        </div>
+        <div>
+            <label>Enter second number</label>
+            <input type="number" id="num2">
+        </div>
+        <select id="choice">
+            <option value="1">Addition</object>
+            <option value="2">Substraction</object>
+            <option value="3">Multiplication</object>
+            <option value="4">Division</object>
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        function calculator() {
+            let a = Number(document.getElementById("num1").value)
+            let b = Number(document.getElementById("num2").value)
+            let choice = Number(document.getElementById("choice").value)
+            if (choice == 1) {
+                alert(a + b)
+            }
+            else if (choice == 2) {
+                alert(a - b)
+            }
+            else if (choice == 3) {
+                alert(b * a)
+            }
+            else {
+                alert("Invalid Input")
+            }
+        }
+    </script>
+</body>
+
+</html>

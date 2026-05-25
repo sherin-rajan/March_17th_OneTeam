@@ -1,3 +1,5 @@
+<!--function, alert-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +8,55 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="heading">
-        <h2>Introduction to JavaScript</h2>
-    </div>
+    <form onsubmit="return ageCheck()">
+        <div>
+            <label>Enter your age</label>
+        <input type="number" name="age" id="age">  
+        </div>
+        <div>
+            <input type="submit" value="Check">
+        </div>
+    </form>
+    <script>
+        function ageCheck(){
+            let age_num=document.getElementById("age").value;
+            if(age_num>=18){
+                alert("Eligible to vote")
+                return true
+            }
+            else{
+                alert("Not eligible for vote")
+                return false
+            }
+        }
+    </script>
+    <form>
+        <div>
+            <label for="name">Enter your: </label>
+            <input type="text" name="name" id="name">
+        </div>\
+        <div>
+            <label for="age">Enter your age: </label>
+            <input type="number" name="age" id="age">
+        </div>
+        <div>
+            <label for="nationality">Nationality</label>
+            <input type="text" name="nationality" id="nationality">
+        </div>
+    </form>
+    <script>
+        function eligibility(){
+            let age_num=document.getElementById("age").value;
+            let nation=document.getElementById("nationality").value;
+            if(age_num>=18 and nation==india){
+                alert("Eligible to vote")
+                return true
+            }
+            else{
+                alert("Not eligible for vote")
+                return false
+            }
+        }
+    </script>
 </body>
 </html>
