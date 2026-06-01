@@ -9,7 +9,8 @@
         <form action="">
             <div>
                 <label for="f_name">First Name:</label>
-                <input type="text" name="f_name" id="f_name" placeholder="Enter your first name">
+                <input type="text" name="f_name" id="f_name" placeholder="Enter your first name" oninput="validateName()">
+                <div id="f_name_error" style="color: red;"></div>
             </div>
             <div>
                 <label for="l_name">Last Name:</label>
@@ -52,5 +53,30 @@
             </div>
         </form>
         </div>
+        <script>
+            function validateName(){
+                let f_name=document.getElementById("f_name").value;
+                if(f_name.length>1){
+                    document.getElementById("f_name_error").innerText=""
+                    return true
+                }
+                else{
+                    document.getElementById("f_name_error").innerText="First name must have atleast 2 characters"
+                    return false
+                }
+            }
+            function validateLname(){
+                let email=document.getElementById("l_name").value;
+                if(l_name.length===0){
+                    document.getElementById("f_name_error").innerText="Must contain data"
+                    return false
+                }
+                
+                else{
+                    document.getElementById("f_name_error").innerText="First name must have atleast 2 characters"
+                    return false
+                }
+            }
+        </script>
     </body>
 </html>
