@@ -19,3 +19,42 @@ else if(choice==3){
 else{
     console.log("Invalid Input")
 }
+
+for(let i=1;i<=10;i++){
+    console.log(i)
+}
+
+//factorial
+let r=1
+for(let i=1;i<=5;i++){
+    r=r*i
+}
+console.log(r)
+
+//fibonacii
+let f=0
+let s=1
+console.log(f)
+console.log(s)
+for(i=2;i<=8;i++){
+    let t=f+s
+    console.log(t)
+    f=s
+    s=t
+}
+
+let first=0
+let second=1
+console.log(f)
+console.log(s)
+let count=0
+while(count<8){
+    let third=first+second
+    console.log(third)
+    first=second
+    second=third
+    count++
+}
+
+
+
