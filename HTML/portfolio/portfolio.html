@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+        }
+
+        /* Navbar */
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            transition: .3s;
+        }
+
+        nav a:hover {
+            color: #38bdf8;
+        }
+
+        /* Hero */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #38bdf8;
+            margin-bottom: 20px;
+            transition: .5s;
+        }
+
+        .hero img:hover {
+            transform: scale(1.08);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+        }
+
+        .hero h2 {
+            color: #38bdf8;
+            margin: 10px 0;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: 20px auto;
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #38bdf8;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: .4s;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(56, 189, 248, .5);
+        }
+
+        /* Cards */
+
+        .card {
+            width: 80%;
+            margin: 50px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #38bdf8;
+        }
+
+        /* Skills */
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            list-style: none;
+        }
+
+        .skills-list li {
+            background: #38bdf8;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: .3s;
+        }
+
+        .skills-list li:hover {
+            transform: scale(1.1);
+        }
+
+        /* Table */
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th,
+        table td {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            text-align: center;
+        }
+
+        table th {
+            background: #38bdf8;
+        }
+
+        /* Projects */
+
+        .project-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .project {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px
+        }
+
+        .project:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(56, 189, 248, .3);
+        }
+
+        .project h3 {
+            color: #38bdf8;
+            margin-bottom: 10px;
+        }
+
+        /* Contact */
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input,
+        textarea {
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        button {
+            padding: 15px;
+            border: none;
+            background: #38bdf8;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+        }
+
+        .social-links {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .social-links a {
+            color: #38bdf8;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        /* Footer */
+
+        footer {
+            text-align: center;
+            padding: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Portfolio</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <img src="images/sherin.png" alt="Profile Image">
+            <h1>Hi, I'm Sherin Rajan</h1>
+            <h2>Python Full Stack Developer</h2>
+            <p>
+                Passionate about building modern web applications and
+                continuously learning new technologies.
+            </p>
+            <a href="#contact" class="btn">Contact Me</a>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="card">
+        <h2>About Me</h2>
+        <p>
+            I am a Python Full Stack Development student with a background in
+            data annotation and an interest in web development, cloud
+            technologies, and problem-solving. I enjoy creating responsive
+            websites and learning modern development practices.
+        </p>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="card">
+        <h2>Skills</h2>
+
+        <ul class="skills-list">
+            <li>HTML5</li>
+            <li>CSS3</li>
+            <li>JavaScript</li>
+            <li>Python</li>
+            <li>Bootstrap</li>
+            <li>Django</li>
+            <li>Git & GitHub</li>
+            <li>AWS Basics</li>
+        </ul>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="card">
+        <h2>Education</h2>
+
+        <table>
+            <tr>
+                <th>Qualification</th>
+                <th>Institution</th>
+                <th>Year</th>
+            </tr>
+
+            <tr>
+                <td>Bachelor's Degree</td>
+                <td>APJ Abdul Kalam Technological University</td>
+                <td>2020</td>
+            </tr>
+
+            <tr>
+                <td>AWS & DevOps Certification</td>
+                <td>Intellipaat</td>
+                <td>2024</td>
+            </tr>
+
+            <tr>
+                <td>Python Full Stack Development</td>
+                <td>One Team Solutions</td>
+                <td>2026</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="card">
+        <h2>Projects</h2>
+
+        <div class="project-container">
+
+            <div class="project">
+                <h3>Portfolio Website</h3>
+                <p>
+                    Responsive personal portfolio website using HTML and CSS.
+                </p>
+            </div>
+
+            <div class="project">
+                <h3>Travel Website</h3>
+                <p>
+                    Modern travel website showcasing destinations and packages.
+                </p>
+            </div>
+
+            <div class="project">
+                <h3>AWS Three-Tier Architecture</h3>
+                <p>
+                    Designed and deployed a secure AWS infrastructure with CI/CD.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="card">
+        <h2>Contact Me</h2>
+
+        <form>
+            <input type="text" placeholder="Your Name" required>
+
+            <input type="email" placeholder="Your Email" required>
+
+            <textarea rows="5" placeholder="Your Message"></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+
+        <div class="social-links">
+            <a href="#">LinkedIn</a>
+            <a href="#">GitHub</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Sherin Rajan | Portfolio Website</p>
+    </footer>
+
+</body>
+
+</html>
