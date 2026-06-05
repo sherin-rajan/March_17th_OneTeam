@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSS intro</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 </head>
 
 <body>
@@ -16,13 +17,14 @@
                     <h3>myCSS</h3>
                 </span>
             </div>
-            <ul class="nav-links">
+            <ul id="nav-links" class="nav-links">
                 <li><a href="">Home</a></li>
                 <li><a href="">Contact Us</a></li>
                 <li><a href="">About Us</a></li>
                 <li><a href="">Register</a></li>
                 <li><a href="">Login</a></li>
             </ul>
+            <button class="menu-btn" id="menu-btn"><i class="fa-solid fa-bars"></i></button>
         </nav>
         <div class="banner">
                 <h2>Power of CSS</h2>
@@ -61,6 +63,14 @@
             </div>
         </div>
     </section>
+    <script>
+        const menuBtn = document.getElementById("menu-btn");
+    const navLinks = document.getElementById("nav-links");
+
+    menuBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+    });
+    </script>
 
 </body>
 
