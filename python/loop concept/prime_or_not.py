@@ -39,3 +39,17 @@ for i in n:
             print(i,'is a prime number')
     else:
         print(i,"is not a prime number")
+
+#using function
+def is_prime(n):
+    if n<=1:
+        return False
+    for k in range(2,int(n*.5)+1):
+        if n%k==0:
+            return False
+    return True
+num=int(input("Enter any number: "))
+if is_prime(num):
+    print(f"{num} is prime")
+else:
+    print(f"{num} is not a prime")
