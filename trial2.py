@@ -8,6 +8,13 @@ else:
     print("Invalid email")"""
 
 
+#pattern function
+
+
+
+
+
+
 
 
 
