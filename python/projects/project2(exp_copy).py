@@ -111,9 +111,7 @@ def transfer():
         amount=float(input("Amount:"))
 
         sender=find_ac(from_ac)
-        print(sender)
         receiver=find_ac(to_ac)
-        print(receiver)
 
         if sender and receiver:
             if sender["balance"]>=amount:

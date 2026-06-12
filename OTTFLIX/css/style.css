@@ -1,0 +1,60 @@
+.category-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    overflow-x:auto;
+
+    scrollbar-width:none;
+}
+
+.category-row::-webkit-scrollbar{
+    display:none;
+}
+
+.movie-card{
+    flex:0 0 auto;
+}
+
+.movie-card img{
+    width:140px;
+    height:210px;
+
+    object-fit:cover;
+
+    border-radius:8px;
+
+    transition:.3s;
+}
+
+.movie-card:hover img{
+    transform:scale(1.08);
+}
+
+.view-all-card{
+    width:140px;
+    height:210px;
+
+    flex:0 0 auto;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:#222;
+
+    border-radius:8px;
+
+    color:white;
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.view-all-card:hover{
+    background:#e50914;
+    color:white;
+
+    transform:scale(1.05);
+}
