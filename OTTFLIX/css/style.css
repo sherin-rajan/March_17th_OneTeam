@@ -1,3 +1,6 @@
+nav{
+backdrop-filter: blur(10px);
+}
 .category-row{
     display:flex;
     align-items:center;

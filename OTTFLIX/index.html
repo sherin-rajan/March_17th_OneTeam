@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body class="bg-black text-white">
     <nav class="navbar navbar-expand-lg navbar-dark bg-black">
         <div class="container">
 
@@ -40,10 +40,10 @@
                         </a>
 
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Comedy</a></li>
-                            <li><a class="dropdown-item" href="#">Drama</a></li>
-                            <li><a class="dropdown-item" href="#">Horror</a></li>
+                            <li><a class="dropdown-item" href="m_action.html">Action</a></li>
+                            <li><a class="dropdown-item" href="m_comedy.html">Comedy</a></li>
+                            <li><a class="dropdown-item" href="m_horror.html">Horror</a></li>
+                            <li><a class="dropdown-item" href="m_romance.html">Romance</a></li>
                         </ul>
                     </li>
 
@@ -53,10 +53,10 @@
                         </a>
 
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Comedy</a></li>
-                            <li><a class="dropdown-item" href="#">Drama</a></li>
-                            <li><a class="dropdown-item" href="#">Horror</a></li>
+                            <li><a class="dropdown-item" href="s_action.html">Action</a></li>
+                            <li><a class="dropdown-item" href="s_comedy.html">Comedy</a></li>
+                            <li><a class="dropdown-item" href="s_horror.html">Horror</a></li>
+                            <li><a class="dropdown-item" href="s_romance.html">Romance</a></li>
                         </ul>
                     </li>
 
@@ -65,10 +65,10 @@
                             Languages
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">English</a></li>
-                            <li><a class="dropdown-item" href="#">Malayalam</a></li>
-                            <li><a class="dropdown-item" href="#">Tamil</a></li>
-                            <li><a class="dropdown-item" href="#">Hindi</a></li>
+                            <li><a class="dropdown-item" href="l_english.html">English</a></li>
+                            <li><a class="dropdown-item" href="l_hindi.html">Hindi</a></li>
+                            <li><a class="dropdown-item" href="l_malayalam.html">Malayalam</a></li>
+                            <li><a class="dropdown-item" href="l_tamil.html">Tamil</a></li>
                         </ul>
                     </li>
 
@@ -82,7 +82,7 @@
 
         </div>
     </nav>
-    <section class="hero-section">
+    <section class="hero-section d-flex justify-content-center align-items-center min-vh-100 text-center">
 
         <div class="hero-overlay">
 
@@ -129,6 +129,10 @@
                 <img src="images/howToTrainYourDragon.jpg" alt="">
             </div>
 
+            <div class="movie-card">
+                <img src="images/ladyANd.webp" alt="">
+            </div>
+
             <a href="pages/trending.html" class="view-all-card">
                 View All →
             </a>
@@ -162,6 +166,10 @@
                 <img src="images/howToTrainYourDragon.jpg" alt="">
             </div>
 
+            <div class="movie-card">
+                <img src="images/ladyANd.webp" alt="">
+            </div>
+
             <a href="pages/trending.html" class="view-all-card">
                 View All →
             </a>
@@ -174,6 +182,10 @@
         <h3 class="mb-3">Romance</h3>
 
         <div class="category-row">
+
+            <div class="movie-card">
+                <img src="images/brave.webp" alt="">
+            </div>
 
             <div class="movie-card">
                 <img src="images/beautyAnd.webp" alt="">
@@ -221,11 +233,15 @@
             </div>
 
             <div class="movie-card">
-                <img src="images/narnia.jpg" alt="">
+                <img src="images/howToTrainYourDragon.jpg" alt="">
             </div>
 
             <div class="movie-card">
-                <img src="images/howToTrainYourDragon.jpg" alt="">
+                <img src="images/beautyAnd.webp" alt="">
+            </div>
+
+            <div class="movie-card">
+                <img src="images/ladyANd.webp" alt="">
             </div>
 
             <a href="pages/trending.html" class="view-all-card">
@@ -235,13 +251,6 @@
         </div>
 
     </section>
-    <footer class="bg-black text-center py-4">
-
-        <p class="mb-0">
-            © 2026 OTTFLIX. All Rights Reserved.
-        </p>
-
-    </footer>
 
     <div class="modal fade" id="movieModal" tabindex="-1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -283,6 +292,14 @@
         </div>
 
     </div>
+    
+    <footer class="bg-black text-center py-4">
+
+        <p class="mb-0">
+            © 2026 OTTFLIX. All Rights Reserved.
+        </p>
+
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
