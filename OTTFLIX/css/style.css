@@ -1,3 +1,13 @@
+body{
+    background: linear-gradient(
+        135deg,
+        #7b2ff7,
+        #f107a3,
+        #ff6a00
+    );
+    min-height: 100vh;
+    color: white;
+}
 nav{
 backdrop-filter: blur(10px);
 }
