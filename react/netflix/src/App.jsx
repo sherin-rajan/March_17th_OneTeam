@@ -4,6 +4,8 @@ import Login from "./components/pages/Login/Login"
 import Register from "./components/pages/Register/Register"
 import AllMovies from "./components/pages/All Movies/AllMovies"
 import { Routes, Route } from "react-router-dom"
+import "./components/Footer/Footer.css"
+import "./components/Navbar/Navbar.css"
 
 function App() {
 

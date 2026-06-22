@@ -1,4 +1,5 @@
 import MovieCard from "../../MovieCard"
+import axios from "axios"
 
 function AllMovies(){
     const response={
