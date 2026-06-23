@@ -1,7 +1,7 @@
 import pymysql
 
-connection=pymysql.connect(user="root",password="Caleb@2499",host="localhost",database="MyPOrtalDB")
-track=connection.cursor() #cursor is to execute sgq queries and transactions
+connection=pymysql.connect(user="root",password="Caleb@2499",host="localhost",database="MyPortalDB")
+track=connection.cursor() #cursor is to execute sql queries and transactions
 
 def addUser():
     name=input("Enter your name : ")
