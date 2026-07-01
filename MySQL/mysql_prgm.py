@@ -34,10 +34,14 @@ def viewById():
     person=track.fetchone()
     print(person)
     connection.commit()
+
+def update():
+    id=int(input("Enter id : "))
+    track.execute(f"UPDATE  ")
     
 
 while True:
-    print("1.Add users\n2.View Users\n3.Delete User\n4.View By ID\n5.Exit")
+    print("1.Add users\n2.View Users\n3.Delete User\n4.View By ID\n5.Update\n6.Exit")
     choice=int(input("Enter your choice : "))
     if choice==1:
         addUser()
@@ -48,6 +52,8 @@ while True:
     elif choice==4:
         viewById()
     elif choice==5:
+        update()
+    elif choice==6:
         print("Exiting...")
         break
     else:

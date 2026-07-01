@@ -1,4 +1,6 @@
-"""def MyDec(fun):
+#adds extra functionality to a function without changing its original code using another function as decorator
+
+def MyDec(fun):
     def wrapper():
         print("Hello from decorator")
         fun()
@@ -7,7 +9,7 @@
 def Greet():
     print("Hello Everyone")
 
-Greet()"""
+Greet()
 
 def divideDec(fun):
     def wrapper(a,b):

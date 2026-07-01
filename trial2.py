@@ -7,8 +7,15 @@ if re.match(regex,email):
 else:
     print("Invalid email")"""
 
+class Students:
+    institute="OneTeam"
+    def __init__(self,n,p):
+        self.name=n
+        self.place=p
+        print(f"Hello {self.name}")
 
-#pattern function
+std1=Students("Liam","Kochi")  
+
 
 
 

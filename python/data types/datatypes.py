@@ -11,6 +11,12 @@ set{} unordred, no reptition
 dictionary{} key:value, can add new key:value
 boolean True or False
 """
+a,b=2,4
+c,d=5,7
+a,b=b,a
+print(d)
+print('a=',a)
+
 age=27
 p=3.14
 c=2j
