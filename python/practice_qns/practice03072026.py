@@ -46,12 +46,13 @@ while True:
 17 19 23 29
 """
 
+
 #matrix
 matrix=[[1,2,3],[4,5,6]]
 new_matrix=[]
-for j in range(0,len(matrix)+1):
+for i in range(0,len(matrix)+1):
     new=[]
-    for i in matrix:
-        new+=[i[j]]
+    for j in matrix:
+        new+=[j[i]]
     new_matrix+=[new]
 print(new_matrix)

@@ -13,7 +13,7 @@ class Person:
 p1=Person("Ebin",25,987654)
 print(p1.name)
 print(p1._age)
-#print(p1.__number) error:private
+#print(p1.__number) error:private, we can not access normaly
 print(p1._Person__number) #this is how we call private
 
 
