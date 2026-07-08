@@ -1,4 +1,4 @@
-#package for GUIs
+#package for GUIs(graphical user interface)
 from tkinter import *
 
 window=Tk()
