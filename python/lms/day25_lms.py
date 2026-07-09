@@ -128,18 +128,17 @@ print("\n---------- STUDENT DETAILS ----------")
 
 for s in students:
     s.display()
-    print("-" * 40)
+    print("\n")
 
-print("\n------------ RANK LIST ------------")
+print("------------ RANK LIST ------------")
 
 rank = 1
 for s in students:
-    print("Rank :", rank)
+    print("\nRank :", rank)
     print("Name :", s.get_name())
     print("Roll :", s.roll_number)
     print("Total :", s.total_marks())
     print("Grade :", s.calculate_grade())
-    print("-" * 25)
     rank += 1
 
 Student.total_students()
