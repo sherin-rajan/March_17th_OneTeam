@@ -192,3 +192,78 @@ for i in range(1, 6):
             else:
                 print(" ", end="")
         print()
+
+"""
+    *
+   * *
+  *   *
+ *     *
+*       *
+ *     *
+  *   *
+   * *
+    *
+"""
+for i in range(1,6):
+    for j in range(5-i,0,-1):
+        print(" ",end="")
+    for k in range(1,2*i):
+        if k==1 or k==2*i-1:
+            print("*",end="")
+        else:
+            print(" ",end="")
+    print()
+for i in range(4,0,-1):
+    for j in range(5-i):
+        print(" ",end="")
+    for k in range(1,2*i):
+        if k==1 or k==2*i-1:
+            print("*",end="")
+        else:
+            print(" ",end="")
+    print()
+
+"""
+*        *
+**      **
+***    ***
+****  ****
+**********
+****  ****
+***    ***
+**      **
+*        *
+"""
+for i in range(1,6):
+    for j in range(i):
+        print("*",end="")
+    for k in range(2*(5-i)):
+        print(" ",end="")
+    for j in range(i):
+        print("*",end="")
+    print()
+for i in range(5,0,-1):
+    for j in range(i):
+        print("*",end="")
+    for k in range(2*(5-i)):
+        print(" ",end="")
+    for j in range(i):
+        print("*",end="")
+    print()
+
+"""
+*****
+*   *
+*   *
+*   *
+*****
+"""
+row=5
+col=5
+for i in range(1,row+1):
+    for j in range(1,col+1):
+        if i==1 or i==5 or j==1 or j==5:
+            print("*",end="")
+        else:
+            print(" ",end="")
+    print()
