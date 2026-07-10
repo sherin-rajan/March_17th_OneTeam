@@ -1,5 +1,4 @@
-#ATM
-"""
+# qns1: ATM
 balance=10000
 pin=1234
 entered_pin=int(input('Enter your pin : '))
@@ -24,8 +23,8 @@ if entered_pin==pin:
         print(f"Your balance is {balance}")
 else:
     print('Invalid Pin')
-"""
-"""
+
+#qns2
 pin=1234
 balance=10000
 entered_pin=int(input('Enter your PIN : '))
@@ -38,7 +37,6 @@ if entered_pin==pin:
     for sr in range(row):
         print("*",end=" ")
     print(" ")
-"""
 
 """
 1
@@ -46,7 +44,6 @@ if entered_pin==pin:
 3 7 10
 4 8 11 13
 5 9 12 14 15
-""" 
 """ 
 #bubble sorting
 numbers=[2,8,4,29,47,24,7]
@@ -56,7 +53,7 @@ for k in range(length):
         if numbers[j]>numbers[j+1]:      #comparing adjacent elements
            numbers[j],numbers[j+1]=numbers[j+1],numbers[j]
 print(numbers)
-
+#qns3
 size=int(input("How many number do you want to enter : "))
 numbers=[]
 for i in range(1,size+1):
@@ -64,6 +61,7 @@ for i in range(1,size+1):
     numbers=numbers+num
 print(numbers)
 
+#qns4
 rows=5
 for i in range(1,rows+1):
     m=rows-1
@@ -73,9 +71,9 @@ for i in range(1,rows+1):
         num+=m
         m-=1
     print(" ")
-"""
 
-"""marks=[]
+#qns5
+marks=[]
 print("Enter marks:")
 for h in range(1,4):
     mark=int(input(f"Subject {h}: "))
@@ -86,9 +84,10 @@ for h in range(1,4):
             return 0
         else:
             return marks[0]+recursive_sum(marks[1:])
-print(recursive_sum(marks))"""
+print(recursive_sum(marks))
 
-"""students=[{'Name': 'Athul', 'Roll Number': 56, 'Total Marks': 219, 'Average': 73.0, 'Grade': 'C'}, 
+#qns6
+students=[{'Name': 'Athul', 'Roll Number': 56, 'Total Marks': 219, 'Average': 73.0, 'Grade': 'C'}, 
  {'Name': 'Arun', 'Roll Number': 100, 'Total Marks': 249, 'Average': 83.0, 'Grade': 'B'}]
 print("---Stundents Details---")
 for student in students:
@@ -96,9 +95,10 @@ for student in students:
     print("Roll Number: ",student['Roll Number'])
     print("Total Marks: ",student['Total Marks'])
     print("Average: ",student['Average'])
-    print("Grade: ",student['Grade'])"""
+    print("Grade: ",student['Grade'])
 
-"""accounts=[]
+#qns7
+accounts=[]
 transactions=[]
 ac_set=set()
 
@@ -133,14 +133,14 @@ for i in range(1,n+1):
         "balance":balance
     }
     accounts.append(account)
-print(accounts)"""
+print(accounts)
 
 #adding digits of any number until get single digits
-"""n=list(input("Enter any number:"))
+n=list(input("Enter any number:"))
 while len(n)>1:
     t=sum(int(d) for d in n)
     n=list(str(t))
-print(n)"""
+print(n)
 
 candidates=[]
 class Candidates:
