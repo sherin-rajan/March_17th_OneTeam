@@ -25,3 +25,34 @@ while True:
     n+=1
     if count==num:
         break
+
+#factorial using function
+def factorial(n):
+    fact=1
+    for i in range(1, n+1):
+        fact=fact*i
+    return fact
+
+num=int(input("Enter any number: "))
+print(factorial(num))
+
+#factorial using recursion
+def factorial(n):
+    if n==0 or n==1:
+        return 1
+    return n*factorial(n-1)
+
+num=int(input("Enter any number: "))
+print(factorial(num))
+
+#frequency of alphabets
+s=input("Enter a string: ")
+freq={}
+for ch in s.lower():
+    if ch in freq:
+        freq[ch] += 1
+    else:
+        freq[ch] = 1
+for ch in freq:
+    print(ch, ":", freq[ch])
+
