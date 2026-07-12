@@ -56,3 +56,45 @@ for ch in s.lower():
 for ch in freq:
     print(ch, ":", freq[ch])
 
+#anagram function
+def is_anagram(s1,s2):
+    l1=len(s1)
+    l2=len(s2)
+    is_anagram=True
+    if l1==l2:
+        for i in s1:
+            if i in s2:
+                s2.remove(i)
+            else:
+                is_anagram=False
+                print("Words are not anagram")
+                break
+        if is_anagram:
+            print("Words are anagram")
+    else:
+        print("Words are not anagram")
+
+str1=list(input("Enter the first string:").lower())
+str2=list(input("Enter the second string:").lower()) 
+is_anagram(str1,str2)  
+
+#is perfect number
+num=int(input("Enter any number: "))
+sum=0
+for i in range(1,num):
+    if num%i==0:
+        sum+=i
+if sum==num:
+    print("Perfect Number")
+else:
+    print("Not a Perfect Number")
+
+#perfect numbers between 1 and 10000
+print("Perfect numbers between 1 and 10000:")
+for num in range(1,10001):
+    sum=0
+    for i in range(1,num):
+        if num%i==0:
+            sum+=i
+    if sum==num:
+        print(num)
