@@ -1,4 +1,4 @@
-#hollow square of n
+#Q1: hollow square of n
 n=int(input("How many * in one row: "))
 for i in range(1,n+1):
     for j in range(1,n+1):
@@ -8,7 +8,7 @@ for i in range(1,n+1):
             print(" ",end="")
     print()
 
-#first n prime numbers
+#Q2: first n prime numbers
 num=int(input("How many * in one row: "))
 count=0
 n=2
@@ -26,7 +26,7 @@ while True:
     if count==num:
         break
 
-#factorial using function
+#Q3: factorial using function
 def factorial(n):
     fact=1
     for i in range(1, n+1):
@@ -36,7 +36,7 @@ def factorial(n):
 num=int(input("Enter any number: "))
 print(factorial(num))
 
-#factorial using recursion
+#Q4: factorial using recursion
 def factorial(n):
     if n==0 or n==1:
         return 1
@@ -45,7 +45,7 @@ def factorial(n):
 num=int(input("Enter any number: "))
 print(factorial(num))
 
-#frequency of alphabets
+#Q5: frequency of alphabets
 s=input("Enter a string: ")
 freq={}
 for ch in s.lower():
@@ -56,7 +56,7 @@ for ch in s.lower():
 for ch in freq:
     print(ch, ":", freq[ch])
 
-#anagram function
+#Q6: anagram function
 def is_anagram(s1,s2):
     l1=len(s1)
     l2=len(s2)
@@ -78,7 +78,7 @@ str1=list(input("Enter the first string:").lower())
 str2=list(input("Enter the second string:").lower()) 
 is_anagram(str1,str2)  
 
-#is perfect number
+#Q7: is perfect number
 num=int(input("Enter any number: "))
 sum=0
 for i in range(1,num):
@@ -89,7 +89,7 @@ if sum==num:
 else:
     print("Not a Perfect Number")
 
-#perfect numbers between 1 and 10000
+#Q8: perfect numbers between 1 and 10000
 print("Perfect numbers between 1 and 10000:")
 for num in range(1,10001):
     sum=0
@@ -98,3 +98,15 @@ for num in range(1,10001):
             sum+=i
     if sum==num:
         print(num)
+
+#Q9: second largest without sort
+numbers=[10,25,8,40,32]
+largest=numbers[0]
+second=numbers[0]
+for num in numbers:
+    if num>largest:
+        second=largest
+        largest=num
+    elif num>second and num!=largest:
+        second=num
+print("Second Largest =",second)
