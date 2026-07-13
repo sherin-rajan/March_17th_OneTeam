@@ -39,7 +39,6 @@ def update():
     id=int(input("Enter id : "))
     track.execute(f"UPDATE  ")
     
-
 while True:
     print("1.Add users\n2.View Users\n3.Delete User\n4.View By ID\n5.Update\n6.Exit")
     choice=int(input("Enter your choice : "))
