@@ -7,3 +7,7 @@ def TextResponse(request):
 
 def Home(request):
     return render(request,"index.html")
+
+def Add(request):
+    return render(request,"add_tasks.html")
+
