@@ -1,41 +1,55 @@
 from validation import *
+from config import *
 
 print("="*30)
 print("  STUDENT MANAGEMENT SYSTEM")
 print("="*30)
 print("\nLOGIN")
-user=input("\nEnter your username: ")
-if validate_username(user):
-    pw=input("\nEnter your password: ")
-    if validate_password(pw):
-     print("Login Successfuly!")
+
+def login():
+    attempt=0
+    while attempt<3:
+        user=input("Enter your username: ")
+        pw=input("Enter your password: ")
+        if validate_username(user) and validate_password(pw) and user==admin_username and pw==admin_password:
+            return True
+            break
+        else:
+            print("Wrong username or password! Try again!")
+            attempt+=1
+    print("Application closed after three failed login attempts!")
+        
+if login():
     while True:
         print("""\n1. Add Student
-2. View All Students
-3. Search Student
-4. Update Student
-5. Delete Student
-6. Restore Database
-7. View Student Details
-8. Logout""")
+    2. View All Students
+    3. Search Student
+    4. Update Student
+    5. Delete Student
+    6. Restore Database
+    7. View Student Details
+    8. Logout""")
         choice=int(input("Enter your choice: "))
 
         if choice==1:
             print("added")
-        if choice==2:
+        elif choice==2:
             print("viewed")
-        if choice==3:
+        elif choice==3:
             print("searched")
-        if choice==4:
+        elif choice==4:
             print("updated")
-        if choice==5:
+        elif choice==5:
             print("deleted")
-        if choice==6:
+        elif choice==6:
             print("restored")
-        if choice==7:
-           print("logout")
-else:
-    print("Invalid Username!")
+        elif choice==7:
+            print("View student details")
+        elif choice==8:
+            print("logout")
+            break
+        else:
+            print("Invalid Choice!")
 
 
     
