@@ -11,3 +11,6 @@ def Home(request):
 def Add(request):
     return render(request,"add_tasks.html")
 
+def AllTasks(request):
+    return render(request,"all_tasks.html")
+

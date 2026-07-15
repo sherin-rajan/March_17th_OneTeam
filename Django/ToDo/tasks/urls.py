@@ -4,5 +4,6 @@ from tasks import views
 urlpatterns=[
     path("home/",views.Home),
     path('',views.TextResponse),
-    path("add/",views.Add)
+    path("add/",views.Add),
+    path('alltasks',views.AllTasks)
 ]
