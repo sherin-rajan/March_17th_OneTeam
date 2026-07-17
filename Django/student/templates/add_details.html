@@ -13,6 +13,14 @@
             <li><a href="/details">Details</a></li>
         </ul>
     </nav>
-    <h1>STUDENT MANAGEMNET SYSTEM</h1>
+    <h1>Contact Us</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <label >Name</label>
+            <input type="text" name="name">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
 </body>
 </html>

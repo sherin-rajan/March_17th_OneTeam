@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie List</title>
+    <title>Document</title>
 </head>
 <body>
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/movies/">Movies List</a></li>
-            <li><a href="/add_movie">Add Movies</a></li>
+            <li><a href="/add_details">Add Details</a></li>
+            <li><a href="/details">Details</a></li>
         </ul>
     </nav>
-    <h1>Movies List</h1>
+    <h1>Students Details</h1>
     <ul>
-        {% for m in movie %}
-        <li> {{m.movie}} </li>
+        {% for t in data %}
+        <li> {{t.name}} </li>
         {% endfor %}
     </ul>
 </body>

@@ -1,5 +1,5 @@
 """
-URL configuration for ToDo project.
+URL configuration for Config project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/6.0/topics/http/urls/
@@ -16,12 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from django.http import HttpResponse
-from django.shortcuts import render
-
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('app/',include('tasks.urls'))
+    path('',include())
 ]

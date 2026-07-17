@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie List</title>
+    <title>About Us</title>
+
 </head>
 <body>
     <nav>
@@ -13,11 +14,14 @@
             <li><a href="/add_movie">Add Movies</a></li>
         </ul>
     </nav>
-    <h1>Movies List</h1>
-    <ul>
-        {% for m in movie %}
-        <li> {{m.movie}} </li>
-        {% endfor %}
-    </ul>
+    <form method="post">
+        {% csrf_token %}
+        <div>
+        <label >Movie</label>
+        <input type="text" name="name">
+        <input type="submit" value="Submit">
+        </div>
+    </form>
+
 </body>
 </html>

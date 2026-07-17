@@ -1,16 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 # Create your views here.
-def TextResponse(request):
-    return HttpResponse("Hello Developer!!!")
+def home(request):
+    return render(request,'index.html')
 
-def Home(request):
-    return render(request,"index.html")
+def add_task(request):
+    return render(request,'add_task.html')
 
-def Add(request):
-    return render(request,"add_tasks.html")
-
-def AllTasks(request):
-    return render(request,"all_tasks.html")
-
+def all_tasks(request):
+    return render(request,'all_tasks.html')
