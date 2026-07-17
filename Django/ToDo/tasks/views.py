@@ -9,7 +9,7 @@ def add_task(request):
     if request.method=="POST":
         t=request.POST['task']
         ToDos(task=t).save()
-        return redirect('/alltask/')
+        return redirect('/all_tasks')
     return render(request,'add_task.html')
 
 def all_tasks(request):
