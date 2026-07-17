@@ -6,6 +6,21 @@
     <title>Document</title>
 </head>
 <body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/addtask">Add Task</a></li>
+            <li><a href="/alltasks/">All Tasks</a></li>
+        </ul>
+    </nav>
     <h1>Add Task</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <label >Task</label>
+            <input type="text" name="task">
+            <input type="submit" value="Add Task">
+        </div>
+    </form>
 </body>
 </html>

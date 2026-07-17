@@ -6,6 +6,18 @@
     <title>Document</title>
 </head>
 <body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/addtask">Add Task</a></li>
+            <li><a href="/alltasks/">All Tasks</a></li>
+        </ul>
+    </nav>
     <h1>All Tasks</h1>
+    <ul>
+        {% for t in data %}
+        <li>{{t.task}}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
