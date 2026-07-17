@@ -9,9 +9,13 @@ def add_task(request):
     if request.method=="POST":
         t=request.POST['task']
         ToDos(task=t).save()
-        return redirect('/all_tasks')
-    return render(request,'add_task.html')
+        return redirect('/all-tasks')
+    return render(request,'add-task.html')
 
 def all_tasks(request):
     my_task=ToDos.objects.all()
-    return render(request,'all_tasks.html',{'data':my_task})
+    return render(request,'all-tasks.html',{'data':my_task})
+
+def updateTask(request,task_id):
+    task=ToDos.objects.get(id=task_id)
+    return render(request,"update-task.html",{'my_task':task})

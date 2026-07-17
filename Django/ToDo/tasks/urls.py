@@ -3,6 +3,6 @@ from tasks import views
 
 urlpatterns=[
     path('',views.home),
-    path('add_task/',views.add_task),
-    path('all_tasks/',views.all_tasks)
+    path('add-task/',views.add_task),
+    path('all-tasks/',views.all_tasks)
 ]
