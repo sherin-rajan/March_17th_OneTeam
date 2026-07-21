@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/add_details">Add Details</a></li>
-            <li><a href="/details">Details</a></li>
+            <li><a href="/add-details">Add Details</a></li>
         </ul>
     </nav>
-    <h1>Contact Us</h1>
+    <h1>Add Studnets Details</h1>
     <form method="post">
         {% csrf_token %}
         <div>
-            <label >Name</label>
+            <label>Name</label>
             <input type="text" name="name">
-            <input type="submit" value="Submit">
+        </div>
+        <div>
+            <label>Email</label>
+            <input type="text" name="email">
+        </div>
+        <div>
+            <input type="submit" value="Add Details">
         </div>
     </form>
 </body>
+
 </html>

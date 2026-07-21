@@ -9,10 +9,17 @@
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/add_details">Add Details</a></li>
-            <li><a href="/details">Details</a></li>
+            <li><a href="/add-details">Add Details</a></li>
         </ul>
     </nav>
-    <h1>STUDENT MANAGEMNET SYSTEM</h1>
+    <h1>Students Management System</h1>
+    <h3>Students Details</h3>
+    <div>
+        {% for i in data %}
+        <p>{{i.name}}</p>
+        <p>{{i.email}}</p>
+        <p>{% if is_active %}Completed{% else %}Incomplete{% endif %}</p>
+        {% endfor %}
+    </div>
 </body>
 </html>

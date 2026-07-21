@@ -21,6 +21,10 @@ def updateTask(request,task_id):
     if request.method=='POST': #when submitting -> 'post'
         t=request.POST['task']
         status=request.POST.get("status") 
+
+        #status=request.POST.get("status",False) for value='True'
+        #my_task.is_completed=status 
+
         if status:
             my_task.is_completed=True
         else:
