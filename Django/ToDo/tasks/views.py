@@ -20,8 +20,11 @@ def updateTask(request,task_id):
     my_task=ToDos.objects.get(id=task_id)#fetching data by id
     if request.method=='POST': #when submitting -> 'post'
         t=request.POST['task']
-        status=request.POST.get("status",False)
-        my_task.is_completed=status
+        status=request.POST.get("status") 
+        if status:
+            my_task.is_completed=True
+        else:
+            my_task.is_completed=False
         my_task.task=t #adding changes 
         my_task.save()
         return redirect('/all-tasks')
