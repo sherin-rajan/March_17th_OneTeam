@@ -29,3 +29,8 @@ def updateTask(request,task_id):
         my_task.save()
         return redirect('/all-tasks')
     return render(request,"update-task.html",{'my_task':my_task})
+
+def deleteTask(request,task_id):
+    my_task=ToDos.objects.get(id=task_id)
+    my_task.delete()
+    return redirect("/all-tasks")

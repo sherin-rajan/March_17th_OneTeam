@@ -18,6 +18,7 @@
         {% for t in data %}
         <li>{{t.task}} {% if t.is_completed %} : Completed{% else %} : Incomplete {% endif %}
             <a href="/update-task/{{t.id}}">Edit</a>
+            <a href="/delete-task/{{t.id}}">Delete</a>
         </li>
         {% endfor %}
     </ul>
