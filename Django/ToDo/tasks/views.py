@@ -18,4 +18,9 @@ def all_tasks(request):
 
 def updateTask(request,task_id):
     task=ToDos.objects.get(id=task_id)
+    if request.method=='POST':
+        t=request.POST['task']
+        my_task.task=t
+        my_task.save()
+        return redirect('/all-tasks')
     return render(request,"update-task.html",{'my_task':task})

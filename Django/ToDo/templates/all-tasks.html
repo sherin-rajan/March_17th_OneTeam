@@ -16,7 +16,7 @@
     <h1>All Tasks</h1>
     <ul>
         {% for t in data %}
-        <li>{{t.task}}</li>
+        <li>{{t.task}} {% if t.is_completed %} : Completed{% else %} : Incomplete {% endif %}</li>
         {% endfor %}
     </ul>
 </body>

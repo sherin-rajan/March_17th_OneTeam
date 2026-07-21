@@ -7,10 +7,12 @@
 </head>
 <body>
     <div>
-        <form action="">
+        <form method="post" action="">
+            {% csrf_token %}
             <div>
                 <label for="">Task</label>
                 <input type="text" name="task" value="'{{my_task.task}}">
+                <input type="submit" value="Save changes">
             </div>
         </form>
     </div>
