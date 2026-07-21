@@ -12,6 +12,12 @@
             <div>
                 <label for="">Task</label>
                 <input type="text" name="task" value="'{{my_task.task}}">
+            </div>
+            <div>
+                <label for="status">Is completed</label>
+                <input type="checkbox" name="status" id="status" value="True" {% if my_task.is_completed %}checked{% endif %}>
+            </div>
+            <div>
                 <input type="submit" value="Save changes">
             </div>
         </form>

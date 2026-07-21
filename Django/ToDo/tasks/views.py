@@ -17,10 +17,12 @@ def all_tasks(request):
     return render(request,'all-tasks.html',{'data':my_task})
 
 def updateTask(request,task_id):
-    task=ToDos.objects.get(id=task_id)
-    if request.method=='POST':
+    my_task=ToDos.objects.get(id=task_id)#fetching data by id
+    if request.method=='POST': #when submitting -> 'post'
         t=request.POST['task']
-        my_task.task=t
+        status=request.POST.get("status",False)
+        my_task.is_completed=status
+        my_task.task=t #adding changes 
         my_task.save()
         return redirect('/all-tasks')
-    return render(request,"update-task.html",{'my_task':task})
+    return render(request,"update-task.html",{'my_task':my_task})
