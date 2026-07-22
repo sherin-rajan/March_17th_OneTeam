@@ -1,27 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
 </head>
-<body>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/add-task">Add Task</a></li>
-            <li><a href="/all-tasks/">All Tasks</a></li>
-        </ul>
-    </nav>
-    <h1>All Tasks</h1>
-    <ul>
-        {% for t in data %}
-        <li>{{t.task}} {% if t.is_completed %} : Completed{% else %} : Incomplete {% endif %}
-            <a href="/update-task/{{t.id}}">Edit</a>
-            <a href="/delete-task/{{t.id}}">Delete</a>
-        </li>
-        {% endfor %}
-    </ul>
 
+<body class="container-fluid ">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">ToDo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add-task">Add Task</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <h1 class="text-center mb-4">All Tasks</h1>
+    <div>
+        {% for msg in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{msg}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row justify-content-center">
+        {% for t in data %}
+        <div class="btn-waring col-lg-3 col-md-4 col-sm-6 border border-danger m-2 p-2 rounded shadow p-3 mb-5 bg-body-tertiary">
+            <p>{{t.task}} - {% if t.is_completed %}<i class="fa-solid fa-check text-success"></i>{% else %}<i class="fa-solid fa-x btn text-danger"></i>{% endif %}</p>
+            <p><i class="fa-solid fa-calendar"></i>{{t.date}}</p>
+            <a href="/update-task/{{t.id}}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
+            <a href="/delete-task/{{t.id}}" class="btn btn-danger" onclick="return confirmDelete()"><i class="fa-solid fa-trash"></i>Delete</a>
+        </div>
+        {% endfor %}
+    </div>
+    <script>
+        function confirmDelete() {
+            let choice = confirm("Do you wish to delete this task?")
+            return choice
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
