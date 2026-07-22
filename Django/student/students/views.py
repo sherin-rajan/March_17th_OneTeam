@@ -16,4 +16,19 @@ def addDetails(request):
 
 def update(request,d_id):
     data=Details.objects.get(id=d_id)
-    return render(request,'update.html',{'date':data})
+    if request.method=='POST':
+        n=request.POST['name']
+        e=request.POST['email']
+        status=request.POST.get('status',False)
+        data.is_active=status
+        data.name=n
+        data.email=e
+        data.save()
+        return redirect('/')
+    return render(request,'update.html',{'data':data})
+
+def delete(request,d_id):
+    data=Details.objects.get(id=d_id)
+    data.delete()
+    return redirect('/')
+    

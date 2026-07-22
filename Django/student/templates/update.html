@@ -6,6 +6,24 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <H1>Update Details</H1>
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <label>Name</label>
+            <input type="text" name="name" value="{{data.name}}">
+        </div>
+        <div>
+            <label>Email</label>
+            <input type="text" name="email" value="{{data.email}}">
+        </div>
+        <div>
+            <label for="status">Is active</label>
+            <input type="checkbox" name="status" id="status" value="True" {% if data.is_active %}checked{% endif %}>
+        </div>
+        <div>
+            <input type="submit" value="Save Changes">
+        </div>
+    </form>
 </body>
 </html>
