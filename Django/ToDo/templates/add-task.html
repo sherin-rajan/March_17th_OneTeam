@@ -11,7 +11,7 @@
 
 </head>
 
-<body class="container-fluid">
+<body class="container-fluid bg-dark-subtle">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">ToDo</a>
@@ -22,26 +22,56 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" href="/"><i class="fa-regular fa-house"></i>Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/add-task">Add Task</a>
+                        <a class="nav-link" href="/add-task"><i class="fa-solid fa-check text-gray"></i>Add Task</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <h1 class="text-center">Add Task</h1>
+    <div class="container mt-5">
     <div class="row justify-content-center">
-        <form method="post">
-            {% csrf_token %}
-            <div>
-                <label>Task</label>
-                <input type="text" name="task">
-                <input type="submit" value="Add Task">
+        <div class="col-lg-6 col-md-8">
+
+            <div class="card shadow border-danger">
+                <div class="card-body p-5">
+
+                    <h1 class="text-center display-2 fw-bold mb-5">
+                        Add Task
+                    </h1>
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="row align-items-center mb-4">
+                            <label class="col-sm-2 col-form-label fw-semibold">
+                                Task
+                            </label>
+
+                            <div class="col-sm-10">
+                                <input type="text"
+                                       class="form-control"
+                                       name="task"
+                                       placeholder="Enter your task">
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-5">
+                            <button type="submit" class="btn btn-primary px-4">
+                                <i class="fa-solid fa-check text-success text-white"></i> Add Task
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
             </div>
-        </form>
+
+        </div>
     </div>
+</div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
