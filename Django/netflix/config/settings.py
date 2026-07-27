@@ -83,7 +83,7 @@ DATABASES = {
         'NAME': 'netflix_db',
         'USER':'root',
         'HOST':'localhost',
-        'PASSWORD':'Caleb@2499'
+        'PASSWORD':'Pass@123'
     }
 }
 
@@ -125,3 +125,6 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS=[os.path.join(BASE_DIR,"static")]
 STATIC_ROOT=os.path.join(BASE_DIR,"assets")
+
+MEDIA_URL="media/"
+MEDIA_ROOT=os.path.join(BASE_DIR/"media")

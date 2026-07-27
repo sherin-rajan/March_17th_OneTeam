@@ -3,25 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
+    <title>Add Category</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/movies/">Movies List</a></li>
-            <li><a href="/add_movie">Add Movies</a></li>
-        </ul>
-    </nav>
-    <form method="post">
-        {% csrf_token %}
-        <div>
-        <label >Enter category name</label>
-        <input type="text" name="category">
-        <input type="submit" value="Add category">
+
+<body class="bg-dark text-light">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-warning fs-3" href="/">🎬 MovieHub</a>
+
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/add-category">Add Category</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/all-movies">Movie List</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </form>
+    </nav>
+
+    <!-- Form -->
+    <div class="container py-5">
+
+        <div class="row justify-content-center">
+
+            <div class="col-md-6 col-lg-5">
+
+                <h1 class="text-warning fw-bold text-center mb-4">
+                    ➕ Add Category
+                </h1>
+
+                <hr class="border-warning mb-4">
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="mb-4">
+                        <label class="form-label fs-5">
+                            Category Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="category"
+                            class="form-control form-control-lg"
+                            placeholder="Enter category name">
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-warning btn-lg">
+                            Add Category
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

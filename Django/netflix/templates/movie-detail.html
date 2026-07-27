@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ cinema.movie }}</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-dark text-light">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black shadow">
+        <div class="container">
+            <a class="navbar-brand text-warning fw-bold fs-3" href="/">🎬 MovieHub</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add-category">Add Category</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/all-movies">Movie List</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Movie Details -->
+    <div class="container py-5">
+
+        <div class="row align-items-center">
+
+            <!-- Poster -->
+            <div class="col-lg-4 text-center mb-4 mb-lg-0">
+                <img src="{{ cinema.poster.url }}" class="img-fluid rounded shadow" style="max-height:550px;"
+                    alt="{{ cinema.movie }}">
+            </div>
+
+            <!-- Details -->
+            <div class="col-lg-8">
+
+                <h1 class="display-4 text-warning fw-bold">
+                    {{ cinema.movie }}
+                </h1>
+
+                <hr class="border-warning">
+
+                <div class="mb-3">
+                    <span class="btn btn-dark border border-warning text-warning rounded-pill px-4 py-2">
+                        {{ cinema.category }}
+                    </span>
+                </div>
+
+                <h5 class="text-warning">📅 Release Date</h5>
+                <p class="fs-5">{{ cinema.release_date }}</p>
+
+                <h5 class="text-warning">🎬 Description</h5>
+                <p class="text-light-emphasis fs-5">
+                    {{ cinema.description }}
+                </p>
+
+                <a href="/all-movies" class="btn btn-warning btn-lg mt-3">
+                    ← Back to Movies
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
