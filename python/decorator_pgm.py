@@ -1,5 +1,4 @@
 #adds extra functionality to a function without changing its original code using another function as decorator
-
 def MyDec(fun):
     def wrapper():
         print("Hello from decorator")

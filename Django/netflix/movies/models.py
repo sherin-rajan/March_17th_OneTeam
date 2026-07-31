@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from actors.models import Actors
 
 # Create your models here.
 class Category(models.Model):
@@ -25,3 +26,16 @@ class Movies(models.Model):
 
     def __str__(self):
         return self.movie
+
+class Cast(models.Model):
+    class Role(models.TextChoices):
+        ACTOR="ACTOR","Actor"
+        DIRECTOR="DIRECTOR",'Director'
+        PRODUCER='PRODUCER','Producer'
+    movie=models.ForeignKey(Movies,on_delete=models.CASCADE)
+    role=models.CharField(max_length=20,choices=Role.choices)
+    actor=models.ForeignKey(Actors,on_delete=models.CASCADE)
+    charactor_name=models.CharField(max_length=40)
+
+    def __str__(self):
+        return f'{self.movie} - {self.role} - {self.actor}'

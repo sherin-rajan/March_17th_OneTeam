@@ -12,3 +12,4 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields={"slug":['category']}
 
 admin.site.register(Category,CategoryAdmin)
+
