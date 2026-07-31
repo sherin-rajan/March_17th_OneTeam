@@ -1,7 +1,6 @@
 from django.shortcuts import render,redirect
-from movies.models import Category
+from movies.models import Category,Movies,Cast
 from django.http import HttpResponse
-from movies.models import Movies
 from movies.form import CastForm
 
 
@@ -60,5 +59,11 @@ def updateMovie(request,movie_id):
     return render(request,'update-movie.html',{'cinema':m,'cats':categories})
 
 def addCast(request):
-    cast_form=CastForm()
-    return render(request,"add-cast.html",{"my_form":cast_form})
+    if request.method=='POST':
+        cast_form=CastForm(request.POST)
+        if cast_form.is_valid():
+            cast_form.save()
+            return HttpResponse("New Cast Added")
+    else:
+        cast_form=CastForm()
+        return render(request,"add-cast.html",{"my_form":cast_form})
