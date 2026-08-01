@@ -11,7 +11,17 @@ for i in range(len(matrix)+1):
     o+=[p]
 print(o)"""
 
-stock=[{'name':'laptop',23,'mouse':12,'keyboard':20}]
+stock = [
+    {'name': 'laptop', 'stock': 23},
+    {'name': 'mouse', 'stock': 12},
+    {'name': 'keyboard', 'stock': 20}
+]
+n = len(stock)
+for i in range(n):
+    for j in range(n - i - 1):
+        if stock[j]['stock'] > stock[j + 1]['stock']:
+            stock[j],stock[j+1]=stock[j + 1],stock[j]
+print(stock)
 
 
 
