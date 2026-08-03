@@ -21,7 +21,16 @@ def allMovies(request):
     
 def movieDetails(request,movie_id):
     m=Movies.objects.get(id=movie_id)
-    return render(request,'movie-detail.html',{'cinema':m})
+    actors=m.casts.filter(role=Cast.Role.ACTOR)
+    director=m.casts.filter(role=Cast.Role.DIRECTOR)
+    producer=m.casts.filter(role=Cast.Role.PRODUCER)
+    context={
+        'cinema':m,
+        'actor':actors,
+        'director':director,
+        'producer':producer
+    }
+    return render(request,'movie-detail.html',context)
 
 def deleteMovie(request,movie_id):
     m=Movies.objects.get(id=movie_id)

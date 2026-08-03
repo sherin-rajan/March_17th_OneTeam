@@ -32,7 +32,7 @@ class Cast(models.Model):
         ACTOR="ACTOR","Actor"
         DIRECTOR="DIRECTOR",'Director'
         PRODUCER='PRODUCER','Producer'
-    movie=models.ForeignKey(Movies,on_delete=models.CASCADE)
+    movie=models.ForeignKey(Movies,on_delete=models.CASCADE,related_name='casts')
     role=models.CharField(max_length=20,choices=Role.choices)
     actor=models.ForeignKey(Actors,on_delete=models.CASCADE)
     charactor_name=models.CharField(max_length=40)

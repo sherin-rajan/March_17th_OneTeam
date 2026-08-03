@@ -75,14 +75,80 @@
                 <p class="text-light-emphasis fs-5">
                     {{ cinema.description }}
                 </p>
-                
+
                 <a href="/update-movie/{{ cinema.id }}" class="btn btn-outline-warning btn-lg px-4">
                     ✏️ Edit
                 </a>
+                <h3 class="mt-5 text-warning">Actors</h3>
 
-                <a href="/all-movies" class="btn btn-warning btn-lg mt-3">
-                    ← Back to Movies
-                </a>
+                <div class="row g-4">
+
+                    {% for act in actor %}
+
+                    <div class="col-auto text-center">
+
+                        <img src="{{ act.actor.picture.url }}" class="rounded shadow"
+                            style="width:120px; height:160px; object-fit:cover;" alt="{{ act.actor.name }}">
+
+                        <h6 class="mt-2 mb-1">{{ act.actor.name }}</h6>
+
+                        <small class="text-secondary">
+                            {{ act.charactor_name }}
+                        </small>
+
+                    </div>
+
+                    {% empty %}
+
+                    <p>No actors found.</p>
+
+                    {% endfor %}
+
+                </div>
+                <h3 class="mt-5 text-warning">Directors</h3>
+
+                <div class="row g-4">
+
+                    {% for act in director %}
+
+                    <div class="col-auto text-center">
+
+                        <img src="{{ act.director.picture.url }}" class="rounded shadow"
+                            style="width:120px; height:160px; object-fit:cover;" alt="{{ act.director.name }}">
+
+                        <h6 class="mt-2 mb-1">{{ act.director.name }}</h6>
+
+                    </div>
+
+                    {% empty %}
+
+                    <p>No actors found.</p>
+
+                    {% endfor %}
+
+                </div>
+                <h3 class="mt-5 text-warning">Producers</h3>
+
+                <div class="row g-4">
+
+                    {% for act in producer %}
+
+                    <div class="col-auto text-center">
+
+                        <img src="{{ act.producer.picture.url }}" class="rounded shadow"
+                            style="width:120px; height:160px; object-fit:cover;" alt="{{ act.producer.name }}">
+
+                        <h6 class="mt-2 mb-1">{{ act.producer.name }}</h6>
+
+                    </div>
+
+                    {% empty %}
+
+                    <p>No actors found.</p>
+
+                    {% endfor %}
+
+                </div>
 
             </div>
 
