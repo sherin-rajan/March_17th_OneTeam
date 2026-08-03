@@ -109,20 +109,20 @@
 
                 <div class="row g-4">
 
-                    {% for act in director %}
+                    {% for dir in director %}
 
                     <div class="col-auto text-center">
 
-                        <img src="{{ act.director.picture.url }}" class="rounded shadow"
-                            style="width:120px; height:160px; object-fit:cover;" alt="{{ act.director.name }}">
+                        <img src="{{ dir.director.picture.url }}" class="rounded shadow"
+                            style="width:120px; height:160px; object-fit:cover;" alt="{{ dir.director.name }}">
 
-                        <h6 class="mt-2 mb-1">{{ act.director.name }}</h6>
+                        <h6 class="mt-2 mb-1">{{ dir.director.name }}</h6>
 
                     </div>
 
                     {% empty %}
 
-                    <p>No actors found.</p>
+                    <p>No producers found.</p>
 
                     {% endfor %}
 
@@ -131,20 +131,20 @@
 
                 <div class="row g-4">
 
-                    {% for act in producer %}
+                    {% for pro in producer %}
 
                     <div class="col-auto text-center">
 
-                        <img src="{{ act.producer.picture.url }}" class="rounded shadow"
-                            style="width:120px; height:160px; object-fit:cover;" alt="{{ act.producer.name }}">
+                        <img src="{{ pro.producer.picture.url }}" class="rounded shadow"
+                            style="width:120px; height:160px; object-fit:cover;" alt="{{ pro.producer.name }}">
 
-                        <h6 class="mt-2 mb-1">{{ act.producer.name }}</h6>
+                        <h6 class="mt-2 mb-1">{{ pro.producer.name }}</h6>
 
                     </div>
 
                     {% empty %}
 
-                    <p>No actors found.</p>
+                    <p>No directors found.</p>
 
                     {% endfor %}
 

@@ -14,3 +14,4 @@ class Actors(models.Model):
     class Meta:
         verbose_name='Actors'
         verbose_name_plural='Actors'
+
