@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from movies.models import Category,Movies,Cast
 from django.http import HttpResponse
-from movies.form import CastForm
+from movies.form import CastForm,ReviewForm
 
 
 # Create your views here.
@@ -24,12 +24,20 @@ def movieDetails(request,movie_id):
     actors=m.casts.filter(role=Cast.Role.ACTOR)
     director=m.casts.filter(role=Cast.Role.DIRECTOR)
     producer=m.casts.filter(role=Cast.Role.PRODUCER)
+    if request.method=='POST':
+        form=ReviewForm(request.POST)
+        if form.is_valid():
+            review=form.save(commit=False)
+            review.movie=m
+            review.save()
+    form=ReviewForm()
     context={
-        'cinema':m,
-        'actor':actors,
-        'director':director,
-        'producer':producer
-    }
+            'cinema':m,
+            'actor':actors,
+            'director':director,
+            'producer':producer,
+            'form':form
+        }
     return render(request,'movie-detail.html',context)
 
 def deleteMovie(request,movie_id):

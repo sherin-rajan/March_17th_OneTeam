@@ -39,3 +39,14 @@ class Cast(models.Model):
 
     def __str__(self):
         return f'{self.movie} - {self.role} - {self.actor}'
+
+class Review(models.Model):
+    movie=models.ForeignKey(Movies,on_delete=models.CASCADE,related_name='reviews')
+    username=models.CharField(max_length=50)
+    rating=models.PositiveSmallIntegerField()
+    comment=models.TextField()
+    date=models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.username} - {self.movie.movie}'
+    
