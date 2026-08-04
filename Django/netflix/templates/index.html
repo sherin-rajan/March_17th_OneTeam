@@ -1,187 +1,144 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>MovieHub</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- External CSS -->
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
 </head>
+
 
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
-        <div class="container">
+    <nav class="navbar">
 
-            <a class="navbar-brand logo" href="/">
-                🎬 MovieHub
-            </a>
+        <a href="{% url 'home' %}" class="logo">
+            🎬 MovieHub
+        </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
 
-                <span class="navbar-toggler-icon"></span>
+        <ul class="nav-links">
 
-            </button>
+            <li>
+                <a href="{% url 'home' %}">
+                    Home
+                </a>
+            </li>
 
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <li>
+                <a href="{% url 'all_movies' %}">
+                    All Movies
+                </a>
+            </li>
 
-                <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
-                    <div class="container">
+            <li>
+                <a href="{% url 'add_movie' %}">
+                    Add Movie
+                </a>
+            </li>
 
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNav">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
+            <li>
+                <a href="{% url 'add_category' %}">
+                    Add Category
+                </a>
+            </li>
 
-                        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        </ul>
 
-                            <ul class="navbar-nav">
-
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="/">Home</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/add-category">Add Category</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/all-movies">Movie List</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/add-movie">Add Movie</a>
-                                </li>
-
-                            </ul>
-
-                        </div>
-
-                    </div>
-                </nav>
-
-            </div>
-
-        </div>
     </nav>
-
-    <!-- Hero Section -->
 
     <section class="hero">
 
-        <div class="container text-center">
+        <h1>
+            Welcome to MovieHub
+        </h1>
 
-            <h1>Welcome to MovieHub</h1>
+        <p>
+            Discover your favourite movies, explore different genres,
+            and manage your personal movie collection with ease.
+        </p>
+
+
+        <a href="{% url 'all_movies' %}" class="btn">
+            Browse Movies
+        </a>
+
+    </section>
+
+    <section class="features">
+
+        <div class="card">
+
+            <div class="icon">
+                🎬
+            </div>
+
+            <h3>
+                Movie Collection
+            </h3>
 
             <p>
-                Discover your favourite movies, explore different genres,
-                and manage your personal movie collection with ease.
+                Browse all the movies stored in your collection.
             </p>
 
-            <a href="/all-movies" class="hero-btn">
-                Browse Movies
+            <a href="{% url 'all_movies' %}" class="btn-small">
+                View Movies
             </a>
 
         </div>
 
-    </section>
+        <div class="card">
 
-    <!-- Features -->
-
-    <section class="container py-5">
-
-        <div class="row g-4">
-
-            <div class="col-md-4">
-
-                <div class="feature-card">
-
-                    <div class="feature-icon">
-                        🎬
-                    </div>
-
-                    <h3>Movie Collection</h3>
-
-                    <p>
-                        Browse all the movies stored in your collection.
-                    </p>
-
-                    <a href="/all-movies" class="btn btn-warning">
-                        View Movies
-                    </a>
-
-                </div>
-
+            <div class="icon">
+                ➕
             </div>
 
-            <div class="col-md-4">
+            <h3>
+                Add Movie
+            </h3>
 
-                <div class="feature-card">
+            <p>
+                Add new movies with posters, descriptions, and release dates.
+            </p>
 
-                    <div class="feature-icon">
-                        ➕
-                    </div>
-
-                    <h3>Add Movie</h3>
-
-                    <p>
-                        Add new movies with posters, descriptions and release dates.
-                    </p>
-
-                    <a href="/add-movie" class="btn btn-warning">
-                        Add Movie
-                    </a>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-4">
-
-                <div class="feature-card">
-
-                    <div class="feature-icon">
-                        🎭
-                    </div>
-
-                    <h3>Categories</h3>
-
-                    <p>
-                        Organize movies into different genres and categories.
-                    </p>
-
-                    <a href="/add-category" class="btn btn-warning">
-                        Manage Categories
-                    </a>
-
-                </div>
-
-            </div>
+            <a href="{% url 'add_movie' %}" class="btn-small">
+                Add Movie
+            </a>
 
         </div>
 
+        <div class="card">
+
+            <div class="icon">
+                🎭
+            </div>
+
+            <h3>
+                Categories
+            </h3>
+
+            <p>
+                Organize movies into different genres and categories.
+            </p>
+
+            <a href="{% url 'add_category' %}" class="btn-small">
+                Manage Categories
+            </a>
+        </div>
+
+
     </section>
 
-    <!-- Footer -->
-
     <footer>
-
         <p>
-            © 2026 MovieHub | Built with Django & Bootstrap
+            © 2026 MovieHub | All Rights Reserved
         </p>
-
     </footer>
-
-    <!-- Bootstrap JS -->
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

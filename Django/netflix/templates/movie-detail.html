@@ -1,163 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ cinema.movie }}</title>
+{% block title %}Movie Details | MovieFlix{% endblock %}
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+{% block content %}
+<!-- Movie Details -->
+<div class="container py-5">
 
-<body class="bg-dark text-light">
+    <div class="row align-items-center">
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-black shadow">
-        <div class="container">
-            <a class="navbar-brand text-warning fw-bold fs-3" href="/">🎬 MovieHub</a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/add-category">Add Category</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/all-movies">Movie List</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/add-movie">Add Movies</a>
-                    </li>
-                </ul>
-            </div>
+        <!-- Poster -->
+        <div class="col-lg-4 text-center mb-4 mb-lg-0">
+            <img src="{{ cinema.poster.url }}" class="img-fluid rounded shadow" style="max-height:550px;"
+                alt="{{ cinema.movie }}">
         </div>
-    </nav>
 
-    <!-- Movie Details -->
-    <div class="container py-5">
+        <!-- Details -->
+        <div class="col-lg-8">
 
-        <div class="row align-items-center">
+            <h1 class="display-4 text-warning fw-bold">
+                {{ cinema.movie }}
+            </h1>
 
-            <!-- Poster -->
-            <div class="col-lg-4 text-center mb-4 mb-lg-0">
-                <img src="{{ cinema.poster.url }}" class="img-fluid rounded shadow" style="max-height:550px;"
-                    alt="{{ cinema.movie }}">
+            <hr class="border-warning">
+
+            <div class="mb-3">
+                <span class="btn btn-dark border border-warning text-warning rounded-pill px-4 py-2">
+                    {{ cinema.category }}
+                </span>
             </div>
 
-            <!-- Details -->
-            <div class="col-lg-8">
+            <h5 class="text-warning">📅 Release Date</h5>
+            <p class="fs-5">{{ cinema.release_date }}</p>
 
-                <h1 class="display-4 text-warning fw-bold">
-                    {{ cinema.movie }}
-                </h1>
+            <h5 class="text-warning">🎬 Description</h5>
+            <p class="text-light-emphasis fs-5">
+                {{ cinema.description }}
+            </p>
 
-                <hr class="border-warning">
+            <a href="/update-movie/{{ cinema.id }}" class="btn btn-outline-warning btn-lg px-4">
+                ✏️ Edit
+            </a>
+            <h3 class="mt-5 text-warning">Actors</h3>
 
-                <div class="mb-3">
-                    <span class="btn btn-dark border border-warning text-warning rounded-pill px-4 py-2">
-                        {{ cinema.category }}
-                    </span>
-                </div>
+            <div class="row g-4">
 
-                <h5 class="text-warning">📅 Release Date</h5>
-                <p class="fs-5">{{ cinema.release_date }}</p>
+                {% for act in actor %}
 
-                <h5 class="text-warning">🎬 Description</h5>
-                <p class="text-light-emphasis fs-5">
-                    {{ cinema.description }}
-                </p>
+                <div class="col-auto text-center">
 
-                <a href="/update-movie/{{ cinema.id }}" class="btn btn-outline-warning btn-lg px-4">
-                    ✏️ Edit
-                </a>
-                <h3 class="mt-5 text-warning">Actors</h3>
+                    <img src="{{ act.actor.picture.url }}" class="rounded shadow"
+                        style="width:120px; height:160px; object-fit:cover;" alt="{{ act.actor.name }}">
 
-                <div class="row g-4">
+                    <h6 class="mt-2 mb-1">{{ act.actor.name }}</h6>
 
-                    {% for act in actor %}
-
-                    <div class="col-auto text-center">
-
-                        <img src="{{ act.actor.picture.url }}" class="rounded shadow"
-                            style="width:120px; height:160px; object-fit:cover;" alt="{{ act.actor.name }}">
-
-                        <h6 class="mt-2 mb-1">{{ act.actor.name }}</h6>
-
-                        <small class="text-secondary">
-                            {{ act.charactor_name }}
-                        </small>
-
-                    </div>
-
-                    {% empty %}
-
-                    <p>No actors found.</p>
-
-                    {% endfor %}
+                    <small class="text-secondary">
+                        {{ act.charactor_name }}
+                    </small>
 
                 </div>
-                <h3 class="mt-5 text-warning">Directors</h3>
 
-                <div class="row g-4">
+                {% empty %}
 
-                    {% for dir in director %}
+                <p>No actors found.</p>
 
-                    <div class="col-auto text-center">
-
-                        <img src="{{ dir.director.picture.url }}" class="rounded shadow"
-                            style="width:120px; height:160px; object-fit:cover;" alt="{{ dir.director.name }}">
-
-                        <h6 class="mt-2 mb-1">{{ dir.director.name }}</h6>
-
-                    </div>
-
-                    {% empty %}
-
-                    <p>No producers found.</p>
-
-                    {% endfor %}
-
-                </div>
-                <h3 class="mt-5 text-warning">Producers</h3>
-
-                <div class="row g-4">
-
-                    {% for pro in producer %}
-
-                    <div class="col-auto text-center">
-
-                        <img src="{{ pro.producer.picture.url }}" class="rounded shadow"
-                            style="width:120px; height:160px; object-fit:cover;" alt="{{ pro.producer.name }}">
-
-                        <h6 class="mt-2 mb-1">{{ pro.producer.name }}</h6>
-
-                    </div>
-
-                    {% empty %}
-
-                    <p>No directors found.</p>
-
-                    {% endfor %}
-
-                </div>
+                {% endfor %}
 
             </div>
+
 
         </div>
 
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-
-</html>
+</div>
+{% endblock %}
