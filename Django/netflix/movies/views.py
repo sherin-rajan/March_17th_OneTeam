@@ -30,7 +30,9 @@ def movieDetails(request,movie_id):
             review=form.save(commit=False)
             review.movie=m
             review.save()
-    form=ReviewForm()
+            return redirect("movie_details", movie_id=movie_id)
+    else:
+        form=ReviewForm()
     context={
             'cinema':m,
             'actor':actors,

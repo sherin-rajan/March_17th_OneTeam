@@ -3,119 +3,169 @@
 {% block title %}Movie Details | MovieFlix{% endblock %}
 
 {% block content %}
-<!-- Movie Details -->
+
 <div class="container py-5">
 
-    <div class="row align-items-center">
+    <div class="row g-5">
 
-        <!-- Poster -->
-        <div class="col-lg-4 text-center mb-4 mb-lg-0">
-            <img src="{{ cinema.poster.url }}" class="img-fluid rounded shadow" style="max-height:550px;"
-                alt="{{ cinema.movie }}">
-        </div>
+        <!-- Left Section -->
+        <div class="col-lg-4">
 
-        <!-- Details -->
-        <div class="col-lg-8">
+            <!-- Poster -->
+            <img src="{{ cinema.poster.url }}" class="img-fluid rounded shadow mb-4" alt="{{ cinema.movie }}">
 
-            <h1 class="display-4 text-warning fw-bold">
-                {{ cinema.movie }}
-            </h1>
+            <!-- Review Button -->
+            <button class="btn btn-warning w-100 mb-3 fw-semibold" id="reviewBtn">
+                ✍ Write a Review
+            </button>
 
-            <hr class="border-warning">
+            <!-- Review Form -->
+            <div id="reviewForm" style="display:none;">
 
-            <div class="mb-3">
-                <span class="btn btn-dark border border-warning text-warning rounded-pill px-4 py-2">
-                    {{ cinema.category }}
-                </span>
-            </div>
+                <div class="card shadow-sm mb-4">
 
-            <h5 class="text-warning">📅 Release Date</h5>
-            <p class="fs-5">{{ cinema.release_date }}</p>
-
-            <h5 class="text-warning">🎬 Description</h5>
-            <p class="text-light-emphasis fs-5">
-                {{ cinema.description }}
-            </p>
-
-            <a href="/update-movie/{{ cinema.id }}" class="btn btn-outline-warning btn-lg px-4">
-                ✏️ Edit
-            </a>
-            <div class="card bg-dark text-light border-secondary mt-5">
-
-                <div class="card-header">
-                    <h3>Write a Review</h3>
-                </div>
-
-                <div class="card-body">
-
-                    <form method="POST">
-
-                        {% csrf_token %}
-
-                        {{ form.as_p }}
-
-                        <button class="btn btn-warning">
-                            Submit Review
-                        </button>
-
-                    </form>
-
-                </div>
-
-            </div>
-            <div class="mt-5">
-
-                <h3 class="text-warning">
-                    Reviews
-                </h3>
-
-                {% for review in cinema.reviews.all %}
-
-                <div class="card bg-secondary text-light mb-3">
+                    <div class="card-header bg-warning">
+                        <h5 class="mb-0">Write a Review</h5>
+                    </div>
 
                     <div class="card-body">
 
-                        <h5>{{ review.username }}</h5>
+                        <form method="POST">
 
-                        <p>
-                            ⭐ {{ review.rating }}/5
-                        </p>
+                            {% csrf_token %}
 
-                        <p>
-                            {{ review.comment }}
-                        </p>
+                            <div class="mb-3">
+                                {{ form.username.label_tag }}
+                                {{ form.username }}
+                            </div>
 
-                        <small class="text-light">
-                            {{ review.created_at }}
-                        </small>
+                            <div class="mb-3">
+                                {{ form.rating.label_tag }}
+                                {{ form.rating }}
+                            </div>
+
+                            <div class="mb-3">
+                                {{ form.comment.label_tag }}
+                                {{ form.comment }}
+                            </div>
+
+                            <button class="btn btn-success w-100">
+                                Submit Review
+                            </button>
+
+                        </form>
 
                     </div>
 
                 </div>
 
-                {% empty %}
+            </div>
 
-                <p>No reviews yet.</p>
+            <!-- Reviews -->
+            <div class="card shadow-sm">
 
-                {% endfor %}
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">⭐ Reviews</h5>
+                </div>
+
+                <div class="card-body">
+
+                    {% for review in cinema.reviews.all %}
+
+                    <div class="border rounded p-3 mb-3">
+
+                        <div class="d-flex justify-content-between">
+
+                            <strong>{{ review.username }}</strong>
+
+                            <span class="badge bg-warning text-dark">
+                                {{ review.rating }}/5
+                            </span>
+
+                        </div>
+
+                        <p class="mt-2 mb-1">
+                            {{ review.comment }}
+                        </p>
+
+                        <small class="text-muted">
+                            {{ review.created_at|date:"d M Y" }}
+                        </small>
+
+                    </div>
+
+                    {% empty %}
+
+                    <p class="text-muted mb-0">
+                        No reviews yet.
+                    </p>
+
+                    {% endfor %}
+
+                </div>
 
             </div>
-            <h3 class="mt-5 text-warning">Actors</h3>
 
-            <div class="row g-4">
+        </div>
+
+        <!-- Right Section -->
+        <div class="col-lg-8">
+
+            <h1 class="display-5 fw-bold">
+                {{ cinema.movie }}
+            </h1>
+
+            <span class="badge bg-warning text-dark fs-6 mb-3">
+                {{ cinema.category }}
+            </span>
+
+            <hr>
+
+            <h4>📅 Release Date</h4>
+
+            <p class="fs-5">
+                {{ cinema.release_date }}
+            </p>
+
+            <h4>🎬 Description</h4>
+
+            <p class="lead">
+                {{ cinema.description }}
+            </p>
+
+            <a href="{% url 'update_movie' cinema.id %}" class="btn btn-primary mb-5">
+                ✏ Edit Movie
+            </a>
+
+            <!-- Actors -->
+            <h3 class="mb-4">Actors</h3>
+
+            <div class="row">
 
                 {% for act in actor %}
 
-                <div class="col-auto text-center">
+                <div class="col-md-3 col-sm-4 col-6 mb-4">
 
-                    <img src="{{ act.actor.picture.url }}" class="rounded shadow"
-                        style="width:120px; height:160px; object-fit:cover;" alt="{{ act.actor.name }}">
+                    <div class="card h-100 shadow-sm">
 
-                    <h6 class="mt-2 mb-1">{{ act.actor.name }}</h6>
+                        <img src="{{ act.actor.picture.url }}"
+                             class="card-img-top"
+                             style="height:220px;object-fit:cover;"
+                             alt="{{ act.actor.name }}">
 
-                    <small class="text-secondary">
-                        {{ act.charactor_name }}
-                    </small>
+                        <div class="card-body text-center">
+
+                            <h6 class="card-title mb-1">
+                                {{ act.actor.name }}
+                            </h6>
+
+                            <small class="text-muted">
+                                {{ act.charactor_name }}
+                            </small>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -127,10 +177,33 @@
 
             </div>
 
-
         </div>
 
     </div>
 
 </div>
+
+<script>
+
+const reviewBtn = document.getElementById("reviewBtn");
+const reviewForm = document.getElementById("reviewForm");
+
+reviewBtn.addEventListener("click", function(){
+
+    if(reviewForm.style.display==="none"){
+
+        reviewForm.style.display="block";
+        reviewBtn.innerHTML="✖ Close Review Form";
+
+    }else{
+
+        reviewForm.style.display="none";
+        reviewBtn.innerHTML="✍ Write a Review";
+
+    }
+
+});
+
+</script>
+
 {% endblock %}
