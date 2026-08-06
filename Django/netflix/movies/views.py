@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from movies.models import Category,Movies,Cast
 from django.http import HttpResponse
 from movies.form import CastForm,ReviewForm
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -15,10 +16,11 @@ def addCategory(request):
         return HttpResponse("New category added")
     return render(request,'add-category.html')
 
+@login_required(login_url='login')
 def allMovies(request):
     m=Movies.objects.all()
     return render(request,'all-movies.html',{'movies':m})
-    
+  
 def movieDetails(request,movie_id):
     m=Movies.objects.get(id=movie_id)
     actors=m.casts.filter(role=Cast.Role.ACTOR)
@@ -42,11 +44,13 @@ def movieDetails(request,movie_id):
         }
     return render(request,'movie-detail.html',context)
 
+@login_required
 def deleteMovie(request,movie_id):
     m=Movies.objects.get(id=movie_id)
     m.delete()
     return redirect('/all-movies/')
 
+@login_required
 def addMovies(request):
     categories=Category.objects.all()
     if request.method=='POST':
@@ -61,6 +65,7 @@ def addMovies(request):
         return redirect('/all-movies')
     return render(request,'add-movie.html',{'cats':categories})
 
+@login_required
 def updateMovie(request,movie_id):
     categories=Category.objects.all()
     m=Movies.objects.get(id=movie_id)
@@ -77,6 +82,7 @@ def updateMovie(request,movie_id):
         return redirect('/all-movies')
     return render(request,'update-movie.html',{'cinema':m,'cats':categories})
 
+@login_required
 def addCast(request):
     if request.method=='POST':
         cast_form=CastForm(request.POST)

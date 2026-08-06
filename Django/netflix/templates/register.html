@@ -4,53 +4,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register | MovieFlix</title>
+    <title>Register | MovieHub</title>
 
     <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
 </head>
 <body>
 
-<div class="auth-container">
+<!-- Navbar -->
+<nav>
+    <div class="navbar">
 
-    <a href="{% url 'home' %}" class="home-link">🏠 Home</a>
+        <a href="{% url 'home' %}" class="logo">
+            🎬 MovieHub
+        </a>
 
-    <div class="auth-card">
+        <a href="{% url 'home' %}" class="home-btn">
+            Home
+        </a>
 
-        <h1>Create Account</h1>
+    </div>
+</nav>
 
-        <form method="post" action="{% url 'register' %}">
+<!-- Register Card -->
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Create Account</h2>
+
+        <p class="subtitle">
+            Join MovieHub and start exploring movies.
+        </p>
+
+        <form method="POST" action="{% url 'register' %}">
             {% csrf_token %}
 
-            <div class="input-group">
-                <label>First Name</label>
-                <input type="text" name="first_name" required>
-            </div>
+            <input type="text"
+                   name="first_name"
+                   placeholder="First Name"
+                   required>
 
-            <div class="input-group">
-                <label>Last Name</label>
-                <input type="text" name="last_name" required>
-            </div>
+            <input type="text"
+                   name="last_name"
+                   placeholder="Last Name"
+                   required>
 
-            <div class="input-group">
-                <label>Email</label>
-                <input type="email" name="email" required>
-            </div>
+            <input type="email"
+                   name="email"
+                   placeholder="Email"
+                   required>
 
-            <div class="input-group">
-                <label>Password</label>
-                <input type="password" name="password1" required>
-            </div>
+            <input type="password"
+                   name="password1"
+                   placeholder="Password"
+                   required>
 
-            <div class="input-group">
-                <label>Confirm Password</label>
-                <input type="password" name="password2" required>
-            </div>
+            <input type="password"
+                   name="password2"
+                   placeholder="Confirm Password"
+                   required>
 
-            <button type="submit">Register</button>
+            <button type="submit">
+                Register
+            </button>
 
         </form>
 
-        <p>
+        <p class="bottom-text">
             Already have an account?
             <a href="{% url 'login' %}">Login</a>
         </p>

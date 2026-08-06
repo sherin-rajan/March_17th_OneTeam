@@ -30,23 +30,25 @@
                 </a>
             </li>
 
+            {% if request.user.is_authenticated %}
             <li>
-                <a href="{% url 'all_movies' %}">
-                    All Movies
+                <a href="{% url 'logout' %}">
+                    Logout
+                </a>
+            </li>
+            {% else %}
+            <li>
+                <a href="{% url 'login' %}">
+                    Login
                 </a>
             </li>
 
             <li>
-                <a href="{% url 'add_movie' %}">
-                    Add Movie
+                <a href="{% url 'register' %}">
+                    Register
                 </a>
             </li>
-
-            <li>
-                <a href="{% url 'add_category' %}">
-                    Add Category
-                </a>
-            </li>
+            {% endif %}
 
         </ul>
 
@@ -91,46 +93,6 @@
             </a>
 
         </div>
-
-        <div class="card">
-
-            <div class="icon">
-                ➕
-            </div>
-
-            <h3>
-                Add Movie
-            </h3>
-
-            <p>
-                Add new movies with posters, descriptions, and release dates.
-            </p>
-
-            <a href="{% url 'add_movie' %}" class="btn-small">
-                Add Movie
-            </a>
-
-        </div>
-
-        <div class="card">
-
-            <div class="icon">
-                🎭
-            </div>
-
-            <h3>
-                Categories
-            </h3>
-
-            <p>
-                Organize movies into different genres and categories.
-            </p>
-
-            <a href="{% url 'add_category' %}" class="btn-small">
-                Manage Categories
-            </a>
-        </div>
-
 
     </section>
 

@@ -4,38 +4,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | MovieFlix</title>
+    <title>Login | MovieHub</title>
 
     <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
 </head>
 <body>
 
-<div class="auth-container">
+<!-- Navbar -->
+<nav>
+    <div class="navbar">
 
-    <a href="{% url 'home' %}" class="home-link">🏠 Home</a>
+        <a href="{% url 'home' %}" class="logo">
+            🎬 MovieHub
+        </a>
 
-    <div class="auth-card">
+        <a href="{% url 'home' %}" class="home-btn">
+            Home
+        </a>
 
-        <h1>Login</h1>
+    </div>
+</nav>
 
-        <form method="POST">
+<!-- Login -->
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Welcome Back</h2>
+
+        <p class="subtitle">
+            Login to continue to your MovieHub account.
+        </p>
+
+        <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
 
-            <div class="input-group">
-                <label>Username</label>
-                <input type="text" name="username" placeholder="Enter username" required>
-            </div>
+            <input
+                type="text"
+                name="username"
+                placeholder="Enter username"
+                required>
 
-            <div class="input-group">
-                <label>Password</label>
-                <input type="password" name="password" placeholder="Enter password" required>
-            </div>
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter password"
+                required>
 
-            <button type="submit">Login</button>
+            <button type="submit">
+                Login
+            </button>
 
         </form>
 
-        <p>
+        <p class="bottom-text">
             Don't have an account?
             <a href="{% url 'register' %}">Register</a>
         </p>

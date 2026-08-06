@@ -2,9 +2,17 @@ from django.shortcuts import render,redirect
 from django.urls import path
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.contrib import auth
 
 # Create your views here.
 def signIn(request):
+    if request.method=='POST':
+        username=request.POST['username']
+        password=request.POST['password']
+        user=auth.authenticate(username=username,password=password)
+        if user is not None:
+            auth.login(request,user)
+            return redirect('all_movies')
     return render(request,'login.html')
 
 def signUp(request):
@@ -24,4 +32,8 @@ def signUp(request):
         else:
             return HttpResponse("Password and cofirm password must be same")
     return render(request,'register.html')
+
+def signOut(request):
+    auth.logout(request)
+    return redirect('home')
 
