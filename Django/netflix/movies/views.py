@@ -1,8 +1,10 @@
 from django.shortcuts import render,redirect
-from movies.models import Category,Movies,Cast
+from movies.models import Category,Movies,Cast,Review
+from actors.models import Actors
 from django.http import HttpResponse
 from movies.form import CastForm,ReviewForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 # Create your views here.
@@ -26,13 +28,21 @@ def movieDetails(request,movie_id):
     actors=m.casts.filter(role=Cast.Role.ACTOR)
     director=m.casts.filter(role=Cast.Role.DIRECTOR)
     producer=m.casts.filter(role=Cast.Role.PRODUCER)
-    if request.method=='POST':
-        form=ReviewForm(request.POST)
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
         if form.is_valid():
-            review=form.save(commit=False)
-            review.movie=m
-            review.save()
-            return redirect("movie_details", movie_id=movie_id)
+            username=form.cleaned_data['username']
+            existing_review=Review.objects.filter(movie=m,username=username).exists()
+            if existing_review:
+                messages.warning(request, "You have already reviewed this movie.")
+                return redirect("movie_details", movie_id=movie_id)
+            else:
+                review=form.save(commit=False)
+                review.movie=m
+                review.save()
+                messages.success(request, "Review added successfully.")
+                return redirect("movie_details", movie_id=movie_id)
     else:
         form=ReviewForm()
     context={
@@ -92,3 +102,7 @@ def addCast(request):
     else:
         cast_form=CastForm()
         return render(request,"add-cast.html",{"my_form":cast_form})
+
+def castDetails(request,id):
+    details=Actors.objects.get(id=id)
+    return render(request, "cast-details.html",{"details":details})

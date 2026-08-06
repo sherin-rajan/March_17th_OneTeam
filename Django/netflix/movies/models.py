@@ -35,7 +35,7 @@ class Cast(models.Model):
     movie=models.ForeignKey(Movies,on_delete=models.CASCADE,related_name='casts')
     role=models.CharField(max_length=20,choices=Role.choices)
     actor=models.ForeignKey(Actors,on_delete=models.CASCADE)
-    charactor_name=models.CharField(max_length=40)
+    character_name=models.CharField(max_length=40,blank=True)
 
     def __str__(self):
         return f'{self.movie} - {self.role} - {self.actor}'

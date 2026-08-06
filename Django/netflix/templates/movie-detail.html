@@ -145,13 +145,10 @@
                 {% for act in actor %}
 
                 <div class="col-md-3 col-sm-4 col-6 mb-4">
-
+                    <a href='{% url "cast_details" act.actor.id %}'>
                     <div class="card h-100 shadow-sm">
-
-                        <img src="{{ act.actor.picture.url }}"
-                             class="card-img-top"
-                             style="height:220px;object-fit:cover;"
-                             alt="{{ act.actor.name }}">
+                        <img src="{{ act.actor.picture.url }}" class="card-img-top"
+                            style="height:220px;object-fit:cover;" alt="{{ act.actor.name }}">
 
                         <div class="card-body text-center">
 
@@ -166,7 +163,72 @@
                         </div>
 
                     </div>
+                    </a>
+                </div>
 
+                {% empty %}
+
+                <p>No actors found.</p>
+
+                {% endfor %}
+
+            </div>
+            <!-- Directors -->
+            <h3 class="mb-4">Directors</h3>
+
+            <div class="row">
+
+                {% for dir in director %}
+
+                <div class="col-md-3 col-sm-4 col-6 mb-4">
+                    <a href='{% url "cast_details" dir.actor.id %'}>
+                    <div class="card h-100 shadow-sm">
+                        <img src="{{ dir.actor.picture.url }}" class="card-img-top"
+                            style="height:220px;object-fit:cover;" alt="{{ dir.actor.name }}">
+
+                        <div class="card-body text-center">
+
+                            <h6 class="card-title mb-1">
+                                {{ dir.actor.name }}
+                            </h6>
+
+                        </div>
+
+                    </div>
+                    </a>
+                </div>
+
+                {% empty %}
+
+                <p>No directors found.</p>
+
+                {% endfor %}
+
+            </div>
+            <!-- Producers -->
+            <h3 class="mb-4">Producers</h3>
+
+            <div class="row">
+                
+                {% for pro in producer %}
+
+                <div class="col-md-3 col-sm-4 col-6 mb-4">
+                    <a href='{% url "cast_details" pro.actor.id %}'>
+
+                    <div class="card h-100 shadow-sm">
+                        <img src="{{ pro.actor.picture.url }}" class="card-img-top"
+                            style="height:220px;object-fit:cover;" alt="{{ pro.actor.name }}">
+
+                        <div class="card-body text-center">
+
+                            <h6 class="card-title mb-1">
+                                {{ pro.actor.name }}
+                            </h6>
+
+                        </div>
+
+                    </div>
+                    </a>
                 </div>
 
                 {% empty %}
@@ -185,24 +247,20 @@
 
 <script>
 
-const reviewBtn = document.getElementById("reviewBtn");
-const reviewForm = document.getElementById("reviewForm");
+    const reviewBtn = document.getElementById("reviewBtn");
+    const reviewForm = document.getElementById("reviewForm");
 
-reviewBtn.addEventListener("click", function(){
+    reviewBtn.addEventListener("click", function () {
 
-    if(reviewForm.style.display==="none"){
-
-        reviewForm.style.display="block";
-        reviewBtn.innerHTML="✖ Close Review Form";
-
-    }else{
-
-        reviewForm.style.display="none";
-        reviewBtn.innerHTML="✍ Write a Review";
-
-    }
-
-});
+        if (reviewForm.style.display === "none") {
+            reviewForm.style.display = "block";
+            reviewBtn.innerHTML = "✖ Close Review Form";
+        }
+        else {
+            reviewForm.style.display = "none";
+            reviewBtn.innerHTML = "✍ Write a Review";
+        }
+    });
 
 </script>
 
