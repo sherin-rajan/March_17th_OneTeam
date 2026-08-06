@@ -5,156 +5,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{details.name}}</title>
+    <title>{{ details.name }}</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-dark text-light">
+<body class="text-light" style="background-color: #121212;">
 
-    <div class="container py-5">
+<div class="container py-5">
 
-        <!-- Name -->
-        <div class="mb-4">
-            <h5 class="text-secondary text-uppercase">Films Starring</h5>
+    <div class="card bg-black border-secondary shadow-lg">
 
-            <h1 class="fw-bold text-warning">
-                {{details.name}}
-            </h1>
+        <div class="row g-0">
 
-        </div>
+            <!-- Image -->
+            <div class="col-md-4">
 
-        <hr class="border-secondary">
+                <img src="{{ details.picture.url }}"
+                     class="img-fluid rounded-start h-100"
+                     alt="{{ details.name }}">
 
-        <div class="row">
+            </div>
 
-            <!-- Movies -->
-            <div class="col-lg-6">
+            <!-- Details -->
+            <div class="col-md-8">
 
-                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+                <div class="card-body p-4">
 
-                    <div class="col">
-                        <div class="card bg-black border-secondary">
-                            <img src="https://placehold.co/300x450?text=Movie+1" class="card-img-top">
-                            <div class="card-body">
-                                <h6 class="text-center text-light">Movie One</h6>
-                            </div>
-                        </div>
+                    <h1 class="display-5 fw-bold text-warning">
+                        {{ details.name }}
+                    </h1>
+
+                    <div class="mb-3">
+
+                        {% for role in roles %}
+                        <span class="badge bg-warning text-dark rounded-pill px-3 py-2 me-2">
+                            {{ role }}
+                        </span>
+                        {% endfor %}
+
                     </div>
 
-                    <div class="col">
-                        <div class="card bg-black border-secondary">
-                            <img src="https://placehold.co/300x450?text=Movie+2" class="card-img-top">
-                            <div class="card-body">
-                                <h6 class="text-center text-light">Movie Two</h6>
-                            </div>
-                        </div>
-                    </div>
+                    <p class="text-secondary fs-5">
+                        📍 {{ details.place }}
+                    </p>
 
-                    <div class="col">
-                        <div class="card bg-black border-secondary">
-                            <img src="https://placehold.co/300x450?text=Movie+3" class="card-img-top">
-                            <div class="card-body">
-                                <h6 class="text-center text-light">Movie Three</h6>
-                            </div>
-                        </div>
-                    </div>
+                    <hr class="border-secondary">
 
-                    <div class="col">
-                        <div class="card bg-black border-secondary">
-                            <img src="https://placehold.co/300x450?text=Movie+4" class="card-img-top">
-                            <div class="card-body">
-                                <h6 class="text-center text-light">Movie Four</h6>
-                            </div>
-                        </div>
-                    </div>
+                    <h4 class="text-warning mb-3">
+                        About
+                    </h4>
 
-                    <div class="col">
-                        <div class="card bg-black border-secondary">
-                            <img src="https://placehold.co/300x450?text=Movie+5" class="card-img-top">
-                            <div class="card-body">
-                                <h6 class="text-center text-light">Movie Five</h6>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="card bg-black border-secondary">
-                            <img src="https://placehold.co/300x450?text=Movie+6" class="card-img-top">
-                            <div class="card-body">
-                                <h6 class="text-center text-light">Movie Six</h6>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="card bg-black border-secondary">
-                            <img src="https://placehold.co/300x450?text=Movie+7" class="card-img-top">
-                            <div class="card-body">
-                                <h6 class="text-center text-light">Movie Seven</h6>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="card bg-black border-secondary">
-                            <img src="https://placehold.co/300x450?text=Movie+8" class="card-img-top">
-                            <div class="card-body">
-                                <h6 class="text-center text-light">Movie Eight</h6>
-                            </div>
-                        </div>
-                    </div>
+                    <p class="text-light">
+                        {{ details.about }}
+                    </p>
 
                 </div>
 
             </div>
-
-            <!-- Profile -->
-            <div class="col-lg-4">
-
-                <div class="card bg-black border-secondary shadow">
-
-                    <img src="{{details.picture.url}}"
-                        class="card-img-top"
-                        alt="Actor">
-
-                    <div class="card-body">
-
-                        <h3 class="text-warning">
-                            {{details.name}}
-                        </h3>
-
-                        <p class="text-secondary">
-                             {{details.place}}
-                        </p>
-
-                        <hr class="border-secondary">
-
-                        <h5 class="text-info">
-                            About
-                        </h5>
-
-                        <p class="text-light">
-                            {{details.about}}
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="text-center mt-5">
-
-            <a href="#" class="btn btn-warning btn-lg px-5">
-                ← Back
-            </a>
 
         </div>
 
     </div>
+
+    <!-- Filmography -->
+    <div class="mt-5">
+
+        <h2 class="text-warning mb-4">
+            Filmography
+        </h2>
+
+        <div class="row g-4">
+
+            {% for movie in movies %}
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+
+                <div class="card bg-black border-secondary h-100">
+
+                    <a href="{% url 'movie_details' movie.id %}">
+                        <img src="{{ movie.poster.url }}"
+                             class="card-img-top"
+                             alt="{{ movie.movie }}">
+                    </a>
+
+                    <div class="card-body text-center">
+
+                        <h6 class="text-light mb-0">
+                            {{ movie.movie }}
+                        </h6>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-12">
+
+                <div class="alert alert-dark border-secondary">
+                    No movies available.
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <div class="text-center mt-5">
+
+        <a href="javascript:history.back()"
+           class="btn btn-warning btn-lg px-5">
+            ← Back
+        </a>
+
+    </div>
+
+</div>
 
 </body>
 
