@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Movie Details | MovieFlix{% endblock %}
+{% block title %}Movie Details | MovieHub{% endblock %}
 
 {% block content %}
 
@@ -133,8 +133,8 @@
                 {{ cinema.description }}
             </p>
 
-            <a href="{% url 'update_movie' cinema.id %}" class="btn btn-primary mb-5">
-                ✏ Edit Movie
+            <a href="javascript:history.back()" class="btn btn-warning btn-lg px-5">
+                ← Back
             </a>
 
             <!-- Actors -->
@@ -146,23 +146,23 @@
 
                 <div class="col-md-3 col-sm-4 col-6 mb-4">
                     <a href='{% url "cast_details" act.actor.id %}'>
-                    <div class="card h-100 shadow-sm">
-                        <img src="{{ act.actor.picture.url }}" class="card-img-top"
-                            style="height:220px;object-fit:cover;" alt="{{ act.actor.name }}">
+                        <div class="card h-100 shadow-sm">
+                            <img src="{{ act.actor.picture.url }}" class="card-img-top"
+                                style="height:220px;object-fit:cover;" alt="{{ act.actor.name }}">
 
-                        <div class="card-body text-center">
+                            <div class="card-body text-center">
 
-                            <h6 class="card-title mb-1">
-                                {{ act.actor.name }}
-                            </h6>
+                                <h6 class="card-title mb-1">
+                                    {{ act.actor.name }}
+                                </h6>
 
-                            <small class="text-muted">
-                                {{ act.charactor_name }}
-                            </small>
+                                <small class="text-muted">
+                                    {{ act.charactor_name }}
+                                </small>
+
+                            </div>
 
                         </div>
-
-                    </div>
                     </a>
                 </div>
 
@@ -182,19 +182,19 @@
 
                 <div class="col-md-3 col-sm-4 col-6 mb-4">
                     <a href="{% url 'cast_details' dir.actor.id %}">
-                    <div class="card h-100 shadow-sm">
-                        <img src="{{ dir.actor.picture.url }}" class="card-img-top"
-                            style="height:220px;object-fit:cover;" alt="{{ dir.actor.name }}">
+                        <div class="card h-100 shadow-sm">
+                            <img src="{{ dir.actor.picture.url }}" class="card-img-top"
+                                style="height:220px;object-fit:cover;" alt="{{ dir.actor.name }}">
 
-                        <div class="card-body text-center">
+                            <div class="card-body text-center">
 
-                            <h6 class="card-title mb-1">
-                                {{ dir.actor.name }}
-                            </h6>
+                                <h6 class="card-title mb-1">
+                                    {{ dir.actor.name }}
+                                </h6>
+
+                            </div>
 
                         </div>
-
-                    </div>
                     </a>
                 </div>
 
@@ -209,25 +209,25 @@
             <h3 class="mb-4">Producers</h3>
 
             <div class="row">
-                
+
                 {% for pro in producer %}
 
                 <div class="col-md-3 col-sm-4 col-6 mb-4">
                     <a href='{% url "cast_details" pro.actor.id %}'>
 
-                    <div class="card h-100 shadow-sm">
-                        <img src="{{ pro.actor.picture.url }}" class="card-img-top"
-                            style="height:220px;object-fit:cover;" alt="{{ pro.actor.name }}">
+                        <div class="card h-100 shadow-sm">
+                            <img src="{{ pro.actor.picture.url }}" class="card-img-top"
+                                style="height:220px;object-fit:cover;" alt="{{ pro.actor.name }}">
 
-                        <div class="card-body text-center">
+                            <div class="card-body text-center">
 
-                            <h6 class="card-title mb-1">
-                                {{ pro.actor.name }}
-                            </h6>
+                                <h6 class="card-title mb-1">
+                                    {{ pro.actor.name }}
+                                </h6>
+
+                            </div>
 
                         </div>
-
-                    </div>
                     </a>
                 </div>
 

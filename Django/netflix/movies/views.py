@@ -20,8 +20,8 @@ def addCategory(request):
 
 @login_required(login_url='login')
 def allMovies(request):
-    m=Movies.objects.all()
-    return render(request,'all-movies.html',{'movies':m})
+    cat=Category.objects.prefetch_related('movies')
+    return render(request,'all-movies.html',{'category':cat})
   
 def movieDetails(request,movie_id):
     m=Movies.objects.get(id=movie_id)

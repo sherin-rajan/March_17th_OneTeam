@@ -17,7 +17,7 @@ class Category(models.Model):
 
 class Movies(models.Model):
     movie=models.CharField(max_length=100,unique=True)
-    category=models.ForeignKey(Category,on_delete=models.CASCADE)
+    category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name='movies')
     description=models.TextField()
     release_date=models.DateField()
     poster=models.ImageField(upload_to="posters")
