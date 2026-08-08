@@ -1,249 +1,304 @@
 {% extends 'base.html' %}
 
-{% block title %}Movie Details | MovieHub{% endblock %}
+{% block title %}{{ cinema.movie }} | MovieHub{% endblock %}
 
 {% block content %}
 
-<div class="container py-5">
+<div class="movie-details-page">
 
-    <div class="row g-5">
+    <!-- ================= TRAILER ================= -->
+    <section class="trailer-section">
 
-        <!-- Left Section -->
-        <div class="col-lg-4">
+        {% if cinema.trailer_link %}
+        <div class="trailer-wrapper">
+            <iframe src="{{ cinema.trailer_link }}" title="{{ cinema.movie }} Trailer" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+            </iframe>
+        </div>
+        {% else %}
+        <div class="no-trailer">
+            <span>🎬</span>
+            <p>No trailer available</p>
+        </div>
+        {% endif %}
+
+    </section>
+
+
+    <!-- ================= MOVIE INFORMATION ================= -->
+    <section class="movie-info-section">
+
+        <div class="movie-main-container">
 
             <!-- Poster -->
-            <img src="{{ cinema.poster.url }}" class="img-fluid rounded shadow mb-4" alt="{{ cinema.movie }}">
+            <div class="poster-section">
 
-            <!-- Review Button -->
-            <button class="btn btn-warning w-100 mb-3 fw-semibold" id="reviewBtn">
-                ✍ Write a Review
-            </button>
+                <img src="{{ cinema.poster.url }}" class="movie-poster" alt="{{ cinema.movie }}">
 
-            <!-- Review Form -->
-            <div id="reviewForm" style="display:none;">
+                <!-- Review Button -->
+                <button class="review-btn" id="reviewBtn">
+                    ✍ Write a Review
+                </button>
 
-                <div class="card shadow-sm mb-4">
+                <!-- Review Form -->
+                <div id="reviewForm" class="review-form">
 
-                    <div class="card-header bg-warning">
-                        <h5 class="mb-0">Write a Review</h5>
-                    </div>
+                    <div class="review-box">
 
-                    <div class="card-body">
+                        <div class="review-header">
+                            <h4>Write a Review</h4>
+                        </div>
 
-                        <form method="POST">
+                        <div class="review-body">
 
-                            {% csrf_token %}
+                            <form method="POST">
 
-                            <div class="mb-3">
-                                {{ form.username.label_tag }}
-                                {{ form.username }}
-                            </div>
+                                {% csrf_token %}
 
-                            <div class="mb-3">
-                                {{ form.rating.label_tag }}
-                                {{ form.rating }}
-                            </div>
+                                <div class="form-group">
+                                    {{ form.username.label_tag }}
+                                    {{ form.username }}
+                                </div>
 
-                            <div class="mb-3">
-                                {{ form.comment.label_tag }}
-                                {{ form.comment }}
-                            </div>
+                                <div class="form-group">
+                                    {{ form.rating.label_tag }}
+                                    {{ form.rating }}
+                                </div>
 
-                            <button class="btn btn-success w-100">
-                                Submit Review
-                            </button>
+                                <div class="form-group">
+                                    {{ form.comment.label_tag }}
+                                    {{ form.comment }}
+                                </div>
 
-                        </form>
+                                <button type="submit" class="submit-review-btn">
+                                    Submit Review
+                                </button>
 
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- Reviews -->
-            <div class="card shadow-sm">
-
-                <div class="card-header bg-dark text-white">
-                    <h5 class="mb-0">⭐ Reviews</h5>
-                </div>
-
-                <div class="card-body">
-
-                    {% for review in cinema.reviews.all %}
-
-                    <div class="border rounded p-3 mb-3">
-
-                        <div class="d-flex justify-content-between">
-
-                            <strong>{{ review.username }}</strong>
-
-                            <span class="badge bg-warning text-dark">
-                                {{ review.rating }}/5
-                            </span>
+                            </form>
 
                         </div>
 
-                        <p class="mt-2 mb-1">
-                            {{ review.comment }}
+                    </div>
+
+                </div>
+
+
+                <!-- Reviews -->
+                <div class="reviews-box">
+
+                    <div class="reviews-title">
+                        ⭐ Reviews
+                    </div>
+
+                    <div class="reviews-content">
+
+                        {% for review in cinema.reviews.all %}
+
+                        <div class="single-review">
+
+                            <div class="review-user">
+
+                                <strong>
+                                    {{ review.username }}
+                                </strong>
+
+                                <span class="rating">
+                                    ⭐ {{ review.rating }}/5
+                                </span>
+
+                            </div>
+
+                            <p>
+                                {{ review.comment }}
+                            </p>
+
+                            <small>
+                                {{ review.created_at|date:"d M Y" }}
+                            </small>
+
+                        </div>
+
+                        {% empty %}
+
+                        <p class="no-reviews">
+                            No reviews yet. Be the first to review this movie!
                         </p>
 
-                        <small class="text-muted">
-                            {{ review.created_at|date:"d M Y" }}
-                        </small>
+                        {% endfor %}
 
                     </div>
 
-                    {% empty %}
-
-                    <p class="text-muted mb-0">
-                        No reviews yet.
-                    </p>
-
-                    {% endfor %}
-
                 </div>
 
             </div>
 
-        </div>
 
-        <!-- Right Section -->
-        <div class="col-lg-8">
+            <!-- Movie Details -->
+            <div class="movie-description">
 
-            <h1 class="display-5 fw-bold">
-                {{ cinema.movie }}
-            </h1>
+                <span class="movie-category">
+                    {{ cinema.category }}
+                </span>
 
-            <span class="badge bg-warning text-dark fs-6 mb-3">
-                {{ cinema.category }}
-            </span>
+                <h1>
+                    {{ cinema.movie }}
+                </h1>
 
-            <hr>
+                <div class="movie-meta">
 
-            <h4>📅 Release Date</h4>
+                    <span>
+                        📅 {{ cinema.release_date }}
+                    </span>
 
-            <p class="fs-5">
-                {{ cinema.release_date }}
-            </p>
+                    <span>
+                        🎬 Movie
+                    </span>
 
-            <h4>🎬 Description</h4>
+                </div>
 
-            <p class="lead">
-                {{ cinema.description }}
-            </p>
+                <div class="gold-line"></div>
 
-            <a href="javascript:history.back()" class="btn btn-warning btn-lg px-5">
-                ← Back
-            </a>
+                <h3>About the Movie</h3>
 
-            <!-- Actors -->
-            <h3 class="mb-4">Actors</h3>
+                <p class="description-text">
+                    {{ cinema.description }}
+                </p>
 
-            <div class="row">
+                <a href="javascript:history.back()" class="back-btn">
+                    ← Back
+                </a>
 
-                {% for act in actor %}
 
-                <div class="col-md-3 col-sm-4 col-6 mb-4">
-                    <a href='{% url "cast_details" act.actor.id %}'>
-                        <div class="card h-100 shadow-sm">
-                            <img src="{{ act.actor.picture.url }}" class="card-img-top"
-                                style="height:220px;object-fit:cover;" alt="{{ act.actor.name }}">
+                <!-- ================= ACTORS ================= -->
+                <div class="cast-section">
 
-                            <div class="card-body text-center">
+                    <h2>Cast</h2>
 
-                                <h6 class="card-title mb-1">
+                    <div class="section-line"></div>
+
+                    <h4>Actors</h4>
+
+                    <div class="cast-grid">
+
+                        {% for act in actor %}
+
+                        <a href="{% url 'cast_details' act.actor.id %}" class="cast-card">
+
+                            <img src="{{ act.actor.picture.url }}" alt="{{ act.actor.name }}">
+
+                            <div class="cast-info">
+
+                                <strong>
                                     {{ act.actor.name }}
-                                </h6>
+                                </strong>
 
-                                <small class="text-muted">
+                                <span>
                                     {{ act.charactor_name }}
-                                </small>
+                                </span>
 
                             </div>
 
-                        </div>
-                    </a>
-                </div>
+                        </a>
 
-                {% empty %}
+                        {% empty %}
 
-                <p>No actors found.</p>
+                        <p class="empty-cast">
+                            No actors found.
+                        </p>
 
-                {% endfor %}
+                        {% endfor %}
 
-            </div>
-            <!-- Directors -->
-            <h3 class="mb-4">Directors</h3>
+                    </div>
 
-            <div class="row">
 
-                {% for dir in director %}
+                    <!-- ================= DIRECTORS ================= -->
+                    <h4 class="cast-heading">
+                        Directors
+                    </h4>
 
-                <div class="col-md-3 col-sm-4 col-6 mb-4">
-                    <a href="{% url 'cast_details' dir.actor.id %}">
-                        <div class="card h-100 shadow-sm">
-                            <img src="{{ dir.actor.picture.url }}" class="card-img-top"
-                                style="height:220px;object-fit:cover;" alt="{{ dir.actor.name }}">
+                    <div class="cast-grid">
 
-                            <div class="card-body text-center">
+                        {% for dir in director %}
 
-                                <h6 class="card-title mb-1">
+                        <a href="{% url 'cast_details' dir.actor.id %}" class="cast-card">
+
+                            <img src="{{ dir.actor.picture.url }}" alt="{{ dir.actor.name }}">
+
+                            <div class="cast-info">
+
+                                <strong>
                                     {{ dir.actor.name }}
-                                </h6>
+                                </strong>
+
+                                <span>
+                                    Director
+                                </span>
 
                             </div>
 
-                        </div>
-                    </a>
-                </div>
+                        </a>
 
-                {% empty %}
+                        {% empty %}
 
-                <p>No directors found.</p>
+                        <p class="empty-cast">
+                            No directors found.
+                        </p>
 
-                {% endfor %}
+                        {% endfor %}
 
-            </div>
-            <!-- Producers -->
-            <h3 class="mb-4">Producers</h3>
+                    </div>
 
-            <div class="row">
 
-                {% for pro in producer %}
+                    <!-- ================= PRODUCERS ================= -->
+                    <h4 class="cast-heading">
+                        Producers
+                    </h4>
 
-                <div class="col-md-3 col-sm-4 col-6 mb-4">
-                    <a href='{% url "cast_details" pro.actor.id %}'>
+                    <div class="cast-grid">
 
-                        <div class="card h-100 shadow-sm">
-                            <img src="{{ pro.actor.picture.url }}" class="card-img-top"
-                                style="height:220px;object-fit:cover;" alt="{{ pro.actor.name }}">
+                        {% for pro in producer %}
 
-                            <div class="card-body text-center">
+                        <a href="{% url 'cast_details' pro.actor.id %}" class="cast-card">
 
-                                <h6 class="card-title mb-1">
+                            <img src="{{ pro.actor.picture.url }}" alt="{{ pro.actor.name }}">
+
+                            <div class="cast-info">
+
+                                <strong>
                                     {{ pro.actor.name }}
-                                </h6>
+                                </strong>
+
+                                <span>
+                                    Producer
+                                </span>
 
                             </div>
 
-                        </div>
-                    </a>
+                        </a>
+
+                        {% empty %}
+
+                        <p class="empty-cast">
+                            No producers found.
+                        </p>
+
+                        {% endfor %}
+
+                    </div>
+
                 </div>
-
-                {% empty %}
-
-                <p>No actors found.</p>
-
-                {% endfor %}
 
             </div>
 
         </div>
 
-    </div>
+    </section>
 
 </div>
+
+
+<!-- ================= REVIEW JAVASCRIPT ================= -->
 
 <script>
 
@@ -252,14 +307,18 @@
 
     reviewBtn.addEventListener("click", function () {
 
-        if (reviewForm.style.display === "none") {
+        if (reviewForm.style.display === "none" || reviewForm.style.display === "") {
+
             reviewForm.style.display = "block";
             reviewBtn.innerHTML = "✖ Close Review Form";
-        }
-        else {
+
+        } else {
+
             reviewForm.style.display = "none";
             reviewBtn.innerHTML = "✍ Write a Review";
+
         }
+
     });
 
 </script>

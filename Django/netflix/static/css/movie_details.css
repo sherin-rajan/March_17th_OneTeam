@@ -1,0 +1,1065 @@
+/* =====================================================
+   MOVIE DETAILS - PRIME STYLE
+   MovieHub Theme: Black + Navy + Gold
+===================================================== */
+
+.movie-details-page {
+    background: #05070b;
+    min-height: 100vh;
+    color: #ffffff;
+    padding-bottom: 80px;
+}
+
+
+/* =====================================================
+   TRAILER
+===================================================== */
+
+.trailer-section {
+    width: 100%;
+    background: #020305;
+    padding: 30px 5%;
+}
+
+.trailer-wrapper {
+    max-width: 1200px;
+    margin: auto;
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #000;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
+}
+
+.trailer-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.no-trailer {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #aaa;
+}
+
+.no-trailer span {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+
+/* =====================================================
+   MOVIE INFORMATION
+===================================================== */
+
+.movie-info-section {
+    max-width: 1400px;
+    margin: auto;
+    padding: 50px 5%;
+}
+
+.movie-main-container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 55px;
+    align-items: start;
+}
+
+
+/* =====================================================
+   POSTER
+===================================================== */
+
+.poster-section {
+    position: relative;
+}
+
+.movie-poster {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 10px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.7);
+
+    transition: transform 0.3s ease;
+}
+
+.movie-poster:hover {
+    transform: scale(1.02);
+}
+
+
+/* =====================================================
+   REVIEW BUTTON
+===================================================== */
+
+.review-btn {
+    width: 100%;
+    margin-top: 20px;
+
+    background: #f5c518;
+    color: #050505;
+
+    border: none;
+    border-radius: 6px;
+
+    padding: 13px;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.review-btn:hover {
+    background: #ffffff;
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   REVIEW FORM
+===================================================== */
+
+.review-form {
+    display: none;
+    margin-top: 15px;
+}
+
+.review-box {
+    background: #10151d;
+    border: 1px solid #252c38;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.review-header {
+    background: #151c27;
+    padding: 15px 18px;
+    border-bottom: 1px solid #2a313d;
+}
+
+.review-header h4 {
+    margin: 0;
+    color: #f5c518;
+}
+
+.review-body {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    color: #ddd;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    background: #080b10;
+    color: white;
+
+    border: 1px solid #303744;
+    border-radius: 5px;
+
+    padding: 10px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #f5c518;
+    box-shadow: 0 0 0 2px rgba(245, 197, 24, 0.15);
+}
+
+.submit-review-btn {
+    width: 100%;
+    padding: 11px;
+
+    background: #f5c518;
+    color: #050505;
+
+    border: none;
+    border-radius: 5px;
+
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.submit-review-btn:hover {
+    background: #ffffff;
+}
+
+
+/* =====================================================
+   REVIEWS
+===================================================== */
+
+.reviews-box {
+    margin-top: 25px;
+
+    background: #10151d;
+
+    border: 1px solid #252c38;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+}
+
+.reviews-title {
+    padding: 15px 18px;
+
+    background: #151c27;
+
+    color: #ffffff;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    border-bottom: 1px solid #252c38;
+}
+
+.reviews-content {
+    padding: 15px;
+}
+
+.single-review {
+    background: #080b10;
+
+    border: 1px solid #252c38;
+
+    border-radius: 6px;
+
+    padding: 15px;
+
+    margin-bottom: 12px;
+}
+
+.single-review:last-child {
+    margin-bottom: 0;
+}
+
+.review-user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 10px;
+}
+
+.review-user strong {
+    color: #ffffff;
+}
+
+.rating {
+    background: #f5c518;
+    color: #050505;
+
+    padding: 4px 8px;
+
+    border-radius: 4px;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.single-review p {
+    color: #d0d0d0;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.single-review small {
+    color: #777;
+}
+
+.no-reviews {
+    color: #888;
+    text-align: center;
+    margin: 10px 0;
+}
+
+
+/* =====================================================
+   MOVIE DESCRIPTION
+===================================================== */
+
+.movie-description {
+    padding-top: 10px;
+}
+
+.movie-category {
+    display: inline-block;
+
+    background: #f5c518;
+    color: #050505;
+
+    padding: 7px 15px;
+
+    border-radius: 4px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    margin-bottom: 15px;
+}
+
+.movie-description h1 {
+    font-size: clamp(38px, 5vw, 65px);
+
+    font-weight: 800;
+
+    line-height: 1.05;
+
+    margin-bottom: 20px;
+
+    letter-spacing: -1px;
+}
+
+.movie-meta {
+    display: flex;
+    gap: 25px;
+
+    color: #aaa;
+
+    font-size: 15px;
+}
+
+.gold-line {
+    width: 70px;
+    height: 4px;
+
+    background: #f5c518;
+
+    margin: 25px 0;
+}
+
+.movie-description h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.description-text {
+    max-width: 850px;
+
+    color: #c5c5c5;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+}
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
+
+.back-btn {
+    display: inline-block;
+
+    margin-top: 20px;
+
+    padding: 11px 25px;
+
+    border: 1px solid #f5c518;
+
+    border-radius: 5px;
+
+    color: #f5c518;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #f5c518;
+    color: #050505;
+}
+
+
+/* =====================================================
+   CAST
+===================================================== */
+
+.cast-section {
+    margin-top: 60px;
+}
+
+.cast-section h2 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.section-line {
+    width: 50px;
+    height: 3px;
+
+    background: #f5c518;
+
+    margin-bottom: 30px;
+}
+
+.cast-section h4 {
+    font-size: 20px;
+    color: #ddd;
+
+    margin-bottom: 20px;
+}
+
+.cast-heading {
+    margin-top: 45px;
+}
+
+
+/* =====================================================
+   CAST GRID
+===================================================== */
+
+.cast-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(150px, 1fr));
+
+    gap: 20px;
+}
+
+.cast-card {
+    background: #10151d;
+
+    border: 1px solid #252c38;
+
+    border-radius: 7px;
+
+    overflow: hidden;
+
+    text-decoration: none;
+
+    color: white;
+
+    transition: all 0.3s ease;
+}
+
+.cast-card:hover {
+    transform: translateY(-7px);
+
+    border-color: #f5c518;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.cast-card img {
+    width: 100%;
+    height: 210px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+.cast-info {
+    padding: 12px;
+
+    text-align: center;
+}
+
+.cast-info strong {
+    display: block;
+
+    font-size: 14px;
+
+    margin-bottom: 5px;
+}
+
+.cast-info span {
+    display: block;
+
+    color: #888;
+
+    font-size: 12px;
+}
+
+.empty-cast {
+    color: #777;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 992px) {
+
+    .movie-main-container {
+        grid-template-columns: 250px 1fr;
+        gap: 35px;
+    }
+
+    .movie-poster {
+        height: 380px;
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .trailer-section {
+        padding: 20px 3%;
+    }
+
+    .trailer-wrapper {
+        aspect-ratio: 16 / 9;
+    }
+
+    .movie-info-section {
+        padding: 35px 5%;
+    }
+
+    .movie-main-container {
+        grid-template-columns: 1fr;
+    }
+
+    .poster-section {
+        max-width: 320px;
+        margin: auto;
+        width: 100%;
+    }
+
+    .movie-description h1 {
+        font-size: 40px;
+    }
+
+    .movie-meta {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .cast-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .movie-poster {
+        height: 420px;
+    }
+
+    .movie-description h1 {
+        font-size: 34px;
+    }
+
+    .cast-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 12px;
+    }
+
+    .cast-card img {
+        height: 180px;
+    }
+
+}
+
+/* =====================================================
+   ALL MOVIES PAGE
+   MovieHub - Prime Style
+===================================================== */
+
+.movies-page {
+    background: #05070b;
+    min-height: 100vh;
+    color: #ffffff;
+    padding: 50px 0 80px;
+}
+
+.movies-container {
+    max-width: 1400px;
+    margin: auto;
+    padding: 0 5%;
+}
+
+
+/* =====================================================
+   CATEGORY SECTION
+===================================================== */
+
+.movie-category-section {
+    margin-bottom: 60px;
+}
+
+.category-heading {
+    margin-bottom: 25px;
+}
+
+.category-heading h2 {
+    font-size: 28px;
+    font-weight: 700;
+
+    color: #ffffff;
+
+    margin: 0 0 10px;
+}
+
+.category-line {
+    width: 60px;
+    height: 4px;
+
+    background: #f5c518;
+
+    border-radius: 3px;
+}
+
+
+/* =====================================================
+   MOVIE GRID
+===================================================== */
+
+.movies-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 25px;
+}
+
+
+/* =====================================================
+   MOVIE CARD
+===================================================== */
+
+.movie-card {
+    height: 300px;
+    background: #10151d;
+
+    border: 1px solid #252c38;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.movie-card:hover {
+    transform: translateY(-8px);
+
+    border-color: #f5c518;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+
+/* =====================================================
+   POSTER
+===================================================== */
+
+.movie-poster-wrapper {
+    position: relative;
+
+    height: 252px;
+
+    overflow: hidden;
+
+    background: #080b10;
+}
+
+.movie-poster-wrapper img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: transform 0.5s ease;
+}
+
+.movie-card:hover .movie-poster-wrapper img {
+    transform: scale(1.06);
+}
+
+
+/* =====================================================
+   HOVER OVERLAY
+===================================================== */
+
+.movie-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.65);
+
+    opacity: 0;
+
+    transition: opacity 0.3s ease;
+}
+
+.movie-card:hover .movie-overlay {
+    opacity: 1;
+}
+
+.watch-btn {
+    background: #f5c518;
+
+    color: #050505;
+
+    text-decoration: none;
+
+    padding: 11px 22px;
+
+    border-radius: 5px;
+
+    font-weight: 700;
+
+    transform: translateY(10px);
+
+    transition: all 0.3s ease;
+}
+
+.movie-card:hover .watch-btn {
+    transform: translateY(0);
+}
+
+.watch-btn:hover {
+    background: #ffffff;
+    color: #050505;
+}
+
+
+/* =====================================================
+   MOVIE CARD BODY
+===================================================== */
+
+.movie-card-body {
+    padding: 10px;
+}
+
+.movie-card-body h5 {
+    color: #ffffff;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    text-align: center;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.movie-actions {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 8px;
+}
+
+.movie-details-btn,
+.movie-delete-btn {
+    flex: 1;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    padding: 9px 10px;
+
+    border-radius: 5px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: all 0.3s ease;
+}
+
+
+/* Details */
+
+.movie-details-btn {
+    background: #f5c518;
+
+    color: #050505;
+
+    border: 1px solid #f5c518;
+}
+
+
+/* Delete */
+
+.movie-delete-btn {
+    background: red;
+
+    color: Black;
+
+    border: 1px solid #7b3030;
+}
+
+.movie-delete-btn:hover {
+    background: #8b2020;
+
+    border-color: #8b2020;
+
+    color: #ffffff;
+}
+
+
+/* =====================================================
+   EMPTY CATEGORY
+===================================================== */
+
+.no-movies {
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    padding: 40px;
+
+    background: #0b0f15;
+
+    border: 1px dashed #303744;
+
+    border-radius: 8px;
+}
+
+.no-movies p {
+    margin: 0;
+
+    color: #777;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1200px) {
+
+    .movies-grid {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .movies-page {
+        padding-top: 35px;
+    }
+
+    .movies-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 18px;
+    }
+
+    .movie-poster-wrapper {
+        height: 300px;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .movies-container {
+        padding: 0 15px;
+    }
+
+    .movies-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 12px;
+    }
+
+    .movie-poster-wrapper {
+        height: 240px;
+    }
+
+    .movie-card-body {
+        padding: 12px;
+    }
+
+    .movie-card-body h5 {
+        font-size: 14px;
+    }
+
+    .movie-actions {
+        flex-direction: column;
+    }
+
+    .movie-details-btn,
+    .movie-delete-btn {
+        width: 100%;
+    }
+
+}
+/* =====================================================
+   VIEW ALL CARD
+===================================================== */
+
+.view-all-card {
+    min-height: 300px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #0b0f15;
+
+    border: 1px solid #252c38;
+
+    transition: all 0.3s ease;
+}
+
+.view-all-card:hover {
+    border-color: #f5c518;
+
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+.view-all-link {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+
+    color: white;
+}
+
+.view-all-content {
+    text-align: center;
+}
+
+.view-all-icon {
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    background: #f5c518;
+
+    color: #050505;
+
+    font-size: 32px;
+    font-weight: bold;
+
+    transition: all 0.3s ease;
+}
+
+.view-all-card:hover .view-all-icon {
+    transform: translateX(8px);
+
+    background: #ffffff;
+}
+
+.view-all-content h5 {
+    margin-bottom: 7px;
+
+    color: #ffffff;
+
+    font-size: 20px;
+
+    font-weight: 700;
+}
+
+.view-all-content span {
+    color: #888;
+
+    font-size: 13px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .view-all-card {
+        min-height: 360px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .view-all-card {
+        min-height: 300px;
+    }
+
+    .view-all-icon {
+        width: 50px;
+        height: 50px;
+
+        font-size: 25px;
+    }
+
+    .view-all-content h5 {
+        font-size: 16px;
+    }
+
+}
+
