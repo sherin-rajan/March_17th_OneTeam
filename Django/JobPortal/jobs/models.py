@@ -22,6 +22,7 @@ class Jobs(models.Model):
     location=models.CharField(max_length=50)
     description=models.TextField()
     salary=models.CharField(max_length=50)
+    post_date=models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.title
