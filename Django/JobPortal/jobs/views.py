@@ -1,6 +1,11 @@
 from django.shortcuts import render,redirect
 from jobs.models import Jobs,Sectors
 from jobs.forms import JobForm
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib import auth
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 def allJobs(request,sector=None):
@@ -11,7 +16,7 @@ def allJobs(request,sector=None):
         job_posts=Jobs.objects.all() 
     return render(request,"all-jobs.html",{'jobs':job_posts,"sectors":all_sectors}) 
    
-
+@login_required
 def jobDetail(request,job_id):
     job=Jobs.objects.get(id=job_id)
     return render(request,"job-detail.html",{"job":job})
@@ -37,3 +42,36 @@ def updateJob(request,job_id):
     else:
         form=JobForm(instance=job)
     return render(request,"update-job.html",{"form":form})
+
+def signIn(request):
+    if request.method=='POST':
+        username=request.POST['username']
+        password=request.POST['password']
+        user=auth.authenticate(username=username,password=password)
+        if user is not None:
+            auth.login(request,user)
+            return redirect('all_jobs')
+        else:
+            messages.error(request,'Invalid username or password!')
+            return redirect('login')
+    return render(request,'login.html')
+
+def signUp(request):
+    if request.method=="POST":
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
+        password = request.POST['password']
+        if User.objects.filter(username=email).exists():
+            messages.info(request,'User already exist! Please login!')
+            return redirect('login')
+        else:
+            user=User.objects.create_user(username=email,first_name=first_name,last_name=last_name,email=email,password=password)
+            user.save()
+            messages.success(request,'Welcome to JobsPortal! Please login to contonue!')
+            return redirect('login')
+    return render(request,'register.html')
+
+def signOut(request):
+    auth.logout(request)
+    return redirect('all_jobs')

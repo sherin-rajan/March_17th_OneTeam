@@ -6,5 +6,8 @@ urlpatterns=[
     path("jobs-by-category/<int:sector>",views.allJobs,name="jobs_by_category"),
     path("job-detail/<int:job_id>",views.jobDetail,name="job_detail"),
     path("add-job",views.addJob,name="add_job"),
-    path("update-job/<int:job_id>",views.updateJob,name="update_job")
+    path("update-job/<int:job_id>",views.updateJob,name="update_job"),
+    path('login/',views.signIn,name='login'),
+    path('register/',views.signUp,name='register'),
+    path('logout/',views.signOut,name='logout')
 ]
