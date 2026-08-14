@@ -8,20 +8,29 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+#
+def admin_permission(fun):
+    def wrapper(request,*args,**kwargs):
+        if request.user.is_superuser:
+            return fun(request,*args,**kwargs)
+        else:
+            messages.error(request,"Permission denied!")
+            return redirect("all_jobs")
+    return wrapper
+
 def allJobs(request,sector=None):
-    all_sectors=Sectors.objects.all()
     if sector:
         job_posts=Jobs.objects.filter(sector__id=sector)
     else:
         job_posts=Jobs.objects.all() 
-    return render(request,"all-jobs.html",{'jobs':job_posts,"sectors":all_sectors}) 
+    return render(request,"all-jobs.html",{'jobs':job_posts}) 
    
 @login_required
 def jobDetail(request,job_id):
     job=Jobs.objects.get(id=job_id)
     return render(request,"job-detail.html",{"job":job})
 
-
+@admin_permission
 def addJob(request):
     if request.POST:
         form=JobForm(request.POST)

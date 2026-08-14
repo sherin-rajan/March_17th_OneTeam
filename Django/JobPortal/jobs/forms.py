@@ -5,3 +5,4 @@ class JobForm(forms.ModelForm):
     class Meta:
         model=Jobs
         fields='__all__'
+        exclude=['slug']

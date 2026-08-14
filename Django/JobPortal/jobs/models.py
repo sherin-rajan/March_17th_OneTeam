@@ -19,10 +19,12 @@ class Company(models.Model):
 class Jobs(models.Model):
     title=models.CharField(max_length=100)
     sector=models.ForeignKey(Sectors,on_delete=models.CASCADE)
+    company=models.ForeignKey(Company,on_delete=models.CASCADE)
     location=models.CharField(max_length=50)
     description=models.TextField()
     salary=models.CharField(max_length=50)
     post_date=models.DateField(auto_now_add=True)
+    slug=models.SlugField(blank=True)
 
     def __str__(self):
         return self.title

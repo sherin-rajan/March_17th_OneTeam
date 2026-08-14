@@ -1,0 +1,147 @@
+/* General */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #222;
+}
+
+/* Navbar */
+nav {
+    background-color: #172b4d;
+    padding: 15px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+nav ul li a:hover {
+    color: #ffc107;
+}
+
+/* Filter dropdown */
+.dropdown {
+    margin-left: auto;
+}
+
+.dropdown .btn {
+    background-color: #ffc107;
+    border: none;
+    color: #222;
+    font-weight: 600;
+}
+
+.dropdown .btn:hover {
+    background-color: #e0a800;
+}
+
+/* Main section */
+body > section {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #172b4d;
+}
+
+/* Job cards */
+body > section > section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+body > section > section > div {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+
+body > section > section > div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+body > section > section h3 {
+    color: #172b4d;
+    margin-bottom: 15px;
+}
+
+body > section > section div div {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+body > section > section p {
+    color: #888;
+    font-size: 14px;
+}
+
+/* View Detail button */
+body > section > section a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 9px 16px;
+    background-color: #172b4d;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+body > section > section a:hover {
+    background-color: #0d1b33;
+}
+
+/* No jobs message */
+body > section > section > p {
+    text-align: center;
+    grid-column: 1 / -1;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    color: #777;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .dropdown {
+        margin-left: 0;
+    }
+
+    body > section > section {
+        grid-template-columns: 1fr;
+    }
+}
