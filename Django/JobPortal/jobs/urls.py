@@ -2,11 +2,14 @@ from django.urls import path
 from jobs import views
 
 urlpatterns=[
-    path("",views.allJobs,name="all_jobs"),
+    path("",views.home,name='home'),
+    path("dashboard",views.dashboard,name='dashboard'),
+    path("all-jobs",views.allJobs,name="all_jobs"),
     path("jobs-by-category/<int:sector>",views.allJobs,name="jobs_by_category"),
     path("job-detail/<int:job_id>",views.jobDetail,name="job_detail"),
-    path("add-job",views.addJob,name="add_job"),
+    path("add-jobs",views.addJob,name="add_jobs"),
     path("update-job/<int:job_id>",views.updateJob,name="update_job"),
+    path('apply-job/<int:job_id>',views.applyJob,name='apply_job'),
     path('login/',views.signIn,name='login'),
     path('register/',views.signUp,name='register'),
     path('logout/',views.signOut,name='logout')

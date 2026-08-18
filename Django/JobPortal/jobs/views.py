@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from jobs.models import Jobs,Sectors
+from jobs.models import Jobs,Sectors,Applications
 from jobs.forms import JobForm
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-#
+#custom decorator
 def admin_permission(fun):
     def wrapper(request,*args,**kwargs):
         if request.user.is_superuser:
@@ -18,6 +18,13 @@ def admin_permission(fun):
             return redirect("all_jobs")
     return wrapper
 
+def home(request):
+    return render(request,'home.html')
+
+def dashboard(request):
+    return render(request,'dashboard.html')
+
+@login_required
 def allJobs(request,sector=None):
     if sector:
         job_posts=Jobs.objects.filter(sector__id=sector)
@@ -39,7 +46,7 @@ def addJob(request):
             return redirect("/")
     else:
         form=JobForm()
-    return render(request,"add-job.html",{"form":form})
+    return render(request,"add-jobs.html",{"form":form})
 
 def updateJob(request,job_id):
     job=Jobs.objects.get(id=job_id)
@@ -52,6 +59,12 @@ def updateJob(request,job_id):
         form=JobForm(instance=job)
     return render(request,"update-job.html",{"form":form})
 
+def applyJob(request,job_id):
+    user=User.objects.get(id=request.user.id) #id of the logged user
+    job=Jobs.objects.get(id=job_id)
+    Applications(user=user,job=job).save()
+    return redirect('all_jobs')
+
 def signIn(request):
     if request.method=='POST':
         username=request.POST['username']
@@ -59,7 +72,7 @@ def signIn(request):
         user=auth.authenticate(username=username,password=password)
         if user is not None:
             auth.login(request,user)
-            return redirect('all_jobs')
+            return redirect('dashboard')
         else:
             messages.error(request,'Invalid username or password!')
             return redirect('login')

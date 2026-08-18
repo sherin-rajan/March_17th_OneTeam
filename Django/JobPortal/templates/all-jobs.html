@@ -1,207 +1,83 @@
-{% load static %}
+{% extends 'base.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block title %}JobsPortal | All Jobs {% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
+<nav>
+    <div>
+        <button type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Filter by Sector
+        </button>
+        <ul>
+            {% for sector in sectors %}
+            <li><a href="{% url 'jobs_by_category' sector.id %}">{{ sector.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>
 
-    <title>JobsPortal | All Jobs</title>
+{% if messages %}
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-
-<body>
-
-    <!-- ================= NAVBAR ================= -->
-    <nav class="navbar">
-
-        <div class="navbar-container">
-
-            <!-- Logo -->
-            <div class="logo">
-                <a href="{% url 'all_jobs' %}">JobsPortal</a>
-            </div>
-
-            <!-- Navigation Links -->
-            <ul class="nav-links">
-
-                <li><a href="{% url 'all_jobs' %}">All Jobs</a></li>
-
-                {% if user.is_authenticated %}
-
-                    {% if user.is_superuser %}
-
-                        <li><a href="{% url 'add_job' %}">Add Job</a></li>
-
-                    {% endif %}
-
-                     <li><a href="{% url 'logout' %}">Logout</a></li>
-
-                {% else %}
-
-                    <li><a href="{% url 'register' %}">Register</a></li>
-
-                    <li><a href="{% url 'login' %}">Login</a></li>
-
-                {% endif %}
-
-            </ul>
-
-
-            <!-- Sector Filter -->
-            <div class="filter-container">
-
-                <div class="dropdown">
-
-                    <button class="btn btn-primary dropdown-toggle filter-button" type="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-
-                        Filter by Sector
-
-                    </button>
-
-                    <ul class="dropdown-menu">
-
-                        {% for sector in sectors %}
-
-                        <li>
-                            <a class="dropdown-item" href="{% url 'jobs_by_category' sector.id %}">
-
-                                {{ sector.name }}
-
-                            </a>
-                        </li>
-
-                        {% endfor %}
-
-                    </ul>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </nav>
-
-
-    <!-- ================= MAIN CONTENT ================= -->
-
+<div>
     {% for msg in messages %}
-    <p>{{msg}}</p>
+    <div>{{ msg }}</div>
+
     {% endfor %}
-    <main class="main-container">
+</div>
 
-        <!-- Page Heading -->
-        <div class="page-heading">
+{% endif %}
 
-            <h1>Available Jobs</h1>
+<main>
+    <div>
+        <h1>Available Jobs</h1>
+        <p>Find your next career opportunity</p>
+    </div>
+    <section>
+        {% if jobs %}
+        <div>
+            {% for job in jobs %}
+            <div>
+                <h3>{{ job.title }}</h3>
 
-            <p>Find your next career opportunity</p>
+                <div>
 
-        </div>
+                    <span>Location:</span>
+                    <span>{{ job.location }}</span>
 
+                </div>
+                <div>
 
-        <!-- ================= JOB LIST ================= -->
+                    <span>Posted:</span>
 
-        <section class="jobs-section">
-
-            {% if jobs %}
-
-            <div class="jobs-grid">
-
-                {% for job in jobs %}
-
-                <!-- Job Card -->
-                <div class="job-card">
-
-                    <!-- Job Title -->
-                    <h3 class="job-title">
-                        {{ job.title }}
-                    </h3>
-
-
-                    <!-- Location -->
-                    <div class="job-location">
-
-                        <span class="job-label">
-                            Location:
-                        </span>
-
-                        <span>
-                            {{ job.location }}
-                        </span>
-
-                    </div>
-
-
-                    <!-- Posted Date -->
-                    <div class="job-date">
-
-                        <span class="job-label">
-                            Posted:
-                        </span>
-
-                        <span>
-                            {{ job.post_date }}
-                        </span>
-
-                    </div>
-
-
-                    <!-- View Detail -->
-                    <div class="job-action">
-
-                        <a href="{% url 'job_detail' job.id %}" class="view-button">
-
-                            View Details
-
-                        </a>
-
-                    </div>
+                    <span>{{ job.post_date }}</span>
 
                 </div>
 
-                {% endfor %}
+                <div>
+                    <a href="{% url 'job_detail' job.id %}">View Details</a>
+                </div>
 
             </div>
 
-            {% else %}
+            {% endfor %}
 
-            <!-- No Jobs -->
-            <div class="no-jobs">
+        </div>
 
-                <h3>No Jobs Found</h3>
+        {% else %}
+        <div>
 
-                <p>
-                    Sorry, there are currently no jobs available.
-                </p>
+            <h3>No Jobs Found</h3>
 
-                <a href="{% url 'all_jobs' %}" class="back-button">
+            <p>Sorry, there are currently no jobs available.</p>
 
-                    View All Jobs
+            <a href="{% url 'all_jobs' %}">View All Jobs</a>
 
-                </a>
+        </div>
 
-            </div>
+        {% endif %}
 
-            {% endif %}
+    </section>
 
-        </section>
+</main>
 
-    </main>
-
-
-    <!-- ================= BOOTSTRAP JS ================= -->
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-
-</html>
+{% endblock %}

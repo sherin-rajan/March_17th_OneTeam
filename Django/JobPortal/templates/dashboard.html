@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+User Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div>
+
+    <h2>Welcome, {{ user.first_name }}</h2>
+    <form method="get" class="mb-4">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search jobs..."
+            value="{{ request.GET.search }}"
+            class="form-control"
+        >
+
+        <button type="submit">
+            Search
+        </button>
+
+    </form>
+
+    <h3>Applied Jobs</h3>
+
+</div>
+
+{% endblock %}

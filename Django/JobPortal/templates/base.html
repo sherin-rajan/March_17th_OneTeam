@@ -1,0 +1,185 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}JobsPortal{% endblock %}</title>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <!-- Logo -->
+            <a href="{% url 'home' %}" class="logo">
+                <i class="fa-solid fa-briefcase"></i>
+                Jobs<span>Portal</span>
+            </a>
+
+
+            <!-- Navigation Links -->
+            <ul class="nav-links">
+
+                <li>
+                    <a href="{% url 'home' %}">
+                        <i class="fa-solid fa-house"></i>
+                        Home
+                    </a>
+                </li>
+
+
+                {% if user.is_authenticated %}
+
+                    <li>
+                        <a href="{% url 'all_jobs' %}">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            All Jobs
+                        </a>
+                    </li>
+
+
+                    {% if user.is_superuser %}
+
+                        <li>
+                            <a href="{% url 'add_jobs' %}">
+                                <i class="fa-solid fa-circle-plus"></i>
+                                Add Jobs
+                            </a>
+                        </li>
+
+                    {% endif %}
+
+
+                    <li>
+                        <a href="{% url 'dashboard' %}">
+                            <i class="fa-solid fa-gauge"></i>
+                            Dashboard
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="{% url 'logout' %}" class="logout-link">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            Logout
+                        </a>
+                    </li>
+
+
+                {% else %}
+
+                    <li>
+                        <a href="{% url 'register' %}">
+                            <i class="fa-solid fa-user-plus"></i>
+                            Register
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'login' %}" class="login-link">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            Login
+                        </a>
+                    </li>
+
+                {% endif %}
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= MESSAGES ================= -->
+
+    {% if messages %}
+
+        <div class="messages-container">
+
+            {% for message in messages %}
+
+                <div class="message">
+                    <i class="fa-solid fa-circle-info"></i>
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main>
+
+        {% block content %}
+
+        {% endblock %}
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-content">
+
+            <div class="footer-logo">
+                <i class="fa-solid fa-briefcase"></i>
+                JobsPortal
+            </div>
+
+            <p>
+                Find your dream job and build your future.
+            </p>
+
+            <div class="social-icons">
+
+                <a href="#">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+
+                <a href="#">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="#">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+
+                <a href="#">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 JobsPortal. All Rights Reserved.
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

@@ -1,55 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-</head>
+{% block title %}JobsPortal | Register {% endblock %}
 
-<body>
-    <main>
-        <h1>Register</h1>
+{% block content %}
+<main>
+    <h1>Register</h1>
 
-        <form method="POST" action="" onsubmit="return passwordValidate()">
-            {% csrf_token %}
-            <label for="first_name">First Name:</label>
-            <input type="text" id="first_name" name="first_name" required>
+    <form method="POST" action="" onsubmit="return passwordValidate()">
+        {% csrf_token %}
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" required>
 
 
-            <label for="last_name">Last Name:</label>
-            <input type="text" id="last_name" name="last_name" required>
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" required>
 
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
 
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
 
 
-            <label for="confirm_password">Confirm Password:</label>
-            <input type="password" id="confirm_password" name="confirm_password" required>
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" required>
 
 
-            <button type="submit">Register</button>
-        </form>
-    </main>
-    <script>
-        function passwordValidate() {
-            let password = document.getElementById('password').value;
-            let con_password = document.getElementById('confirm_password').value;
-            if (password == con_password) {
-                return true
-            }
-            else {
-                alert("Passwords must be same")
-                return false
-            }
+        <button type="submit">Register</button>
+    </form>
+</main>
+<script>
+    function passwordValidate() {
+        let password = document.getElementById('password').value;
+        let con_password = document.getElementById('confirm_password').value;
+        if (password == con_password) {
+            return true
         }
-    </script>
+        else {
+            alert("Passwords must be same")
+            return false
+        }
+    }
+</script>
 
-</body>
-
-</html>
+{% endblock %}
