@@ -12,5 +12,6 @@ urlpatterns=[
     path('apply-job/<int:job_id>',views.applyJob,name='apply_job'),
     path('login/',views.signIn,name='login'),
     path('register/',views.signUp,name='register'),
-    path('logout/',views.signOut,name='logout')
+    path('logout/',views.signOut,name='logout'),
+    path("dashboard", views.userDashboard,name="dashboard"),
 ]

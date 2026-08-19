@@ -21,9 +21,6 @@ def admin_permission(fun):
 def home(request):
     return render(request,'home.html')
 
-def dashboard(request):
-    return render(request,'dashboard.html')
-
 @login_required
 def allJobs(request,sector=None):
     if sector:
@@ -97,3 +94,8 @@ def signUp(request):
 def signOut(request):
     auth.logout(request)
     return redirect('all_jobs')
+
+@login_required
+def userDashboard(request):
+    applied_jobs = Applications.objects.filter(id=request.user.id)
+    return render(request,"dashboard.html",{"applied_jobs":applied_jobs})
