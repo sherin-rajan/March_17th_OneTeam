@@ -1,14 +1,34 @@
 {% extends 'base.html' %}
 
-{% block title %}JobsPortal | All Jobs {% endblock %}
+{% block title %}JobsPortal | Update Job{% endblock %}
 
 {% block content %}
-<div>
-    <form method="post" action="">
-        {% csrf_token %}
-        {{form}}
-        <input type="submit" value="Save changes">
-    </form>
+
+<div class="update-job-page">
+
+    <div class="update-job-container">
+
+        <div class="update-job-header">
+            <h1>Update Job</h1>
+            <p>Edit the job details below</p>
+        </div>
+
+        <form method="post" action="" class="update-job-form">
+
+            {% csrf_token %}
+
+            <div class="job-form-fields">
+                {{ form }}
+            </div>
+
+            <div class="update-job-actions">
+                <input type="submit" value="Save Changes">
+            </div>
+
+        </form>
+
+    </div>
+
 </div>
 
 {% endblock %}

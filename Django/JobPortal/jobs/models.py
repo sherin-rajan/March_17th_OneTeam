@@ -31,6 +31,11 @@ class Jobs(models.Model):
     def __str__(self):
         return self.title
 
+    def save(self):
+        super().save()
+        self.slug=f"{self.company.name}-{self.title}-{self.id}".lower()
+        return super().save(update_fields=['slug'])
+
 class Applications(models.Model):
     job=models.ForeignKey(Jobs,on_delete=models.CASCADE)
     user=models.ForeignKey(User,on_delete=models.CASCADE)

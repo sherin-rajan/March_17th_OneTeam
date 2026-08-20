@@ -24,9 +24,9 @@ def home(request):
 @login_required
 def allJobs(request,sector=None):
     if sector:
-        job_posts=Jobs.objects.filter(sector__id=sector)
+        job_posts=Jobs.objects.filter(sector__id=sector,is_active=True)
     else:
-        job_posts=Jobs.objects.all() 
+        job_posts=Jobs.objects.filter(is_active=True) 
     return render(request,"all-jobs.html",{'jobs':job_posts}) 
    
 @login_required
@@ -40,7 +40,7 @@ def addJob(request):
         form=JobForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("/")
+            return redirect("all_jobs")
     else:
         form=JobForm()
     return render(request,"add-jobs.html",{"form":form})
@@ -93,9 +93,9 @@ def signUp(request):
 
 def signOut(request):
     auth.logout(request)
-    return redirect('all_jobs')
+    return redirect('home')
 
 @login_required
-def userDashboard(request):
-    applied_jobs = Applications.objects.filter(id=request.user.id)
+def dashboard(request):
+    applied_jobs = Applications.objects.filter(user__id=request.user.id)
     return render(request,"dashboard.html",{"applied_jobs":applied_jobs})
