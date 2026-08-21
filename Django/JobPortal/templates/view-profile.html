@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard | JobsPortal{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div>
+    <p>Name : {{p.user.first_name}}</p>
+    <p>Headline : {{p.headline}}</p>
+    <p>Place : {{p.place}}</p>
+    <p>Email : {{p.user.email}}</p>
+    <p>Contact Number : {{p.phone}}</p>
+    <p>Highest qualification : {{p.qualification}}</p>
+</div>
+{% endblock %}

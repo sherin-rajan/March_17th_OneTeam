@@ -41,6 +41,21 @@ class Applications(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     date=models.DateField(auto_now_add=True)
 
+class Profile(models.Model):
+    user=models.OneToOneField(User,on_delete=models.CASCADE)
+    dob=models.DateField()
+    phone=models.CharField(max_length=12)
+    place=models.CharField(max_length=50)
+    qualification=models.CharField(max_length=50,blank=True)
+    headline=models.TextField(blank=True)
+
+    def __str__(self):
+        return self.user.first_name
+    
+
+
+
+
 
 
 

@@ -29,7 +29,7 @@
                         <li><a href="{% url 'add_jobs' %}">Add Jobs</a></li>
                     {% endif %}
 
-                    <li><a href="{% url 'dashboard' %}" class="user-link">Dashboard ({{ user.username }})</a></li>
+                    <li><a href="{% url 'dashboard' %}" class="user-link">{{ user.first_name }}</a></li>
                     <li><a href="{% url 'logout' %}" class="btn-logout">Logout</a></li>
                 {% else %}
                     <li><a href="{% url 'register' %}">Register</a></li>

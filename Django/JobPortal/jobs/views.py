@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
-from jobs.models import Jobs,Sectors,Applications
-from jobs.forms import JobForm
+from jobs.models import Jobs,Sectors,Applications,Profile
+from jobs.forms import JobForm,ProfileForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib import auth
@@ -97,5 +97,17 @@ def signOut(request):
 
 @login_required
 def dashboard(request):
+    profile=Profile.objects.get(user__id=request.user.id)
     applied_jobs = Applications.objects.filter(user__id=request.user.id)
-    return render(request,"dashboard.html",{"applied_jobs":applied_jobs})
+    return render(request,"dashboard.html",{"applied_jobs":applied_jobs,'p':profile})
+
+def editProfile(request):
+    profile,created=Profile.objects.get_or_create(user=request.user)
+    if request.method=='POST':
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+    else:
+        form=ProfileForm()
+        return render(request,'edit-profile.html',{'form':form})
