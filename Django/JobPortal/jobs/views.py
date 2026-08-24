@@ -32,7 +32,8 @@ def allJobs(request,sector=None):
 @login_required
 def jobDetail(request,job_id):
     job=Jobs.objects.get(id=job_id)
-    return render(request,"job-detail.html",{"job":job})
+    has_applied=Applications.objects.filter(job__id=job_id,user__id=request.user.id).exists()
+    return render(request,"job-detail.html",{"job":job,'has_applied':has_applied})
 
 @admin_permission
 def addJob(request):
@@ -111,3 +112,7 @@ def editProfile(request):
     else:
         form=ProfileForm()
         return render(request,'edit-profile.html',{'form':form})
+
+def viewProfile(request):
+    p=Profile.objects.get(user=request.user)
+    return render(request,'view-profile.html',{'p':p})

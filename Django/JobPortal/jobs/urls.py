@@ -14,5 +14,6 @@ urlpatterns=[
     path('register/',views.signUp,name='register'),
     path('logout/',views.signOut,name='logout'),
     path("dashboard", views.dashboard,name="dashboard"),
-    path('edit-profile',views.editProfile,name='edit_profile')
+    path('edit-profile',views.editProfile,name='edit_profile'),
+    path('view-proflie',views.viewProfile,name='view_profile')
 ]

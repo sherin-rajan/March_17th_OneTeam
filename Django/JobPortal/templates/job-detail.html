@@ -43,7 +43,11 @@
 
         <!-- Apply CTA Section -->
         <footer class="job-detail-footer">
-            <a href="{% url 'apply_job' job.id %}" class="btn-primary btn-apply">Apply Now 🚀</a>
+            {% if has_applied %}
+            <h3 style="color: blue;">Applied</h3>
+            {% else %}
+            <a href="{% url 'apply_job' job.id %}" class="btn-primary btn-apply">Apply Now</a>
+            {% endif %}
         </footer>
     </article>
 </div>
