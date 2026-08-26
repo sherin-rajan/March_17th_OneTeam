@@ -47,7 +47,7 @@ class Profile(models.Model):
     phone=models.CharField(max_length=12)
     place=models.CharField(max_length=50)
     qualification=models.CharField(max_length=50,blank=True)
-    headline=models.TextField(blank=True)
+    headline=models.CharField(max_length=200,blank=True)
 
     def __str__(self):
         return self.user.first_name

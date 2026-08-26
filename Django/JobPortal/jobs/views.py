@@ -103,15 +103,15 @@ def dashboard(request):
     return render(request,"dashboard.html",{"applied_jobs":applied_jobs,'p':profile})
 
 def editProfile(request):
-    profile,created=Profile.objects.get_or_create(user=request.user)
-    if request.method=='POST':
-        form = ProfileForm(request.POST, instance=profile)
+    profile, created = Profile.objects.get_or_create(user=request.user)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST,instance=profile)
         if form.is_valid():
             form.save()
             return redirect('dashboard')
     else:
-        form=ProfileForm()
-        return render(request,'edit-profile.html',{'form':form})
+        form = ProfileForm(instance=profile)
+        return render(request,'edit-profile.html',{'form': form} )
 
 def viewProfile(request):
     p=Profile.objects.get(user=request.user)
