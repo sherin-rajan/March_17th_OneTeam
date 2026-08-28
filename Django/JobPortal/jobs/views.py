@@ -154,3 +154,7 @@ def viewProfile(request):
 def applicationDetails(request,application_id):
     application=Applications.objects.get(id=application_id)
     return render(request,"application-details.html",{"application":application})
+
+def viewUsers(request):
+    users=User.objects.filter(is_superuser=False)
+    return render(request, "view-users.html", {"users": users})

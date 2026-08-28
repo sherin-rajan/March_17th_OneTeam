@@ -4,7 +4,7 @@
 {% block title %}JobsPortal | Admin Dashboard{% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -56,20 +56,15 @@
     </div>
     <div class="application-search">
 
-    <form method="get">
+        <form method="get">
 
-        <input
-            type="text"
-            name="search"
-            placeholder="Search applicants or jobs..."
-            value="{{ search|default:'' }}"
-        >
+            <input type="text" name="search" placeholder="Search applicants or jobs..." value="{{ search|default:'' }}">
 
-        <button type="submit">Search</button>
+            <button type="submit">Search</button>
 
-    </form>
+        </form>
 
-</div>
+    </div>
 
     <!-- Applications -->
     <div class="admin-section">
@@ -112,7 +107,7 @@
 
         <h3>User Management</h3>
 
-        <a href="#" class="admin-btn">
+        <a href="{% url 'view_users' %}" class="admin-btn">
             View Users
         </a>
 

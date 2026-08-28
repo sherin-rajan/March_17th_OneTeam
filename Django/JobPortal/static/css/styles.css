@@ -2009,3 +2009,121 @@
         margin: 8px 0;
     }
 }
+
+/* =========================
+   USERS PAGE
+========================= */
+
+.users-page {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.users-header {
+    margin-bottom: 25px;
+}
+
+.users-header h2 {
+    margin: 0 0 7px;
+    font-size: 30px;
+}
+
+.users-header p {
+    margin: 0;
+    color: #777;
+}
+
+
+/* Users Card */
+
+.users-card {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+
+/* Individual User */
+
+.user-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 1px solid #eee;
+}
+
+.user-item:last-child {
+    border-bottom: none;
+}
+
+
+/* User Information */
+
+.user-info h3 {
+    margin: 0 0 6px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.user-info p {
+    margin: 0 0 5px;
+    color: #555;
+    font-size: 14px;
+}
+
+.user-info span {
+    color: #888;
+    font-size: 13px;
+}
+
+
+/* Details Button */
+
+.user-details-btn {
+    display: inline-block;
+    padding: 8px 15px;
+    border: 1px solid #222;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #222;
+    font-size: 13px;
+}
+
+.user-details-btn:hover {
+    background: #222;
+    color: white;
+}
+
+
+/* Empty */
+
+.empty-users {
+    text-align: center;
+    padding: 30px;
+    color: #777;
+}
+
+
+/* Back */
+
+.users-page .back-btn {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .user-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+}
