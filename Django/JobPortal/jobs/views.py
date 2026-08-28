@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 # Create your views here.
 
@@ -57,11 +58,14 @@ def updateJob(request,job_id):
         form=JobForm(instance=job)
     return render(request,"update-job.html",{"form":form})
 
-def applyJob(request,job_id):
-    user=User.objects.get(id=request.user.id) #id of the logged user
-    job=Jobs.objects.get(id=job_id)
-    Applications(user=user,job=job).save()
-    return redirect('all_jobs')
+def applyJob(request, job_id):
+    user = User.objects.get(id=request.user.id) #id of the logged user
+    job = Jobs.objects.get(id=job_id)
+    if request.method=="POST":
+        resume=request.FILES.get("resume")
+        Applications(user=user,job=job,resume=resume).save()
+        return redirect('all_jobs')
+    return render(request,"apply-job.html",{"job": job})
 
 def signIn(request):
     if request.method=='POST':
@@ -69,8 +73,12 @@ def signIn(request):
         password=request.POST['password']
         user=auth.authenticate(username=username,password=password)
         if user is not None:
-            auth.login(request,user)
-            return redirect('dashboard')
+            if request.user.is_superuser:
+                auth.login(request,user)
+                return redirect('admin_dashboard')
+            else:
+                auth.login(request,user)
+                return redirect('user_dashboard')
         else:
             messages.error(request,'Invalid username or password!')
             return redirect('login')
@@ -97,11 +105,35 @@ def signOut(request):
     return redirect('home')
 
 @login_required
-def dashboard(request):
+def userDashboard(request):
+    if request.user.is_superuser:
+        return redirect('admin_dashboard')
     profile=Profile.objects.get(user__id=request.user.id)
     applied_jobs = Applications.objects.filter(user__id=request.user.id)
-    return render(request,"dashboard.html",{"applied_jobs":applied_jobs,'p':profile})
+    return render(request,"user-dashboard.html",{"applied_jobs":applied_jobs,'p':profile})
 
+@admin_permission
+def adminDashboard(request):
+    if not request.user.is_superuser:
+        return redirect("user_dashboard")
+    data={
+    "total_users":User.objects.count(),
+    "total_jobs":Jobs.objects.count(),
+    "total_applications":Applications.objects.count(),
+    }
+    applications=Applications.objects.all()
+    search = request.GET.get("search")
+    if search:
+        applications = applications.filter(
+            Q(user__first_name__icontains=search) |
+            Q(user__last_name__icontains=search) |
+            Q(user__username__icontains=search) |
+            Q(user__email__icontains=search) |
+            Q(job__title__icontains=search)
+        )
+    return render(request,"admin-dashboard.html",{'data':data,"applications":applications,"search":search})
+
+@login_required
 def editProfile(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
     if request.method == 'POST':
@@ -113,6 +145,12 @@ def editProfile(request):
         form = ProfileForm(instance=profile)
         return render(request,'edit-profile.html',{'form': form} )
 
+@login_required
 def viewProfile(request):
     p=Profile.objects.get(user=request.user)
     return render(request,'view-profile.html',{'p':p})
+
+@admin_permission
+def applicationDetails(request,application_id):
+    application=Applications.objects.get(id=application_id)
+    return render(request,"application-details.html",{"application":application})

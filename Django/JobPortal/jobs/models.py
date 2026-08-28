@@ -39,6 +39,7 @@ class Jobs(models.Model):
 class Applications(models.Model):
     job=models.ForeignKey(Jobs,on_delete=models.CASCADE)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
+    resume=models.FileField(blank=True,upload_to='resume')
     date=models.DateField(auto_now_add=True)
 
 class Profile(models.Model):

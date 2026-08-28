@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}JobsPortal | Admin Dashboard{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="admin-dashboard">
+
+    <div class="admin-header">
+        <h2>Admin Dashboard</h2>
+        <p>Manage your JobsPortal from here.</p>
+    </div>
+
+
+    <!-- Statistics -->
+    <div class="dashboard-stats">
+
+        <div class="stat-card">
+            <h3>Total Users</h3>
+            <p>{{ data.total_users }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Jobs</h3>
+            <p>{{ data.total_jobs }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Applications</h3>
+            <p>{{ data.total_applications }}</p>
+        </div>
+
+    </div>
+
+
+    <!-- Job Management -->
+    <div class="admin-section">
+
+        <h3>Job Management</h3>
+
+        <div class="admin-actions">
+            <a href="{% url 'add_jobs' %}" class="admin-btn">
+                Add Job
+            </a>
+
+            <a href="{% url 'all_jobs' %}" class="admin-btn secondary-btn">
+                Available Jobs
+            </a>
+        </div>
+
+    </div>
+    <div class="application-search">
+
+    <form method="get">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search applicants or jobs..."
+            value="{{ search|default:'' }}"
+        >
+
+        <button type="submit">Search</button>
+
+    </form>
+
+</div>
+
+    <!-- Applications -->
+    <div class="admin-section">
+
+        <h3>Recent Applications</h3>
+
+        <div class="application-list">
+
+            {% for d in applications %}
+
+            <div class="application-item">
+
+                <div>
+                    <strong>{{ d.job.title }}</strong>
+                    <p>
+                        Applicant:
+                        {{ d.user.first_name }} {{ d.user.last_name }}
+                    </p>
+                </div>
+
+                <a href="{% url 'application_details' d.id %}" class="details-btn">Details</a>
+
+            </div>
+
+            {% empty %}
+
+            <p class="empty-message">
+                No applications found.
+            </p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- Users -->
+    <div class="admin-section users-section">
+
+        <h3>User Management</h3>
+
+        <a href="#" class="admin-btn">
+            View Users
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

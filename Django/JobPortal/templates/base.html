@@ -27,9 +27,10 @@
 
                     {% if user.is_superuser %}
                         <li><a href="{% url 'add_jobs' %}">Add Jobs</a></li>
+                        <li><a href="{% url 'admin_dashboard' %}" class="user-link">{{ user.username }}</a></li>
                     {% endif %}
 
-                    <li><a href="{% url 'dashboard' %}" class="user-link">{{ user.first_name }}</a></li>
+                    <li><a href="{% url 'user_dashboard' %}" class="user-link">{{ user.first_name }}</a></li>
                     <li><a href="{% url 'logout' %}" class="btn-logout">Logout</a></li>
                 {% else %}
                     <li><a href="{% url 'register' %}">Register</a></li>
