@@ -165,9 +165,27 @@ def viewUsers(request):
     return render(request, "view-users.html", {"users": users})
 
 @admin_permission
-def adminJob(request,sector=None):
+def adminJob(request):
+    jobs = Jobs.objects.all()
+    search = request.GET.get("search")
+    if search:
+        jobs = jobs.filter(title__icontains=search) | jobs.filter(company__name__icontains=search)
+
+    sector = request.GET.get("sector")
     if sector:
-        job=Jobs.objects.filter(sector__id=sector,is_active=True)
-    else:
-        job=Jobs.objects.filter(is_active=True) 
-    return render(request,"admin-job.html",{"jobs":job})
+        jobs = jobs.filter(sector_id=sector)
+
+    status = request.GET.get("status")
+    if status == "active":
+        jobs = jobs.filter(is_active=True)
+
+    elif status == "inactive":
+        jobs = jobs.filter(is_active=False)
+
+    context = {
+        "jobs": jobs,
+        "search": search,
+        "selected_sector": sector,
+        "selected_status": status,
+    }
+    return render(request, "admin-job.html", context)
