@@ -112,27 +112,6 @@ def userDashboard(request):
     applied_jobs = Applications.objects.filter(user__id=request.user.id)
     return render(request,"user-dashboard.html",{"applied_jobs":applied_jobs,'p':profile})
 
-@admin_permission
-def adminDashboard(request):
-    if not request.user.is_superuser:
-        return redirect("user_dashboard")
-    data={
-    "total_users":User.objects.count(),
-    "total_jobs":Jobs.objects.count(),
-    "total_applications":Applications.objects.count(),
-    }
-    applications=Applications.objects.all()
-    search = request.GET.get("search")
-    if search:
-        applications = applications.filter(
-            Q(user__first_name__icontains=search) |
-            Q(user__last_name__icontains=search) |
-            Q(user__username__icontains=search) |
-            Q(user__email__icontains=search) |
-            Q(job__title__icontains=search)
-        )
-    return render(request,"admin-dashboard.html",{'data':data,"applications":applications,"search":search})
-
 @login_required
 def editProfile(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
@@ -151,10 +130,44 @@ def viewProfile(request):
     return render(request,'view-profile.html',{'p':p})
 
 @admin_permission
+def adminDashboard(request,sector=None):
+    if not request.user.is_superuser:
+        return redirect("user_dashboard")
+    data={
+    "total_users":User.objects.filter(is_superuser=False).count(),
+    "total_jobs":Jobs.objects.count(),
+    "total_applications":Applications.objects.count(),
+    }
+    applications=Applications.objects.all()
+    search = request.GET.get("search")
+    if search:
+        applications = applications.filter(
+            Q(user__first_name__icontains=search) |
+            Q(user__last_name__icontains=search) |
+            Q(user__username__icontains=search) |
+            Q(user__email__icontains=search) |
+            Q(job__title__icontains=search)
+        )
+    if sector:
+        job=Jobs.objects.filter(sector__id=sector,is_active=True)
+    else:
+        job=Jobs.objects.filter(is_active=True) 
+    return render(request,"admin-dashboard.html",{'data':data,"applications":applications,"search":search,"job":job})
+
+@admin_permission
 def applicationDetails(request,application_id):
     application=Applications.objects.get(id=application_id)
     return render(request,"application-details.html",{"application":application})
 
+@admin_permission
 def viewUsers(request):
     users=User.objects.filter(is_superuser=False)
     return render(request, "view-users.html", {"users": users})
+
+@admin_permission
+def adminJob(request,sector=None):
+    if sector:
+        job=Jobs.objects.filter(sector__id=sector,is_active=True)
+    else:
+        job=Jobs.objects.filter(is_active=True) 
+    return render(request,"admin-job.html",{"jobs":job})

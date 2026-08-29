@@ -7,6 +7,13 @@ class JobForm(forms.ModelForm):
         fields='__all__'
         exclude=['slug']
 
+        widgets={
+            'end_date':forms.TextInput(attrs={
+                'type':'date',
+                "class":'form'
+            })
+        }
+
 class ProfileForm(forms.ModelForm):
     class Meta:
         model=Profile

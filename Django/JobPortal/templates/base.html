@@ -26,7 +26,6 @@
                     <li><a href="{% url 'all_jobs' %}">All Jobs</a></li>
 
                     {% if user.is_superuser %}
-                        <li><a href="{% url 'add_jobs' %}">Add Jobs</a></li>
                         <li><a href="{% url 'admin_dashboard' %}" class="user-link">{{ user.username }}</a></li>
                     {% endif %}
 

@@ -325,7 +325,7 @@
     margin-bottom: 30px;
 }
 
-.stat-card {
+.state-card {
     display: flex;
     align-items: center;
     gap: 14px;
@@ -343,7 +343,7 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.stat-card:hover {
+.state-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }
@@ -1654,6 +1654,7 @@
 
 .stat-card {
     background: white;
+    text-decoration: none;
     padding: 25px;
     border-radius: 10px;
     border: 1px solid #e5e5e5;

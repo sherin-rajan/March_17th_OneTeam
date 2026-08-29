@@ -16,6 +16,7 @@ urlpatterns=[
     path("admin-dashboard",views.adminDashboard,name='admin_dashboard'),
     path('edit-profile',views.editProfile,name='edit_profile'),
     path('view-proflie',views.viewProfile,name='view_profile'),
-    path("application/<int:application_id>/",views.applicationDetails, name="application_details"),
+    path("application/<int:application_id>/",views.applicationDetails, name='application_details'),
     path("users/",views.viewUsers,name="view_users"),
+    path("admin-job",views.adminJob,name="admin_job"),
 ]

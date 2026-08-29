@@ -27,6 +27,7 @@ class Jobs(models.Model):
     post_date=models.DateField(auto_now_add=True)
     slug=models.SlugField(blank=True)
     is_active=models.BooleanField(default=True)
+    end_date=models.DateField()
 
     def __str__(self):
         return self.title
