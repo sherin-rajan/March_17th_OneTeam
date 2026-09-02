@@ -208,3 +208,16 @@ def adminJob(request):
     }
     return render(request, "admin-job.html", context)
 
+@login_required(login_url="login")
+def notifications(request):
+    if request.user.is_superuser:
+        return redirect("all_jobs")
+    notifications=Notification.objects.filter(user=request.user,is_read=False).order_by("-created_at")
+    return render(request,"notifications.html",{"notifications": notifications})
+
+@login_required(login_url="login")
+def mark_notification_read(request, notification_id):
+    notification = get_object_or_404(Notification,id=notification_id,user=request.user)
+    notification.is_read = True
+    notification.save()
+    return redirect("notifications")

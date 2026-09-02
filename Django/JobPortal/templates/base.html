@@ -49,7 +49,25 @@
                     </li>
 
 
-                
+                    <!-- ================= NOTIFICATIONS ================= -->
+                    <!-- Show notifications only for normal users -->
+                    {% if not user.is_superuser %}
+
+                        <li>
+                            <a href="{% url 'notifications' %}">
+                                🔔 Notifications
+
+                                {% if notification_count > 0 %}
+                                    <span class="notification-badge">
+                                        {{ notification_count }}
+                                    </span>
+                                {% endif %}
+
+                            </a>
+                        </li>
+
+                    {% endif %}
+                    <!-- ================= END NOTIFICATIONS ================= -->
 
 
                     <!-- ================= USER / ADMIN ================= -->
