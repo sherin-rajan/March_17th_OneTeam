@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-
+from django.core.mail import send_mail
 # Create your views here.
 
 #custom decorator
@@ -115,6 +115,13 @@ def signUp(request):
             user=User.objects.create_user(username=email,first_name=first_name,last_name=last_name,email=email,password=password)
             user.save()
             messages.success(request,'Welcome to JobsPortal! Please login to contonue!')
+            send_mail(
+                subject="Welcome To JobPortal",
+                message=f"Hi {first_name} {last_name},\n   Get ready to step into your dream job with JobPortal . ",
+                from_email=None,  # Uses DEFAULT_FROM_EMAIL from settings.py
+                recipient_list=[email],
+                fail_silently=False,
+            )
             return redirect('login')
     return render(request,'register.html')
 
@@ -212,7 +219,7 @@ def adminJob(request):
 def notifications(request):
     if request.user.is_superuser:
         return redirect("all_jobs")
-    notifications=Notification.objects.filter(user=request.user,is_read=False).order_by("-created_at")
+    notifications = Notification.objects.filter(user=request.user).order_by("-created_at")
     return render(request,"notifications.html",{"notifications": notifications})
 
 @login_required(login_url="login")

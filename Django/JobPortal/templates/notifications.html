@@ -247,10 +247,11 @@
                                 </small>
 
                             </div>
-
-                            <div class="notification-arrow">
-                                →
-                            </div>
+                            {% if not notification.is_read %}
+                                <span class="new-badge" style="color: blue;">
+                                    NEW
+                                </span>
+                            {% endif %}
 
                         </a>
 
@@ -258,28 +259,11 @@
 
                 {% endfor %}
 
-            </div>
-
-
-        {% else %}
-
-            <!-- No Notifications -->
-
-            <div class="empty-notifications">
-
-                <div class="empty-icon">
-                    🔔
+                <div>
+                    <a href="{% url 'home' %}" class="browse-jobs-btn">
+                    Home
+                    </a>
                 </div>
-
-                <h3>No new notifications</h3>
-
-                <p>
-                    You don't have any new notifications at the moment.
-                </p>
-
-                <a href="{% url 'all_jobs' %}" class="browse-jobs-btn">
-                    Browse Jobs
-                </a>
 
             </div>
 
