@@ -5,66 +5,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{% block title %}JobsPortal{% endblock %}</title>
-    
+
     <!-- Base Styling -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    
-    <!-- Block for page-specific CSS files -->
+
+    <!-- Page-specific CSS -->
     {% block extra_css %}{% endblock %}
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="{% url 'home' %}" class="logo">Jobs<span>Portal</span></a>
 
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <!-- Logo -->
+            <a href="{% url 'home' %}" class="logo">
+                Jobs<span>Portal</span>
+            </a>
+
+
+            <!-- Navigation Menu -->
             <ul class="nav-menu">
-                <li><a href="{% url 'home' %}">Home</a></li>
+
+                <!-- Home -->
+                <li>
+                    <a href="{% url 'home' %}">
+                        Home
+                    </a>
+                </li>
+
 
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'all_jobs' %}">All Jobs</a></li>
+
+                    <!-- All Jobs -->
+                    <li>
+                        <a href="{% url 'all_jobs' %}">
+                            All Jobs
+                        </a>
+                    </li>
+
+
+                
+
+
+                    <!-- ================= USER / ADMIN ================= -->
 
                     {% if user.is_superuser %}
-                        <li><a href="{% url 'admin_dashboard' %}" class="user-link">{{ user.username }}</a></li>
+
+                        <!-- Admin Dashboard -->
+                        <li>
+                            <a href="{% url 'admin_dashboard' %}"
+                               class="user-link">
+                                {{ user.username }}
+                            </a>
+                        </li>
+
+                    {% else %}
+
+                        <!-- User Dashboard -->
+                        <li>
+                            <a href="{% url 'user_dashboard' %}"
+                               class="user-link">
+                                {{ user.first_name }}
+                            </a>
+                        </li>
+
                     {% endif %}
 
-                    <li><a href="{% url 'user_dashboard' %}" class="user-link">{{ user.first_name }}</a></li>
-                    <li><a href="{% url 'logout' %}" class="btn-logout">Logout</a></li>
+                    <!-- ================= END USER / ADMIN ================= -->
+
+
+                    <!-- Logout -->
+                    <li>
+                        <a href="{% url 'logout' %}"
+                           class="btn-logout">
+                            Logout
+                        </a>
+                    </li>
+
+
                 {% else %}
-                    <li><a href="{% url 'register' %}">Register</a></li>
-                    <li><a href="{% url 'login' %}" class="btn-login">Login</a></li>
+
+                    <!-- ================= GUEST USER ================= -->
+
+                    <!-- Register -->
+                    <li>
+                        <a href="{% url 'register' %}">
+                            Register
+                        </a>
+                    </li>
+
+
+                    <!-- Login -->
+                    <li>
+                        <a href="{% url 'login' %}"
+                           class="btn-login">
+                            Login
+                        </a>
+                    </li>
+
+                    <!-- ================= END GUEST USER ================= -->
+
                 {% endif %}
+
             </ul>
+
         </div>
+
     </nav>
+    <!-- ================= END NAVBAR ================= -->
+
+
+    <!-- ================= DJANGO MESSAGES ================= -->
 
     {% if messages %}
+
         <div class="messages-container">
+
             {% for message in messages %}
+
                 <div class="alert alert-{{ message.tags }}">
                     {{ message }}
                 </div>
+
             {% endfor %}
+
         </div>
+
     {% endif %}
 
+    <!-- ================= END MESSAGES ================= -->
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
     <main class="main-content">
+
         {% block content %}
         {% endblock %}
+
     </main>
 
+    <!-- ================= END MAIN CONTENT ================= -->
+
+
+    <!-- ================= FOOTER ================= -->
+
     <footer class="footer">
+
         <div class="footer-container">
+
             <div class="footer-brand">
-                <h3>Jobs<span>Portal</span></h3>
-                <p>Find your dream job and build your future.</p>
+
+                <h3>
+                    Jobs<span>Portal</span>
+                </h3>
+
+                <p>
+                    Find your dream job and build your future.
+                </p>
+
             </div>
+
+
             <div class="footer-copyright">
-                <p>&copy; 2026 JobsPortal. All Rights Reserved.</p>
+
+                <p>
+                    &copy; 2026 JobsPortal. All Rights Reserved.
+                </p>
+
             </div>
+
         </div>
+
     </footer>
+
+    <!-- ================= END FOOTER ================= -->
+
 </body>
 
 </html>

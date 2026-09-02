@@ -4,7 +4,7 @@
 {% block title %}JobsPortal | Create Job{% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -63,6 +63,20 @@
                         {{ form.is_active }}
                         <span class="checkbox-label">Job is active and accepting applications</span>
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.end_date.id_for_label }}">Application Deadline</label>
+
+                    <div class="checkbox-container">
+                        {{ form.end_date }}
+                    </div>
+
+                    {% if form.end_date.errors %}
+                    <div class="error-message">
+                        {{ form.end_date.errors }}
+                    </div>
+                    {% endif %}
                 </div>
             </div>
 

@@ -2149,3 +2149,147 @@
 .sector-dropdown option {
     padding: 10px;
 }
+
+/* update page css */
+/* Update Job Page */
+.update-job-page {
+    min-height: 100vh;
+    padding: 50px 20px;
+    background: #f4f7fb;
+}
+
+/* Main Container */
+.update-job-container {
+    max-width: 750px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 35px 40px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Header */
+.update-job-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.update-job-header h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #222;
+}
+
+.update-job-header p {
+    margin-top: 8px;
+    color: #777;
+    font-size: 15px;
+}
+
+/* Form */
+.update-job-form {
+    width: 100%;
+}
+
+/* Django Form Fields */
+.job-form-fields p {
+    margin-bottom: 20px;
+}
+
+.job-form-fields label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 600;
+    color: #333;
+    font-size: 15px;
+}
+
+/* Inputs, Select and Textarea */
+.job-form-fields input,
+.job-form-fields select,
+.job-form-fields textarea {
+    width: 100%;
+    padding: 11px 13px;
+    border: 1px solid #d5d9df;
+    border-radius: 7px;
+    font-size: 15px;
+    font-family: inherit;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Textarea */
+.job-form-fields textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Focus Effect */
+.job-form-fields input:focus,
+.job-form-fields select:focus,
+.job-form-fields textarea:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.12);
+}
+
+/* Submit Button Area */
+.update-job-actions {
+    margin-top: 25px;
+    text-align: center;
+}
+
+/* Submit Button */
+.update-job-actions input[type="submit"] {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 7px;
+    background: #2563eb;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.update-job-actions input[type="submit"]:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+/* Error Messages */
+.job-form-fields .errorlist {
+    margin: 5px 0 0;
+    padding: 0;
+    list-style: none;
+    color: #dc2626;
+    font-size: 13px;
+}
+
+/* Help Text */
+.job-form-fields .helptext {
+    display: block;
+    margin-top: 5px;
+    color: #777;
+    font-size: 12px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+    .update-job-page {
+        padding: 30px 15px;
+    }
+
+    .update-job-container {
+        padding: 25px 20px;
+    }
+
+    .update-job-header h1 {
+        font-size: 27px;
+    }
+
+    .update-job-actions input[type="submit"] {
+        width: 100%;
+    }
+}

@@ -1,5 +1,5 @@
-from django.shortcuts import render,redirect
-from jobs.models import Jobs,Sectors,Applications,Profile
+from django.shortcuts import render,redirect,get_object_or_404
+from jobs.models import Jobs,Sectors,Applications,Profile,Notification
 from jobs.forms import JobForm,ProfileForm
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -22,7 +22,6 @@ def admin_permission(fun):
 def home(request):
     return render(request,'home.html')
 
-@login_required
 def allJobs(request,sector=None):
     if sector:
         job_posts=Jobs.objects.filter(sector__id=sector,is_active=True)
@@ -30,42 +29,61 @@ def allJobs(request,sector=None):
         job_posts=Jobs.objects.filter(is_active=True) 
     return render(request,"all-jobs.html",{'jobs':job_posts}) 
    
-@login_required
 def jobDetail(request,job_id):
-    job=Jobs.objects.get(id=job_id)
-    has_applied=Applications.objects.filter(job__id=job_id,user__id=request.user.id).exists()
-    return render(request,"job-detail.html",{"job":job,'has_applied':has_applied})
+    try:
+        job = Jobs.objects.get(id=job_id)
+        has_applied = Applications.objects.filter( job__id=job_id,user__id=request.user.id).exists()
+        return render(request,"job-detail.html",{"job": job,"has_applied": has_applied})
+    except Jobs.DoesNotExist:
+        messages.error(request, "Job not found!")
+        return redirect("all_jobs")
 
 @admin_permission
 def addJob(request):
     if request.POST:
         form=JobForm(request.POST)
+        
         if form.is_valid():
             form.save()
             return redirect("all_jobs")
+        else:
+            print("Not valid form",form.errors)
     else:
         form=JobForm()
     return render(request,"add-jobs.html",{"form":form})
 
-def updateJob(request,job_id):
-    job=Jobs.objects.get(id=job_id)
-    if request.method=="POST":
-        form=JobForm(request.POST,instance=job)
-        if form.is_valid():
-            form.save()
-            return redirect("job_detail",job_id)
-    else:
-        form=JobForm(instance=job)
-    return render(request,"update-job.html",{"form":form})
+def updateJob(request, job_id):
+    try:
+        job = Jobs.objects.get(id=job_id)
+        if request.method == "POST":
+            form = JobForm(request.POST, instance=job)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Job updated successfully!")
+                return redirect("job_detail", job_id)
+        else:
+            form = JobForm(instance=job)
+        return render(request, "update-job.html", {"form": form})
+    except Jobs.DoesNotExist:
+        messages.error(request, "Job not found!")
+        return redirect("all_jobs")
 
 def applyJob(request, job_id):
-    user = User.objects.get(id=request.user.id) #id of the logged user
-    job = Jobs.objects.get(id=job_id)
-    if request.method=="POST":
-        resume=request.FILES.get("resume")
-        Applications(user=user,job=job,resume=resume).save()
-        return redirect('all_jobs')
-    return render(request,"apply-job.html",{"job": job})
+    try:
+        user = User.objects.get(id=request.user.id)
+        job = Jobs.objects.get(id=job_id)
+        if request.method == "POST":
+            resume = request.FILES.get("resume")
+            Applications(user=user,job=job,resume=resume).save()
+            messages.success(request, "Application submitted successfully!")
+            return redirect("all_jobs")
+        return render(request, "apply-job.html", {"job": job})
+    except User.DoesNotExist:
+        messages.error(request, "User not found!")
+        return redirect("login")
+    except Jobs.DoesNotExist:
+        messages.error(request, "Job not found!")
+        return redirect("all_jobs")
 
 def signIn(request):
     if request.method=='POST':
@@ -189,3 +207,4 @@ def adminJob(request):
         "selected_status": status,
     }
     return render(request, "admin-job.html", context)
+
