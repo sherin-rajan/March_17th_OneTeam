@@ -22,21 +22,18 @@ def admin_permission(fun):
 def home(request):
     return render(request,'home.html')
 
-def allJobs(request,sector=None):
+@login_required
+def allJobs(request, sector=None):
     if sector:
-        job_posts=Jobs.objects.filter(sector__id=sector,is_active=True)
+        job_posts = Jobs.objects.select_related("sector").filter(sector_id=sector,is_active=True)
     else:
-        job_posts=Jobs.objects.filter(is_active=True) 
-    return render(request,"all-jobs.html",{'jobs':job_posts}) 
-   
-def jobDetail(request,job_id):
-    try:
-        job = Jobs.objects.get(id=job_id)
-        has_applied = Applications.objects.filter( job__id=job_id,user__id=request.user.id).exists()
-        return render(request,"job-detail.html",{"job": job,"has_applied": has_applied})
-    except Jobs.DoesNotExist:
-        messages.error(request, "Job not found!")
-        return redirect("all_jobs")
+        job_posts = Jobs.objects.select_related("sector").filter(is_active=True)
+    return render(request, "all-jobs.html",{"jobs": job_posts}) 
+
+def jobDetail(request, job_id): #used optimization: selected_related
+    job = get_object_or_404(Jobs.objects.select_related("sector"),id=job_id) #404 insead of exception
+    has_applied = Applications.objects.filter(job_id=job_id, user_id=request.user.id).exists()
+    return render(request,"job-detail.html",{"job": job,"has_applied": has_applied})
 
 @admin_permission
 def addJob(request):
@@ -68,22 +65,15 @@ def updateJob(request, job_id):
         messages.error(request, "Job not found!")
         return redirect("all_jobs")
 
+@login_required(login_url="login")
 def applyJob(request, job_id):
-    try:
-        user = User.objects.get(id=request.user.id)
-        job = Jobs.objects.get(id=job_id)
-        if request.method == "POST":
-            resume = request.FILES.get("resume")
-            Applications(user=user,job=job,resume=resume).save()
-            messages.success(request, "Application submitted successfully!")
-            return redirect("all_jobs")
-        return render(request, "apply-job.html", {"job": job})
-    except User.DoesNotExist:
-        messages.error(request, "User not found!")
-        return redirect("login")
-    except Jobs.DoesNotExist:
-        messages.error(request, "Job not found!")
+    job = get_object_or_404(Jobs, id=job_id)
+    if request.method == "POST":
+        resume = request.FILES.get("resume")
+        Applications.objects.create(user=request.user,job=job,resume=resume)
+        messages.success(request,"Application submitted successfully!")
         return redirect("all_jobs")
+    return render(request,"apply-job.html",{"job": job})
 
 def signIn(request):
     if request.method=='POST':
@@ -132,10 +122,10 @@ def signOut(request):
 @login_required
 def userDashboard(request):
     if request.user.is_superuser:
-        return redirect('admin_dashboard')
-    profile=Profile.objects.get(user__id=request.user.id)
-    applied_jobs = Applications.objects.filter(user__id=request.user.id)
-    return render(request,"user-dashboard.html",{"applied_jobs":applied_jobs,'p':profile})
+        return redirect("admin_dashboard")
+    profile = Profile.objects.select_related("user").get(user_id=request.user.id)
+    applied_jobs = Applications.objects.select_related("job").filter(user_id=request.user.id)
+    return render(request,"user-dashboard.html",{"applied_jobs": applied_jobs,"p": profile})
 
 @login_required
 def editProfile(request):
@@ -180,9 +170,14 @@ def adminDashboard(request,sector=None):
     return render(request,"admin-dashboard.html",{'data':data,"applications":applications,"search":search,"job":job})
 
 @admin_permission
-def applicationDetails(request,application_id):
-    application=Applications.objects.get(id=application_id)
-    return render(request,"application-details.html",{"application":application})
+def adminApplications(request):
+    applications = Applications.objects.select_related("user","job").all()
+    return render(request,"admin-applications.html",{"applications": applications})
+
+@admin_permission
+def applicationDetails(request, application_id):
+    application = Applications.objects.select_related("user","job").get(id=application_id)
+    return render(request,"application-details.html",{"application": application})
 
 @admin_permission
 def viewUsers(request):
@@ -191,35 +186,31 @@ def viewUsers(request):
 
 @admin_permission
 def adminJob(request):
-    jobs = Jobs.objects.all()
+    jobs = Jobs.objects.select_related("sector","company")
     search = request.GET.get("search")
     if search:
-        jobs = jobs.filter(title__icontains=search) | jobs.filter(company__name__icontains=search)
-
+        jobs = jobs.filter(Q(title__icontains=search) | Q(company__name__icontains=search))
     sector = request.GET.get("sector")
     if sector:
         jobs = jobs.filter(sector_id=sector)
-
     status = request.GET.get("status")
     if status == "active":
         jobs = jobs.filter(is_active=True)
-
     elif status == "inactive":
         jobs = jobs.filter(is_active=False)
-
     context = {
         "jobs": jobs,
         "search": search,
         "selected_sector": sector,
         "selected_status": status,
     }
-    return render(request, "admin-job.html", context)
+    return render(request,"admin-jobs.html",context)
 
 @login_required(login_url="login")
 def notifications(request):
     if request.user.is_superuser:
         return redirect("all_jobs")
-    notifications = Notification.objects.filter(user=request.user).order_by("-created_at")
+    notifications = Notification.objects.select_related("job").filter(user=request.user).order_by("-created_at")
     return render(request,"notifications.html",{"notifications": notifications})
 
 @login_required(login_url="login")
