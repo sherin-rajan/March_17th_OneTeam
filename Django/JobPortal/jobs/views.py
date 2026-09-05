@@ -7,6 +7,9 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.core.mail import send_mail
+
+from django.views.generic import ListView,CreateView,UpdateView,DeleteView
+from django.urls import reverse_lazy
 # Create your views here.
 
 #custom decorator
@@ -219,3 +222,29 @@ def mark_notification_read(request, notification_id):
     notification.is_read = True
     notification.save()
     return redirect("notifications")
+
+#class based view for sector
+class SectorListView(ListView):
+    model = Sectors
+    template_name = 'sector-list.html'
+    context_object_name = 'sectors'
+
+class SectorCreateView(ListView):
+    model = Sectors
+    field = ['name']
+    template_name = 'sector-create.html'
+    success_url = reverse_lazy('sector_list')
+
+class SectorUpdateView(UpdateView):
+    model = Sectors
+    field = ['name']
+    template_name = 'sector-update.html'
+    success_url = reverse_lazy('sector_list')
+
+class SectorDeleteView(DeleteView):
+    model = Sectors
+    template_name = 'sector-delete.html'
+    success_url = reverse_lazy('sector_list')
+    pk_url_kwarg="sector_id"
+    
+

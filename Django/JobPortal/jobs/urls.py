@@ -1,6 +1,5 @@
 from django.urls import path
 from jobs import views
-
 urlpatterns=[
     path("",views.home,name='home'),
     path("all-jobs",views.allJobs,name="all_jobs"),
@@ -22,4 +21,8 @@ urlpatterns=[
     path("admin-jobs",views.adminJob,name="admin_jobs"),
     path("notifications/",views.notifications,name="notifications"),
     path("notification-read/<int:notification_id>/",views.mark_notification_read,name="mark_notification_read"),
+    path('sector-list/',views.SectorListView.as_view(),name='sector_list'),
+    path('sector-create/',views.SectorCreateView.as_view(),name='sector_create'),
+    path('sector-update/',views.SectorUpdateView.as_view(),name='sector_update'),
+    path('sector-delete/<int:sector_id>',views.SectorDeleteView.as_view(),name='sector_delete'),
 ]
