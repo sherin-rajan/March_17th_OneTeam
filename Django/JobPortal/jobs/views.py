@@ -106,7 +106,7 @@ def signUp(request):
             return redirect('login')
         else:
             user=User.objects.create_user(username=email,first_name=first_name,last_name=last_name,email=email,password=password)
-            user.save()
+            Profile.objects.create(user=user)
             messages.success(request,'Welcome to JobsPortal! Please login to contonue!')
             send_mail(
                 subject="Welcome To JobPortal",
@@ -126,7 +126,7 @@ def signOut(request):
 def userDashboard(request):
     if request.user.is_superuser:
         return redirect("admin_dashboard")
-    profile = Profile.objects.select_related("user").get(user_id=request.user.id)
+    profile = Profile.objects.get(user__id=request.user.id)
     applied_jobs = Applications.objects.select_related("job").filter(user_id=request.user.id)
     return render(request,"user-dashboard.html",{"applied_jobs": applied_jobs,"p": profile})
 

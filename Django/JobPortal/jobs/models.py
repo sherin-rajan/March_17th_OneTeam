@@ -44,10 +44,10 @@ class Applications(models.Model):
     date=models.DateField(auto_now_add=True)
 
 class Profile(models.Model):
-    user=models.OneToOneField(User,on_delete=models.CASCADE)
-    dob=models.DateField()
-    phone=models.CharField(max_length=12)
-    place=models.CharField(max_length=50)
+    user=models.OneToOneField(User,on_delete=models.CASCADE, related_name='user')
+    dob=models.DateField(null=True,blank=True)
+    phone=models.CharField(max_length=12,blank=True)
+    place=models.CharField(max_length=50,blank=True)
     qualification=models.CharField(max_length=50,blank=True)
     headline=models.CharField(max_length=200,blank=True)
 
