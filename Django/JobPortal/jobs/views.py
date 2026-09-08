@@ -31,6 +31,8 @@ def allJobs(request, sector=None):
         job_posts = Jobs.objects.select_related("sector").filter(sector_id=sector,is_active=True)
     else:
         job_posts = Jobs.objects.select_related("sector").filter(is_active=True)
+    for job in job_posts:
+        job.has_applied = Applications.objects.filter(job=job,user=request.user).exists()
     return render(request, "all-jobs.html",{"jobs": job_posts}) 
 
 def jobDetail(request, job_id): #used optimization: selected_related
@@ -137,7 +139,7 @@ def editProfile(request):
         form = ProfileForm(request.POST,instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('dashboard')
+            return redirect('user_dashboard')
     else:
         form = ProfileForm(instance=profile)
         return render(request,'edit-profile.html',{'form': form} )
@@ -213,7 +215,7 @@ def adminJob(request):
 def notifications(request):
     if request.user.is_superuser:
         return redirect("all_jobs")
-    notifications = Notification.objects.select_related("job").filter(user=request.user).order_by("-created_at")
+    notifications = Notification.objects.filter(user=request.user).order_by("-created_at")
     return render(request,"notifications.html",{"notifications": notifications})
 
 @login_required(login_url="login")

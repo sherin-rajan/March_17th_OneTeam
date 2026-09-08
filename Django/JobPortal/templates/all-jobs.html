@@ -73,6 +73,11 @@
                     <div class="job-card-footer">
                         <a href="{% url 'job_detail' job.id %}" class="btn-primary btn-block">View Details</a>
                     </div>
+                    {% if job.has_applied %}
+                    <span class="applied-status">
+                        ✓ Applied
+                     </span>
+                     {% endif %}
                 </div>
                 {% endfor %}
             </div>
