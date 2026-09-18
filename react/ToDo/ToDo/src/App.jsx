@@ -1,15 +1,19 @@
-import Footer from "./components/footer";
-import Header from "./components/header";
-import ToDo from "./components/todo";
-
- 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import About from "./components/about";
+import Contact from "./components/contact";
+import Home from "./components/home";
 
 function App() {
-    return (<>
-        <Header/>
-        <ToDo/>
-        <Footer/>
-        </>
+    return (
+    <>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Home/>} />
+                <Route path="/about" element={<About/>} />
+                <Route path="/contact" element={<Contact/>} />
+            </Routes>
+        </BrowserRouter>
+    </>
     );
 }
 
