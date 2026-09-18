@@ -1,5 +1,4 @@
 import { useState } from "react"
-import Navbar from "./navbar";
 
 function Home() {
     const [todo, setTodo] = useState("");
@@ -20,8 +19,6 @@ function Home() {
     }
 
     return (
-        <>
-            <Navbar />
             <div>
                 <input type="text" value={todo} onChange={(event) => setTodo(event.target.value)} />
                 <button onClick={addTodo}>Add</button>
@@ -34,7 +31,6 @@ function Home() {
                     ))}
                 </ul>
             </div>
-        </>
     );
 }
 
