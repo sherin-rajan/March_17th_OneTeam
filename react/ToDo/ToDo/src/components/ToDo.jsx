@@ -13,7 +13,6 @@ function ToDo() {
     const fetchTask = async () => {
         try {
             const response = await axios.get("http://127.0.0.1:8000/api/list-create-todo");
-            console.log("hi")
             setTodos(response.data)
         } catch {
             alert("Failed to fetch tasks")
@@ -39,13 +38,28 @@ function ToDo() {
         }
     }
     const startEdit = (todo) => {
-        console.log("Hi")
         setEditingId(todo.id)
         setEditingText(todo.task)
     }
-    const stopEditing = () => {
+    const stopEdit = () => {
         setEditingId(null)
         setEditingText("")
+    }
+    const saveTaskText=async(todo)=>{
+        const response=await axios.put(`http://127.0.0.1:8000/api/get-update-delete-todo/${todo.id}`,{task:editingText,is_completed:todo.is_completed})
+        stopEdit()
+        fetchTask()
+        alert("Task updated successfully")
+    }
+    const updateToDoStatus=async(todo)=>{
+        const response=await axios.patch(`http://127.0.0.1:8000/api/get-update-delete-todo/${todo.id}`,{is_completed:!todo.is_completed})
+        fetchTask()
+        alert("Task status updated")
+    }
+    const deleteToDo=async(todo)=>{
+        const response=await axios.delete(`http://127.0.0.1:8000/api/get-update-delete-todo/${todo.id}`)
+        fetchTask()
+        alert("Want to delete the task?")
     }
     return (
         <div>
@@ -57,17 +71,23 @@ function ToDo() {
             <ul>
                 {
                     todos.map((todo) => (
-                        <li key={todo.id}>{todo.task}
+                        <li key={todo.id}>
+                            <input type="checkbox" checked={todo.is_completed} onChange={()=>updateToDoStatus(todo)}/>
                             {editingId == todo.id ?
                                 <>
-                                    <button>Save</button>
-                                    <button onClick={stopEditing}>Cancel</button>
+                                    <input type="text" value={editingText} onChange={(e)=>setEditingText(e.target.value)} />
+                                    <button onClick={()=>saveTaskText(todo)}>Save</button>
+                                    <button onClick={stopEdit}>Cancel</button>
                                 </> :
-                                <button onClick={() => startEdit(todo)}>Edit</button>
+                                <>
+                                    {todo.is_completed?<s>{todo.task}</s>:<>{todo.task}</>}
+                                    <button onClick={() => startEdit(todo)}>Edit</button>
+
+                                </>
                             }
 
 
-                            <button>Delete</button>
+                            <button onClick={()=>deleteToDo(todo)}>Delete</button>
                         </li>
                     ))
                 }

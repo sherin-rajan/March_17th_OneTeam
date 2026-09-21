@@ -12,15 +12,15 @@ def todo_list_create(request):
         todos=ToDos.objects.all()
         serializer=ToDoSerializer(todos,many=True)
         return Response(serializer.data)
+    
     elif request.method=='POST':
         serializer=ToDoSerializer(data=request.data)
-
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(["GET", "PUT", "DELETE"])
+@api_view(["GET", "PATCH", "PUT", "DELETE"])
 def todo_get_update_delete(request, pk):
 
     try:
@@ -32,6 +32,15 @@ def todo_get_update_delete(request, pk):
     if request.method=="GET":
         serializer=ToDoSerializer(todo)
         return Response(serializer.data)
+
+    #for status updation in react(using patch there)
+    elif request.method=="PATCH":
+        serializer=ToDoSerializer(todo,data=request.data,partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
     # PUT - update one todo
     elif request.method=="PUT":
