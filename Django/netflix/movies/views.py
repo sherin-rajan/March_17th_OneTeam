@@ -22,7 +22,8 @@ def addCategory(request):
 def allMovies(request):
     cat=Category.objects.prefetch_related('movies')
     return render(request,'all-movies.html',{'category':cat})
-  
+
+@login_required
 def movieDetails(request,movie_id):
     m=Movies.objects.get(id=movie_id)
     actors=m.casts.filter(role=Cast.Role.ACTOR)
@@ -103,6 +104,7 @@ def addCast(request):
         cast_form=CastForm()
         return render(request,"add-cast.html",{"my_form":cast_form})
 
+@login_required
 def castDetails(request,id):
     details=Actors.objects.get(id=id)
     return render(request, "cast-details.html",{"details":details})
