@@ -8,7 +8,7 @@ from .serializers import RegistrationSerializer, UserSerializer
 
 
 class RegisterAPIView(APIView):
-    """Register a user and return JWT access and refresh tokens."""
+    #Register a user and return JWT access and refresh tokens.
 
     permission_classes = [AllowAny]
 
@@ -28,7 +28,7 @@ class RegisterAPIView(APIView):
 
 
 class CurrentUserAPIView(APIView):
-    """Return the account belonging to the token in the request."""
+    #Return the account belonging to the token in the request
 
     permission_classes = [IsAuthenticated]
 

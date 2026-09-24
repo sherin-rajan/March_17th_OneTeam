@@ -8,9 +8,7 @@ function ToDo() {
     const [editingId, setEditingId] = useState(null)
     const [editingText, setEditingText] = useState("")
 
-    useEffect(() => { fetchTask() }, [])
-
-    const fetchTask = async () => {
+    async function fetchTask() {
         try {
             const response = await axios.get("http://127.0.0.1:8000/api/list-create-todo");
             setTodos(response.data)
@@ -18,6 +16,10 @@ function ToDo() {
             alert("Failed to fetch tasks")
         }
     }
+
+    // Initial server synchronization belongs in an effect.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    useEffect(() => { fetchTask(); }, [])
     const addTask = async (e) => {
         e.preventDefault();
         setLoading(true)
@@ -26,8 +28,7 @@ function ToDo() {
             return;
         };
         try {
-            const response = await axios.post("http://127.0.0.1:8000/api/list-create-todo", { task })
-            console.log(response.data)
+            await axios.post("http://127.0.0.1:8000/api/list-create-todo", { task })
             alert("New task added")
         } catch {
             alert("Failed to add task")
@@ -46,53 +47,56 @@ function ToDo() {
         setEditingText("")
     }
     const saveTaskText=async(todo)=>{
-        const response=await axios.put(`http://127.0.0.1:8000/api/get-update-delete-todo/${todo.id}`,{task:editingText,is_completed:todo.is_completed})
+        await axios.put(`http://127.0.0.1:8000/api/get-update-delete-todo/${todo.id}`, { task: editingText, is_completed: todo.is_completed })
         stopEdit()
         fetchTask()
         alert("Task updated successfully")
     }
     const updateToDoStatus=async(todo)=>{
-        const response=await axios.patch(`http://127.0.0.1:8000/api/get-update-delete-todo/${todo.id}`,{is_completed:!todo.is_completed})
+        await axios.patch(`http://127.0.0.1:8000/api/get-update-delete-todo/${todo.id}`, { is_completed: !todo.is_completed })
         fetchTask()
         alert("Task status updated")
     }
     const deleteToDo=async(todo)=>{
-        const response=await axios.delete(`http://127.0.0.1:8000/api/get-update-delete-todo/${todo.id}`)
+        await axios.delete(`http://127.0.0.1:8000/api/get-update-delete-todo/${todo.id}`)
         fetchTask()
         alert("Want to delete the task?")
     }
     return (
-        <div>
-            <h1>ToDo</h1>
-            <form onSubmit={addTask}>
-                <input type="text" value={task} onInput={(e) => setTask(e.target.value)} />
-                <button type="submit">{loading ? "Saving..." : "Add Task"}</button>
+        <section className="todo-page">
+            <h1 className="page-heading">Your tasks, in one place.</h1>
+            <p className="page-intro">Keep today moving with a simple list that stays out of your way.</p>
+            <form className="task-form" onSubmit={addTask}>
+                <input type="text" value={task} onChange={(e) => setTask(e.target.value)} placeholder="What needs doing?" aria-label="New task" />
+                <button className="primary-button" type="submit">{loading ? "Saving..." : "Add task"}</button>
             </form>
-            <ul>
+            <ul className="task-list">
                 {
                     todos.map((todo) => (
-                        <li key={todo.id}>
+                        <li className="task-item" key={todo.id}>
                             <input type="checkbox" checked={todo.is_completed} onChange={()=>updateToDoStatus(todo)}/>
                             {editingId == todo.id ?
                                 <>
                                     <input type="text" value={editingText} onChange={(e)=>setEditingText(e.target.value)} />
-                                    <button onClick={()=>saveTaskText(todo)}>Save</button>
-                                    <button onClick={stopEdit}>Cancel</button>
+                                    <button className="primary-button" onClick={()=>saveTaskText(todo)}>Save</button>
+                                    <button className="ghost-button" onClick={stopEdit}>Cancel</button>
                                 </> :
                                 <>
-                                    {todo.is_completed?<s>{todo.task}</s>:<>{todo.task}</>}
-                                    <button onClick={() => startEdit(todo)}>Edit</button>
+                                    <span className="task-text">{todo.is_completed?<s>{todo.task}</s>:todo.task}</span>
+                                    <div className="task-actions">
+                                        <button className="ghost-button" onClick={() => startEdit(todo)}>Edit</button>
+                                        <button className="danger-button" onClick={()=>deleteToDo(todo)}>Delete</button>
+                                    </div>
 
                                 </>
                             }
 
 
-                            <button onClick={()=>deleteToDo(todo)}>Delete</button>
                         </li>
                     ))
                 }
             </ul>
-        </div>
+        </section>
     )
 }
 

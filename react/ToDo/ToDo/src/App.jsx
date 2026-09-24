@@ -1,17 +1,21 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Home from "./components/Home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ToDo from "./components/ToDo";
 import Navbar from "./components/Navbar";
+import { ThemeProvider } from "./context/ThemeContext.jsx";
+import "./App.css";
 
 function App() {
     return (
-        <BrowserRouter>
-        <Navbar />
-            <Routes>
-                <Route path="home" element={<Home />} />
-                <Route path="/" element={<ToDo/>}/>
-            </Routes>
-        </BrowserRouter>
+        <ThemeProvider>
+            <BrowserRouter>
+                <Navbar />
+                <main className="page-shell">
+                    <Routes>
+                        <Route path="/" element={<ToDo />} />
+                    </Routes>
+                </main>
+            </BrowserRouter>
+        </ThemeProvider>
     );
 }
 
