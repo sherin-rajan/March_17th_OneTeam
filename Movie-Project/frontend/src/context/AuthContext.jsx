@@ -85,6 +85,7 @@ export function AuthProvider({ children }) {
       value={{
         user,
         isAuthenticated: !!user,
+        isManager: !!user?.is_manager,
         loading,
         login,
         register,

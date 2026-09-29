@@ -3,16 +3,12 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import {
   ArrowLeft,
   Calendar,
-  Film,
-  Star,
   Play,
   Edit3,
   Trash2,
   UserPlus,
   MessageSquarePlus,
   Send,
-  User,
-  Clock,
 } from 'lucide-react'
 import api, { getImageUrl, getYoutubeEmbedUrl } from '../api/client'
 import { useAuth } from '../context/AuthContext'
@@ -23,7 +19,7 @@ import LoadingSpinner from '../components/LoadingSpinner'
 export default function MovieDetailPage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { user, isAuthenticated } = useAuth()
+  const { isAuthenticated, isManager } = useAuth()
 
   const [movie, setMovie] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -150,7 +146,7 @@ export default function MovieDetailPage() {
             <span>Back</span>
           </button>
 
-          {isAuthenticated && (
+          {isManager && (
             <div style={{ display: 'flex', gap: '8px' }}>
               <Link to={`/movies/${id}/cast/add`} className="btn btn-secondary btn-sm" style={{ gap: '6px' }}>
                 <UserPlus size={15} />
@@ -404,7 +400,7 @@ export default function MovieDetailPage() {
                 <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff' }}>
                   Cast & Crew
                 </h3>
-                {isAuthenticated && (
+                {isManager && (
                   <Link to={`/movies/${id}/cast/add`} className="btn btn-outline btn-sm" style={{ gap: '4px' }}>
                     <UserPlus size={14} /> Assign Cast
                   </Link>

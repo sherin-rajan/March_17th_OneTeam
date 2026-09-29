@@ -23,11 +23,17 @@ export default function AddCastPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [moviesRes, actorsRes] = await Promise.all([
-          api.get('/api/movies/movies/'),
+        const [firstMoviesResponse, actorsRes] = await Promise.all([
+          api.get('/api/movies/movies/', { params: { page_size: 48 } }),
           api.get('/api/actors/'),
         ])
-        const mList = moviesRes.data.results || moviesRes.data
+        const mList = [...(firstMoviesResponse.data.results || firstMoviesResponse.data)]
+        let nextMoviesPage = firstMoviesResponse.data.next
+        while (nextMoviesPage) {
+          const nextMoviesResponse = await api.get(nextMoviesPage)
+          mList.push(...nextMoviesResponse.data.results)
+          nextMoviesPage = nextMoviesResponse.data.next
+        }
         const aList = actorsRes.data.results || actorsRes.data
         setMovies(mList)
         setActors(aList)

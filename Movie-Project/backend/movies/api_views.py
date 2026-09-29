@@ -1,7 +1,9 @@
+from django.db.models import Avg, F, Q
 from rest_framework import status, viewsets
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
+from accounts.permissions import IsManagerOrReadOnly, ManagerOrReviewCreatorPermission
 from .models import Cast, Category, Movies, Review
 from .serializers import (
     CastSerializer,
@@ -16,7 +18,13 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
     queryset = Category.objects.all().order_by('category')
     serializer_class = CategorySerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsManagerOrReadOnly]
+
+
+class MoviePagination(PageNumberPagination):
+    page_size = 12
+    page_size_query_param = 'page_size'
+    max_page_size = 48
 
 
 class MovieViewSet(viewsets.ModelViewSet):
@@ -24,7 +32,34 @@ class MovieViewSet(viewsets.ModelViewSet):
 
     queryset = Movies.objects.select_related('category').prefetch_related('casts', 'reviews')
     serializer_class = MovieSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsManagerOrReadOnly]
+    pagination_class = MoviePagination
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        category = self.request.query_params.get('category')
+        search = self.request.query_params.get('search', '').strip()
+        sort = self.request.query_params.get('sort', 'newest')
+
+        if category:
+            if not category.isdigit():
+                return queryset.none()
+            queryset = queryset.filter(category_id=category)
+
+        if search:
+            queryset = queryset.filter(
+                Q(movie__icontains=search)
+                | Q(description__icontains=search)
+                | Q(category__category__icontains=search)
+            )
+
+        if sort == 'rating':
+            return queryset.annotate(_average_rating=Avg('reviews__rating')).order_by(
+                F('_average_rating').desc(nulls_last=True), '-release_date', 'id'
+            )
+        if sort == 'title':
+            return queryset.order_by('movie', 'id')
+        return queryset.order_by('-release_date', 'id')
 
 
 class CastViewSet(viewsets.ModelViewSet):
@@ -32,7 +67,7 @@ class CastViewSet(viewsets.ModelViewSet):
 
     queryset = Cast.objects.select_related('movie', 'actor').all()
     serializer_class = CastSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsManagerOrReadOnly]
 
 
 class ReviewViewSet(viewsets.ModelViewSet):
@@ -40,7 +75,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
     queryset = Review.objects.select_related('movie').all()
     serializer_class = ReviewSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [ManagerOrReviewCreatorPermission]
 
     def perform_create(self, serializer):
         """Store the authenticated username instead of trusting request data."""

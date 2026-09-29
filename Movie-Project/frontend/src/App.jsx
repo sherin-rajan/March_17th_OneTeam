@@ -14,6 +14,7 @@ import AddCastPage from './pages/AddCastPage'
 import ActorDetailPage from './pages/ActorDetailPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+import ManagerPanelPage from './pages/ManagerPanelPage'
 
 export default function App() {
   return (
@@ -30,12 +31,20 @@ export default function App() {
               <Route path="/actors/:id" element={<ActorDetailPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
+              <Route
+                path="/manager"
+                element={
+                  <ProtectedRoute managerOnly>
+                    <ManagerPanelPage />
+                  </ProtectedRoute>
+                }
+              />
 
               {/* Protected / Management Routes */}
               <Route
                 path="/movies/add"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute managerOnly>
                     <AddMoviePage />
                   </ProtectedRoute>
                 }
@@ -43,7 +52,7 @@ export default function App() {
               <Route
                 path="/movies/:id/edit"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute managerOnly>
                     <EditMoviePage />
                   </ProtectedRoute>
                 }
@@ -51,7 +60,7 @@ export default function App() {
               <Route
                 path="/movies/:id/cast/add"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute managerOnly>
                     <AddCastPage />
                   </ProtectedRoute>
                 }
@@ -59,7 +68,7 @@ export default function App() {
               <Route
                 path="/cast/add"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute managerOnly>
                     <AddCastPage />
                   </ProtectedRoute>
                 }
@@ -67,7 +76,7 @@ export default function App() {
               <Route
                 path="/categories/add"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute managerOnly>
                     <AddCategoryPage />
                   </ProtectedRoute>
                 }

@@ -1,13 +1,12 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Eye, Edit3, Trash2, Calendar, Star } from 'lucide-react'
 import { getImageUrl } from '../api/client'
 import { useAuth } from '../context/AuthContext'
 import StarRating from './StarRating'
 
 export default function MovieCard({ movie, onDelete }) {
-  const { isAuthenticated } = useAuth()
-  const navigate = useNavigate()
+  const { isManager } = useAuth()
   const [isDeleting, setIsDeleting] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
 
@@ -132,7 +131,7 @@ export default function MovieCard({ movie, onDelete }) {
             <span>View Details</span>
           </Link>
 
-          {isAuthenticated && (
+          {isManager && (
             <div style={{ display: 'flex', gap: '6px' }}>
               <Link
                 to={`/movies/${movie.id}/edit`}

@@ -5,9 +5,14 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 class UserSerializer(serializers.ModelSerializer):
     # Expose safe account fields without returning a user's password
+    is_manager = serializers.SerializerMethodField()
+
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'is_manager']
+
+    def get_is_manager(self, user):
+        return user.is_staff or hasattr(user, 'manager_profile')
 
 
 class RegistrationSerializer(serializers.ModelSerializer):

@@ -7,8 +7,9 @@ import MovieCard from '../components/MovieCard'
 import LoadingSpinner from '../components/LoadingSpinner'
 
 export default function HomePage() {
-  const { isAuthenticated } = useAuth()
+  const { isManager } = useAuth()
   const [movies, setMovies] = useState([])
+  const [movieCount, setMovieCount] = useState(0)
   const [categories, setCategories] = useState([])
   const [loading, setLoading] = useState(true)
   const [heroMovie, setHeroMovie] = useState(null)
@@ -24,6 +25,7 @@ export default function HomePage() {
         const allCats = catRes.data.results || catRes.data
 
         setMovies(allMovies)
+        setMovieCount(moviesRes.data.count ?? allMovies.length)
         setCategories(allCats)
 
         if (allMovies.length > 0) {
@@ -45,6 +47,7 @@ export default function HomePage() {
     try {
       await api.delete(`/api/movies/movies/${id}/`)
       setMovies((prev) => prev.filter((m) => m.id !== id))
+      setMovieCount((prev) => Math.max(0, prev - 1))
       if (heroMovie?.id === id) {
         const remaining = movies.filter((m) => m.id !== id)
         setHeroMovie(remaining[0] || null)
@@ -124,7 +127,7 @@ export default function HomePage() {
                 <span>Browse All Movies</span>
               </Link>
 
-              {isAuthenticated && (
+              {isManager && (
                 <Link to="/movies/add" className="btn btn-secondary btn-lg">
                   <PlusCircle size={18} />
                   <span>Add Movie</span>
@@ -144,7 +147,7 @@ export default function HomePage() {
                 Genres:
               </span>
               <Link to="/movies" className="badge badge-dark" style={{ padding: '6px 14px' }}>
-                All ({movies.length})
+                All ({movieCount})
               </Link>
               {categories.map((cat) => (
                 <Link
@@ -209,7 +212,7 @@ export default function HomePage() {
               <Film size={48} color="var(--primary)" style={{ margin: '0 auto 16px auto' }} />
               <h3 style={{ color: '#fff', marginBottom: '8px' }}>No movies yet</h3>
               <p style={{ marginBottom: '20px' }}>Be the first to add a movie to MovieHub!</p>
-              {isAuthenticated ? (
+              {isManager ? (
                 <Link to="/movies/add" className="btn btn-primary">
                   + Add Movie
                 </Link>

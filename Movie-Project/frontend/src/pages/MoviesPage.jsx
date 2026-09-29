@@ -1,45 +1,84 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
-import { Search, Film, PlusCircle, LayoutGrid, Rows, Filter, ArrowUpDown } from 'lucide-react'
+import { Search, Film, PlusCircle, LayoutGrid, Rows, Filter, ArrowUpDown, ChevronLeft, ChevronRight } from 'lucide-react'
 import api from '../api/client'
 import { useAuth } from '../context/AuthContext'
 import MovieCard from '../components/MovieCard'
 import LoadingSpinner from '../components/LoadingSpinner'
 
 export default function MoviesPage() {
-  const { isAuthenticated } = useAuth()
+  const { isManager } = useAuth()
   const [searchParams, setSearchParams] = useSearchParams()
   const [movies, setMovies] = useState([])
   const [categories, setCategories] = useState([])
   const [loading, setLoading] = useState(true)
+  const [pagination, setPagination] = useState({ count: 0, next: null, previous: null })
   const [viewMode, setViewMode] = useState('category') // 'category' or 'grid'
-  const [sortBy, setSortBy] = useState('newest') // 'newest', 'rating', 'title'
 
   const activeCategory = searchParams.get('category') || 'all'
   const searchQuery = searchParams.get('search') || ''
+  const requestedSort = searchParams.get('sort') || 'newest'
+  const sortBy = ['newest', 'rating', 'title'].includes(requestedSort) ? requestedSort : 'newest'
+  const requestedPage = Number(searchParams.get('page') || 1)
+  const currentPage = Number.isInteger(requestedPage) && requestedPage > 0 ? requestedPage : 1
 
   useEffect(() => {
+    let cancelled = false
+
     const fetchData = async () => {
+      setLoading(true)
       try {
-        const [moviesRes, catRes] = await Promise.all([
-          api.get('/api/movies/movies/'),
-          api.get('/api/movies/categories/'),
-        ])
-        setMovies(moviesRes.data.results || moviesRes.data)
-        setCategories(catRes.data.results || catRes.data)
+        const params = { page: currentPage, sort: sortBy }
+        if (activeCategory !== 'all') params.category = activeCategory
+        if (searchQuery.trim()) params.search = searchQuery.trim()
+
+        const response = await api.get('/api/movies/movies/', { params })
+        if (cancelled) return
+        setMovies(response.data.results || response.data)
+        setPagination({
+          count: response.data.count ?? response.data.length,
+          next: response.data.next ?? null,
+          previous: response.data.previous ?? null,
+        })
       } catch (err) {
+        if (cancelled) return
         console.error('Failed to load movies:', err)
+        if (err.response?.status === 404 && currentPage > 1) {
+          setSearchParams((params) => {
+            const updatedParams = new URLSearchParams(params)
+            updatedParams.delete('page')
+            return updatedParams
+          })
+        }
       } finally {
-        setLoading(false)
+        if (!cancelled) setLoading(false)
       }
     }
     fetchData()
+
+    return () => {
+      cancelled = true
+    }
+  }, [activeCategory, currentPage, searchQuery, setSearchParams, sortBy])
+
+  useEffect(() => {
+    api.get('/api/movies/categories/')
+      .then((response) => setCategories(response.data.results || response.data))
+      .catch((err) => console.error('Failed to load categories:', err))
   }, [])
 
   const handleDeleteMovie = async (id) => {
     try {
       await api.delete(`/api/movies/movies/${id}/`)
       setMovies((prev) => prev.filter((m) => m.id !== id))
+      setPagination((prev) => ({ ...prev, count: Math.max(0, prev.count - 1) }))
+      if (movies.length === 1 && currentPage > 1) {
+        setSearchParams((params) => {
+          const updatedParams = new URLSearchParams(params)
+          updatedParams.set('page', String(currentPage - 1))
+          return updatedParams
+        })
+      }
     } catch (err) {
       alert('Failed to delete movie: ' + (err.response?.data?.detail || err.message))
     }
@@ -52,6 +91,7 @@ export default function MoviesPage() {
     } else {
       newParams.set('category', catId)
     }
+    newParams.delete('page')
     setSearchParams(newParams)
   }
 
@@ -62,55 +102,36 @@ export default function MoviesPage() {
     } else {
       newParams.delete('search')
     }
+    newParams.delete('page')
     setSearchParams(newParams)
   }
 
-  // Filtered and Sorted Movies
-  const filteredMovies = useMemo(() => {
-    let result = [...movies]
-
-    // Category filter
-    if (activeCategory !== 'all') {
-      const catId = parseInt(activeCategory, 10)
-      result = result.filter((m) => m.category === catId)
+  const handleSortChange = (value) => {
+    const newParams = new URLSearchParams(searchParams)
+    if (value === 'newest') {
+      newParams.delete('sort')
+    } else {
+      newParams.set('sort', value)
     }
+    newParams.delete('page')
+    setSearchParams(newParams)
+  }
 
-    // Search query filter
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase()
-      result = result.filter(
-        (m) =>
-          m.movie.toLowerCase().includes(q) ||
-          m.description?.toLowerCase().includes(q) ||
-          m.category_name?.toLowerCase().includes(q)
-      )
+  const handlePageChange = (page) => {
+    const newParams = new URLSearchParams(searchParams)
+    if (page === 1) {
+      newParams.delete('page')
+    } else {
+      newParams.set('page', String(page))
     }
-
-    // Sorting
-    if (sortBy === 'newest') {
-      result.sort((a, b) => new Date(b.release_date || 0) - new Date(a.release_date || 0))
-    } else if (sortBy === 'rating') {
-      result.sort((a, b) => (b.average_rating || 0) - (a.average_rating || 0))
-    } else if (sortBy === 'title') {
-      result.sort((a, b) => a.movie.localeCompare(b.movie))
-    }
-
-    return result
-  }, [movies, activeCategory, searchQuery, sortBy])
+    setSearchParams(newParams)
+  }
 
   // Group movies by category for row view
   const categoryGroups = useMemo(() => {
     const groups = []
     categories.forEach((cat) => {
-      let groupMovies = movies.filter((m) => m.category === cat.id)
-      if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase()
-        groupMovies = groupMovies.filter(
-          (m) =>
-            m.movie.toLowerCase().includes(q) ||
-            m.description?.toLowerCase().includes(q)
-        )
-      }
+      const groupMovies = movies.filter((m) => m.category === cat.id)
       if (activeCategory === 'all' || activeCategory === String(cat.id)) {
         if (groupMovies.length > 0 || activeCategory === String(cat.id)) {
           groups.push({
@@ -121,7 +142,10 @@ export default function MoviesPage() {
       }
     })
     return groups
-  }, [categories, movies, activeCategory, searchQuery])
+  }, [categories, movies, activeCategory])
+
+  const filteredMovies = movies
+  const pageCount = Math.ceil(pagination.count / 12)
 
   if (loading) {
     return <LoadingSpinner text="Loading movies catalog..." />
@@ -149,7 +173,7 @@ export default function MoviesPage() {
           </p>
         </div>
 
-        {isAuthenticated && (
+        {isManager && (
           <Link to="/movies/add" className="btn btn-primary" style={{ gap: '8px' }}>
             <PlusCircle size={18} />
             <span>Add New Movie</span>
@@ -213,7 +237,7 @@ export default function MoviesPage() {
               <ArrowUpDown size={16} color="var(--text-muted)" />
               <select
                 value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
+                onChange={(e) => handleSortChange(e.target.value)}
                 className="form-select"
                 style={{ padding: '8px 12px', width: 'auto', fontSize: '0.85rem' }}
               >
@@ -293,7 +317,7 @@ export default function MoviesPage() {
             className={`btn btn-sm ${activeCategory === 'all' ? 'btn-primary' : 'btn-outline'}`}
             style={{ borderRadius: '999px', padding: '4px 14px' }}
           >
-            All Categories ({movies.length})
+            All Categories ({pagination.count})
           </button>
           {categories.map((c) => (
             <button
@@ -326,7 +350,7 @@ export default function MoviesPage() {
             <p style={{ marginBottom: '20px' }}>
               {searchQuery ? `No results matching "${searchQuery}"` : 'No movies available in this category.'}
             </p>
-            {isAuthenticated ? (
+            {isManager ? (
               <Link to="/movies/add" className="btn btn-primary">
                 + Add a Movie Now
               </Link>
@@ -373,7 +397,7 @@ export default function MoviesPage() {
                       {group.category.category}
                     </h2>
                     <span className="badge badge-dark">
-                      {group.movies.length} {group.movies.length === 1 ? 'Movie' : 'Movies'}
+                      {group.movies.length} on this page
                     </span>
                   </div>
 
@@ -410,6 +434,51 @@ export default function MoviesPage() {
                       <MovieCard key={movie.id} movie={movie} onDelete={handleDeleteMovie} />
                     ))}
                   </div>
+                )}
+
+                {pageCount > 1 && (
+                  <nav
+                    aria-label="Movie pages"
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      flexWrap: 'wrap',
+                      gap: '16px',
+                      marginTop: '36px',
+                      paddingTop: '20px',
+                      borderTop: '1px solid var(--border-color)',
+                    }}
+                  >
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                      Showing {(currentPage - 1) * 12 + 1}-{(currentPage - 1) * 12 + movies.length} of {pagination.count} movies
+                    </span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                      <button
+                        type="button"
+                        className="btn btn-outline btn-sm"
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={!pagination.previous}
+                        aria-label="Previous page"
+                        title="Previous page"
+                      >
+                        <ChevronLeft size={17} />
+                      </button>
+                      <span aria-live="polite" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                        Page {currentPage} of {pageCount}
+                      </span>
+                      <button
+                        type="button"
+                        className="btn btn-outline btn-sm"
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={!pagination.next}
+                        aria-label="Next page"
+                        title="Next page"
+                      >
+                        <ChevronRight size={17} />
+                      </button>
+                    </div>
+                  </nav>
                 )}
               </div>
             ))

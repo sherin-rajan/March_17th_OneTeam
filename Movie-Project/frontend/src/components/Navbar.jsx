@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { Film, PlusCircle, FolderPlus, LogIn, LogOut, User, Menu, X, Search } from 'lucide-react'
+import { Film, PlusCircle, FolderPlus, LogIn, LogOut, Menu, X, Search, LayoutDashboard } from 'lucide-react'
 
 export default function Navbar() {
-  const { user, isAuthenticated, logout } = useAuth()
+  const { user, isAuthenticated, isManager, logout } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -132,24 +132,27 @@ export default function Navbar() {
 
           {isAuthenticated ? (
             <>
-              <Link
-                to="/movies/add"
-                className="btn btn-outline btn-sm"
-                style={{ gap: '6px' }}
-              >
-                <PlusCircle size={16} />
-                <span>Add Movie</span>
-              </Link>
-
-              <Link
-                to="/categories/add"
-                className="btn btn-secondary btn-sm"
-                style={{ gap: '6px' }}
-                title="Add Category"
-              >
-                <FolderPlus size={16} />
-                <span>Category</span>
-              </Link>
+              {isManager && (
+                <>
+                  <Link to="/manager" className="btn btn-outline btn-sm" style={{ gap: '6px' }}>
+                    <LayoutDashboard size={16} />
+                    <span>Manager Panel</span>
+                  </Link>
+                  <Link to="/movies/add" className="btn btn-outline btn-sm" style={{ gap: '6px' }}>
+                    <PlusCircle size={16} />
+                    <span>Add Movie</span>
+                  </Link>
+                  <Link
+                    to="/categories/add"
+                    className="btn btn-secondary btn-sm"
+                    style={{ gap: '6px' }}
+                    title="Add Category"
+                  >
+                    <FolderPlus size={16} />
+                    <span>Category</span>
+                  </Link>
+                </>
+              )}
 
               <div
                 style={{
@@ -272,20 +275,19 @@ export default function Navbar() {
 
           {isAuthenticated ? (
             <>
-              <Link
-                to="/movies/add"
-                onClick={() => setMobileMenuOpen(false)}
-                style={{ fontWeight: 600 }}
-              >
-                + Add Movie
-              </Link>
-              <Link
-                to="/categories/add"
-                onClick={() => setMobileMenuOpen(false)}
-                style={{ fontWeight: 600 }}
-              >
-                + Add Category
-              </Link>
+              {isManager && (
+                <>
+                  <Link to="/manager" onClick={() => setMobileMenuOpen(false)} style={{ fontWeight: 600 }}>
+                    Manager Panel
+                  </Link>
+                  <Link to="/movies/add" onClick={() => setMobileMenuOpen(false)} style={{ fontWeight: 600 }}>
+                    + Add Movie
+                  </Link>
+                  <Link to="/categories/add" onClick={() => setMobileMenuOpen(false)} style={{ fontWeight: 600 }}>
+                    + Add Category
+                  </Link>
+                </>
+              )}
               <div
                 style={{
                   display: 'flex',
