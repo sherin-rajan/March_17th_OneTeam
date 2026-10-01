@@ -50,14 +50,14 @@ function Task() {
     }
     const save=async(task)=>{
         const response=await axios.put(`http://127.0.0.1:8000/api/details/${task.id}/`,
-            {task:editingText,description:editingDescription,is_completed:!task.is_completed})
+            {task:editingText,description:editingDescription,is_completed:task.is_completed})
             stopEdit()
             fetchTask()
             alert("Task updated successfully")
     }
     const isCompleted=async(task)=>{
         const response=await axios.patch(`http://127.0.0.1:8000/api/details/${task.id}/`,
-            {is_completed:task.is_completed})
+            {is_completed:!task.is_completed})
             fetchTask()
             alert("Status updated")
     }
