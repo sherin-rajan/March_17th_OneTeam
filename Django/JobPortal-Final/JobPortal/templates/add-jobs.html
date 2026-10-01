@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}JobsPortal | Update Job{% endblock %}
+{% block title %}JobsPortal | Create Job{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/styles.css' %}">
@@ -11,8 +11,8 @@
 <div class="form-page-container">
     <div class="form-card">
         <div class="form-header">
-            <h2>Update Job</h2>
-            <p>Edit the job opportunity details below.</p>
+            <h2>Create a New Job</h2>
+            <p>Add a new job opportunity to JobsPortal.</p>
         </div>
 
         <form method="post" class="styled-form">
@@ -67,13 +67,21 @@
 
                 <div class="form-group">
                     <label for="{{ form.end_date.id_for_label }}">Application Deadline</label>
-                    {{ form.end_date }}
-                    {% if form.end_date.errors %}<span class="field-error">{{ form.end_date.errors.0 }}</span>{% endif %}
+
+                    <div class="checkbox-container">
+                        {{ form.end_date }}
+                    </div>
+
+                    {% if form.end_date.errors %}
+                    <div class="error-message">
+                        {{ form.end_date.errors }}
+                    </div>
+                    {% endif %}
                 </div>
             </div>
 
             <div class="form-actions">
-                <button type="submit" class="btn-primary btn-block">Save Changes</button>
+                <button type="submit" class="btn-primary btn-block">Create Job</button>
             </div>
         </form>
     </div>
