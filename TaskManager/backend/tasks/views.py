@@ -35,7 +35,7 @@ def task_details(request,pk):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method=="PUT":
+    elif request.method=="PATCH":
             serializer=TaskSerializer(task,data=request.data,partial=True)
             if serializer.is_valid():
                 serializer.save()
