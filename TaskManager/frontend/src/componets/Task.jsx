@@ -68,35 +68,56 @@ function Task() {
     }
 
     return (
-        <div>
-            <h1>My Tasks Management</h1>
-            <form onSubmit={addTask}>
-                <label>Task : </label>
-                <input type="text" value={task} onInput={(e) => setTask(e.target.value)} />
-                <label>Description : </label>
-                <input type="text" value={description} onInput={(e) => setDescription(e.target.value)} />
-                <button type="submit">{loading ? "Saving..." : "Add Task"}</button>
-            </form>
-            <div>
-            {tasks.map((task) => (
-                <div key={task.id}>
-                    <input type="checkbox" checked={task.is_completed} onChange={()=>isCompleted(task)} />
-                    {editingId === task.id ?
-                    <>
-                        <input type="text" value={editingText} onInput={(e)=>setEditingText(e.target.value)} />
-                        <input type="text" value={editingDescription} onInput={(e=>setEditingDescription(e.target.value))} />
-                        <button onClick={()=>save(task)}>Save</button>
-                        <button onClick={stopEdit}>Cancel</button>
-                    </> :
-                    <>
-                    <h3>{task.task}</h3>
-                    <p>{task.description}</p>
-                    <button onClick={()=>startEdit(task)}>Edit</button>
-                    <button onClick={()=>deleteTask(task)}>delete</button>
-                    </>
-                    }
+        <div className="task-app">
+            <div className="task-card">
+                <h1>My Tasks Management</h1>
+
+                <form className="task-form" onSubmit={addTask}>
+                    <div className="input-group">
+                        <label>Task</label>
+                        <input type="text" value={task} onChange={(e) => setTask(e.target.value)} placeholder="Add a new task" />
+                    </div>
+
+                    <div className="input-group">
+                        <label>Description</label>
+                        <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Add details" />
+                    </div>
+
+                    <button type="submit" className="primary-btn">{loading ? "Saving..." : "Add Task"}</button>
+                </form>
+
+                <div className="task-list">
+                    {tasks.map((task) => (
+                        <div key={task.id} className={`task-item ${task.is_completed ? "completed" : ""}`}>
+                            <div className="task-main">
+                                <input type="checkbox" checked={task.is_completed} onChange={() => isCompleted(task)} className="task-check" />
+
+                                {editingId === task.id ? (
+                                    <div className="task-edit-box">
+                                        <input type="text" value={editingText} onChange={(e) => setEditingText(e.target.value)} />
+                                        <input type="text" value={editingDescription} onChange={(e) => setEditingDescription(e.target.value)} />
+                                        <div className="task-actions">
+                                            <button onClick={() => save(task)} className="primary-btn small-btn">Save</button>
+                                            <button onClick={stopEdit} className="secondary-btn small-btn">Cancel</button>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="task-content">
+                                        <h3>{task.task}</h3>
+                                        <p>{task.description}</p>
+                                    </div>
+                                )}
+                            </div>
+
+                            {editingId !== task.id && (
+                                <div className="task-actions">
+                                    <button onClick={() => startEdit(task)} className="secondary-btn small-btn">Edit</button>
+                                    <button onClick={() => deleteTask(task)} className="danger-btn small-btn">Delete</button>
+                                </div>
+                            )}
+                        </div>
+                    ))}
                 </div>
-            ))}
             </div>
         </div>
     )
