@@ -85,10 +85,14 @@ pymysql.install_as_MySQLdb()
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR/'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'netflix_db',    
+        'USER': 'root',
+        'PASSWORD': 'Pass@123',
+        'HOST': 'localhost',                                        
     }
 }
+
 
 
 # Password validation
