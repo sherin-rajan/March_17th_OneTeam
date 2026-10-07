@@ -32,3 +32,24 @@ l=[91,95,92,96,92,97,94]
 l=l[: :2]+l[1: :2]
 print(l)
 
+
+#name and score as nested list, print name with second lowest score
+#if more than one second lowest, print names in alphabetic order
+details=[]
+for _ in range(int(input())):
+    name = input()
+    score = float(input())
+    details.append([name,score])
+new_detail=sorted(details, key=lambda x: x[1])
+small=new_detail[0][1]
+for k in new_detail:
+    if k[1]!=small:
+        second=k[1]
+        break
+name=[]
+for k in new_detail:
+    if k[1]==second:
+        name.append(k[0])
+sort=sorted(name)
+for k in sort:
+    print(k)   
